@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('titre')</title>
-    <base href="{{URL::asset('/public/')}}" target="_blank">
+    <base href="{{URL::asset('/public/')}}">
 
 
     <!-- Bootstrap Styles-->
@@ -39,7 +39,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" target="_self" href={{ route('main')}}>
+                <a class="navbar-brand" href={{ route('main')}}>
 
                 	<img src="img/sonatrach.jpg" height="28" width="24" style=" float: left;">
                 	  &nbsp<span style="color: #f6821f;">Flight</span> System  <i class="fa fa-plane" ></i>
@@ -86,23 +86,29 @@
 
 
                     <li class="hoveredLink">
-                        <a class="active-menu " href=""><i class="fa fa-dashboard"></i> Tableau de bord</a>
+                        <a class="@yield('tableau_de_bord_class')" href="{{route('main')}}">
+                          <i class="fa fa-dashboard"></i> Tableau de bord
+                        </a>
                     </li>
                     <li class="hoveredLink">
-                        <a href=""><i class="fa fa-edit "></i> Modification / Mise à jour</a>
+                        <a class="@yield('modification_class')" href="{{route('modif.get')}}">
+                          <i class="fa fa-edit "></i> Modification / Mise à jour
+                        </a>
                     </li>
-					<li class="hoveredLink">
-                        <a href=""><i class="fa fa-fw fa-file "></i> Extraction des listes</a>
+					          <li class="hoveredLink">
+                        <a class="@yield('extraction_class')" href="{{route('list')}}">
+                          <i class="fa fa-fw fa-file "></i> Extraction des listes
+                        </a>
                     </li>
 
                     <li class="hoveredLink">
-                        <a href="#"><i class="fa fa-calendar"></i> Historique<span class="fa arrow"></span></a>
+                        <a class="@yield('his_class')" href="#"><i class="fa fa-calendar"></i> Historique<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="hoveredLink">
-                                <a href="#" >Par employé</a>
+                                <a class="@yield('his_emp_class')" href="{{route('his.employe')}}" >Par employé</a>
                             </li>
                             <li class="hoveredLink">
-                                <a href="#" >Par vol</a>
+                                <a class="@yield('his_vol_class')" href="{{route('his.vol')}}" >Par vol</a>
                             </li>
                         </ul>
                     </li>

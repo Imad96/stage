@@ -3,6 +3,10 @@
 @section('titre') Accueil @endsection
 @section('userName') Haddad Imad @endsection
 @section('userName') Titre de cette section @endsection
+@section('his_emp_class')active-menu @endsection
+@section('his_class')open @endsection
+
+
 
 @section('contenu')
 

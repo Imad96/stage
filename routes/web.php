@@ -20,3 +20,14 @@ Route::get('/testOracle',"TestController@test");
 
 // La route par default lors de la connexion, affiche le tableau de bord
 Route::get('/home', ['uses' => 'MainController@index', 'as' => 'main']);
+
+// Une route GET vers la page de modification
+Route::get('/modification','MainController@getVol')->name('modif.get');
+// Une route POST vers la page de modification
+Route::post('/modification','MainController@postVol')->name('modif.post');
+// Une route vers la page d'extraction de la liste des employés
+Route::get('/extraction','MainController@getList')->name('list');
+// Une route vers la page d'hitorique par employe
+Route::get('/historique/employe','MainController@getHistoryEmploye')->name('his.employe');
+// Une route vers la page d'hitorique par vol
+Route::get('/historique/vol','MainController@getHistoryVol')->name('his.vol');
