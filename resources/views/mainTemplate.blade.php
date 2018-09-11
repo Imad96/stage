@@ -5,17 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('titre')</title>
-    <base href="{{URL::asset('/public')}}" target="_blank">
+    <base href="{{URL::asset('/public/')}}" target="_blank">
 
 
     <!-- Bootstrap Styles-->
-    <link href={{url('/assets/css/bootstrap.css')}} rel="stylesheet" />
+    <link href={{url('css/bootstrap.css')}} rel="stylesheet" />
     <!-- FontAwesome Styles-->
-    <link href={{url('assets/css/font-awesome.css')}} rel="stylesheet" />
+    <link href={{url('css/font-awesome.css')}} rel="stylesheet" />
     <!-- Morris Chart Styles-->
-    <link href={{url('assets/js/morris/morr is-0.4.3.min.css')}} rel="stylesheet" />
+    <link href={{url('js/morris/morr is-0.4.3.min.css')}} rel="stylesheet" />
     <!-- Custom Styles-->
-    <link href={{url('assets/css/custom-styles.css')}} rel="stylesheet" />
+    <link href={{url('css/custom-styles.css')}} rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
@@ -41,7 +41,7 @@
                 </button>
                 <a class="navbar-brand"  href="index.html">
 
-                	<img src="sonatrach.jpg" height="28" width="24" style=" float: left;">
+                	<img src="img/sonatrach.jpg" height="28" width="24" style=" float: left;">
                 	  &nbsp<span style="color: #f6821f;">Flight</span> System  <i class="fa fa-plane" ></i>
                 </a>
             </div>
@@ -112,7 +112,7 @@
                     </li>
                 </ul>
 
-                  <img src="sonatrach2.jpg" height="125.75" width="225" style="margin-left: 16px; margin-top: 40px;">
+                  <img src="img/sonatrach2.jpg" height="125.75" width="225" style="margin-left: 16px; margin-top: 40px;">
 
             </div>
 
@@ -162,22 +162,22 @@
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
-    <script src={{url('assets/js/jquery-1.10.2.js')}}></script>
+    <script src={{url('js/jquery-1.10.2.js')}}></script>
     <!-- Bootstrap Js -->
-    <script src={{url('assets/js/bootstrap.min.js')}}></script>
+    <script src={{url('js/bootstrap.min.js')}}></script>
 
     <!-- Metis Menu Js -->
-    <script src={{url('assets/js/jquery.metisMenu.js')}}></script>
+    <script src={{url('js/jquery.metisMenu.js')}}></script>
     <!-- Morris Chart Js -->
-    <script src={{url('assets/js/morris/raphael-2.1.0.min.js')}}></script>
-    <script src={{url('assets/js/morris/morris.js')}}></script>
+    <script src={{url('js/morris/raphael-2.1.0.min.js')}}></script>
+    <script src={{url('js/morris/morris.js')}}></script>
 
 
-	  <script src={{url('assets/js/easypiechart.js')}}></script>
-	  <script src={{url('assets/js/easypiechart-data.js')}}></script>
+	  <script src={{url('js/easypiechart.js')}}></script>
+	  <script src={{url('js/easypiechart-data.js')}}></script>
 
     <!-- Custom Js -->
-    <script src={{url('assets/js/custom-scripts.js')}}></script>
+    <script src={{url('js/custom-scripts.js')}}></script>
 
 
 </body>
