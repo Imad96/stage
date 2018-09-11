@@ -15,7 +15,11 @@ class TestController extends Controller
     var_dump($agents);
    }
 
+<<<<<<< HEAD
     public function FunctionName($value='')
+=======
+   public function FunctionName($value='')
+>>>>>>> 40fd92c889bbbd93e02ef2cee81af13646155a8f
 {
   // code..
 }
