@@ -32,6 +32,6 @@ Route::get('/historique/employe','MainController@getHistoryEmploye')->name('his.
 // Une route vers la page d'hitorique par vol
 Route::get('/historique/vol','MainController@getHistoryVol')->name('his.vol');
 // Une route vers la page d'accueil de l'admin
-Route::get('/admin','AdminController@index')->name('accueil_admin') ;
+Route::get('/admin','AdminController@index')->name('accueil.admin') ;
 
 Route::get('/admin/ajouter_compte','AdminController@addAccount')->name('ajouter.compte') ;
