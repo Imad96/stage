@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('titre')</title>
-    <base href="{{URL::asset('/resources')}}" target="_blank">
+    <base href="{{URL::asset('/public')}}" target="_blank">
 
 
     <!-- Bootstrap Styles-->
