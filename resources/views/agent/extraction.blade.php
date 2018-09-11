@@ -1,4 +1,4 @@
-@extends('mainTemplate')
+@extends('main_template')
 
 @section('titre') Accueil @endsection
 @section('userName') Haddad Imad @endsection
