@@ -10,6 +10,9 @@
 
 @section('content')
 
+@section('admin_accueil_classe')
+    active-menu
+@endsection 
 
     <!-- tableau des utilisateurs -->
     <div class="table-responsive">

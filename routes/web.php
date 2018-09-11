@@ -22,10 +22,6 @@ Route::get('/testOracle',"TestController@test");
 Route::get('/home', ['uses' => 'MainController@index', 'as' => 'main']);
 
 /**La route vers la page d'accueil de l'admin */
-Route::get('/admin',function(){
-    return view('admin.accueil'); 
-})->name('accueil_admin') ; 
+Route::get('/admin','AdminController@index')->name('accueil_admin') ; 
 
-Route::get('/admin/ajouter_compte',function(){
-    return view('admin.ajouter_compte') ; 
-})->name('ajouter_compte') ; 
+Route::get('/admin/ajouter_compte','AdminController@addCount')->name('ajouter_compte') ; 

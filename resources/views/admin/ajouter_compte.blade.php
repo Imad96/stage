@@ -12,7 +12,9 @@
     Ajouter un compte
 @endsection
 
-
+@section('ajouter_compte_classe')
+    active-menu
+@endsection 
 
 @section('content')
         <div class="row">
