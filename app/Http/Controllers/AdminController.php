@@ -23,4 +23,10 @@ class AdminController extends Controller
         return view('admin.ajouter_compte') ;
 
     }
+
+    public function insertAccount(Request $request){
+        //
+
+        return redirect()->route('accueil.admin') ; 
+    }
 }
