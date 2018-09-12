@@ -67,7 +67,6 @@
                     {!! Form::submit('Ajouter', ['class' => 'btn btn-info pull-right']) !!}
                 {!! Form::close() !!}
             </div>
-
             <div class="col-md-4 col-sm-4 col-md-offset-2 col-sm-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -122,4 +121,15 @@
             </div>
 
         </div>
+        <br>
+         <div class="row">
+                    @if(session()->has('ok'))
+                        
+                        <div class="col-md-3 col-md-offset-1 alert alert-success alert-dismissible">
+                            {!! session('ok') !!}
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        </div>
+                    @endif
+        </div>
+
 @endsection

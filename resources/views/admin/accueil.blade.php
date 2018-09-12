@@ -13,7 +13,12 @@
 @section('admin_accueil_classe')
     active-menu
 @endsection 
-
+    <div class="row">
+        <div class="col-md-3">
+            <a href="{{route('add.account')}}" class="btn btn-info" > <i class="fa fa-plus"></i> Ajouter un compte </a>
+        </div>
+    </div>
+    <br>
     <!-- tableau des utilisateurs -->
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -27,19 +32,29 @@
                 </tr>
             </thead>
                 <tbody>
-                    <tr class="odd gradeX">
-                        <td>1</td>
-                        <td>Mohamed</td>
-                        <td>Mohamed@hmd-sonatrach.com</td>
-                        <td class="center">Chef de service</td>
-                        <td class="center"> 
-                            <a href="" class="btn btn-default" data-toggle="modal" data-target="#exampleModal"> <i class="fa fa-edit "></i>Modifier</a> 
-                            &nbsp; &nbsp; &nbsp; 
-                            <a href="" class="btn btn-danger"> <i class="fa fa-pencil" ></i>Supprimer</a> 
-                            &nbsp; &nbsp; &nbsp; 
-                            <a href="" class="btn btn-info" data-toggle="modal" data-target="#exampleModal2"> <i class="fa fa-refresh"></i> Modifier le mot de passe </a>
-                        </td>
-                    </tr>                        
+                    @foreach($accounts as $account)
+                        <tr class="odd gradeX">
+                            <td> {{$account->id}} </td>
+                            <td> {{$account->name}} </td>
+                            <td> {{$account->email}} </td>
+                            <td class="center"> 
+                                @if($account->type == 1)
+                                    <span>Agent</span>
+                                @elseif($account->type == 2 )
+                                    <span>Chef de service</span>
+                                @else
+                                    <span>Administrateur</span>
+                                @endif
+                             </td>
+                            <td class="center"> 
+                                <a href="" class="btn btn-default" data-toggle="modal" data-target="#exampleModal"> <i class="fa fa-edit "></i>Modifier</a> 
+                                &nbsp; &nbsp; &nbsp; 
+                                <a href="" class="btn btn-danger"> <i class="fa fa-pencil" ></i>Supprimer</a> 
+                                &nbsp; &nbsp; &nbsp; 
+                                <a href="" class="btn btn-info" data-toggle="modal" data-target="#exampleModal2"> <i class="fa fa-refresh"></i> Modifier le mot de passe </a>
+                            </td>
+                        </tr>  
+                    @endforeach
                 </tbody>
         </table>
     </div>
@@ -122,9 +137,6 @@
             </div>
         </div>
  <!-- Fin Model modification du mot de passe  -->
-
-    
-
 
 
 @endsection 
