@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\InsertAccountRequest;
 
 class AdminController extends Controller
 {
@@ -22,5 +23,11 @@ class AdminController extends Controller
 
         return view('admin.ajouter_compte') ;
 
+    }
+
+    public function insertAccount(InsertAccountRequest $request){
+        //
+
+        return view('admin.accueil') ;
     }
 }

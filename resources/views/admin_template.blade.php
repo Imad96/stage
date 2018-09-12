@@ -90,7 +90,7 @@
                         <a class="@yield('admin_accueil_classe')"  href={{route('accueil.admin')}}><i class="fa fa-dashboard"></i> Tableau de bord</a>
                     </li>
                     <li class="hoveredLink">
-                        <a class="@yield('ajouter_compte_classe')" href={{route('ajouter.compte')}}><i class="fa fa-plus "></i> Ajouter un compte</a>
+                        <a class="@yield('ajouter_compte_classe')" href={{route('add.account')}}><i class="fa fa-plus "></i> Ajouter un compte</a>
                     </li>
                     <li class="hoveredLink">
                         <a href=""><i class="fa fa fa-sign-out"></i> Déconnexion</a>
