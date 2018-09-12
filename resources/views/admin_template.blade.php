@@ -41,15 +41,15 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand"  href="index.html">
-                	
+
                 	<img src="img/sonatrach.jpg" height="28" width="24" style=" float: left;">
-                	  &nbsp<span style="color: #f6821f;">Flight</span> System  <i class="fa fa-plane" ></i>                	
+                	  &nbsp<span style="color: #f6821f;">Flight</span> System  <i class="fa fa-plane" ></i>
                 </a>
             </div>
-           
+
             <ul class="nav navbar-top-links navbar-left">
                 <li><h3 style="color: white; font-weight: bold; margin-top: 14px;">&nbsp&nbsp&nbsp @yield('title_page')  </h3></li>
-            </ul>	
+            </ul>
 
             <ul class="nav navbar-top-links navbar-right">
 
@@ -77,15 +77,15 @@
 
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
-		
-		
+
+
 		<!-- <div id="sideNav" href=""><i class="fa fa-caret-left"></i></div> -->
-        
+
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
 
 
-                
+
                     <li class="hoveredLink">
                         <a class="@yield('admin_accueil_classe')"  href={{route('accueil.admin')}}><i class="fa fa-dashboard"></i> Tableau de bord</a>
                     </li>
@@ -111,25 +111,25 @@
                         <h1 class="page-header">@yield('title')</h1>
                     </div>
                 </div>
-				
+
 
                <div class="row">
 			    <div class="col-md-12">
 			      <div class="panel panel-default">
 				    <div class="panel-heading"> @yield('pannel_head')</div>
 				        <div class="panel-body">
-                                
+
                             @yield('content')
-                            
-                            
-				        </div>     
+
+
+				        </div>
 
 				  </div>
 				</div>
-			   </div>	     
+			   </div>
 
 
-	
+
             </div>
             <!-- /. PAGE INNER  -->
 
@@ -138,7 +138,7 @@
 
         </div>
         <!-- /. PAGE WRAPPER  -->
-       
+
 
     </div>
     <!-- /. WRAPPER  -->
@@ -150,7 +150,7 @@
 
     <!-- Metis Menu Js -->
     <script src={{url('js/jquery.metisMenu.js')}}></script>
-  
+
 
 
     <script src={{url('js/dataTables/jquery.dataTables.js')}}></script>
@@ -162,7 +162,7 @@
     </script>
     <script src={{url('js/custom-scripts.js')}}></script>
 
- 
+
 
 </body>
 
