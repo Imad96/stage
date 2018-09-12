@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'TestController@test');
 
 // Une route pour le test de la BD
 Route::get('/testOracle',"TestController@test");
