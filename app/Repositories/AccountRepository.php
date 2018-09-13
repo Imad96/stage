@@ -42,6 +42,6 @@ class AccountRepository
      */
     public function getAll(){
 
-        return User::all() ; ; 
+        return User::select('id','name','email','type')->get() ; 
     }
 }

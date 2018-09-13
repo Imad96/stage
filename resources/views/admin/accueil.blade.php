@@ -15,7 +15,7 @@
 @endsection 
     <div class="row">
         <div class="col-md-3">
-            <a href="{{route('add.account')}}" class="btn btn-info" > <i class="fa fa-plus"></i> Ajouter un compte </a>
+            <a href="{{route('add.account')}}" class="btn btn-success" > <i class="fa fa-plus"></i> Ajouter un compte </a>
         </div>
     </div>
     <br>
@@ -47,11 +47,11 @@
                                 @endif
                              </td>
                             <td class="center"> 
-                                <a href="" class="btn btn-default" data-toggle="modal" data-target="#exampleModal"> <i class="fa fa-edit "></i>Modifier</a> 
+                                <a href="" class="data btn btn-default" data-id="{{$account->id.'|'.$account->name.'|'.$account->email.'|'.$account->type}}"  data-toggle="modal" > <i class="fa fa-edit "></i>Modifier</a> 
                                 &nbsp; &nbsp; &nbsp; 
                                 <a href="" class="btn btn-danger"> <i class="fa fa-pencil" ></i>Supprimer</a> 
                                 &nbsp; &nbsp; &nbsp; 
-                                <a href="" class="btn btn-info" data-toggle="modal" data-target="#exampleModal2"> <i class="fa fa-refresh"></i> Modifier le mot de passe </a>
+                                <a href="" class="data2 btn btn-info" data-id="{{$account->id.'|'.$account->name}}"  data-toggle="modal" > <i class="fa fa-refresh"></i> Modifier le mot de passe </a>
                             </td>
                         </tr>  
                     @endforeach
@@ -73,11 +73,11 @@
                 <form action="">
                     <div class="modal-body">
                         <div class="row">  
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-4 name">
                                 <label for="name">Nom : </label>
                                 <input type="text" id="name" name="name" class="form-control col-md-4" value="   ">
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 email">
                                 <label for="email">Email :</label>
                                 <input type="email" name="email" id="email" class="form-control" value="   ">
                             </div>
@@ -85,10 +85,10 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label>Type de compte : </label>
-                                <select class="form-control">
-                                    <option>Agent</option>
-                                    <option>Chef de service</option>
-                                    <option >Administrateur</option>
+                                <select class="form-control" id="select">
+                                    <option value="1">Agent</option>
+                                    <option value="2">Chef de service</option>
+                                    <option value="3">Administrateur</option>
                                 </select>
                             </div>
                         </div>  
@@ -108,7 +108,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modification du mot de passe pour  </h5>
+                  <h5 class="modal-title2" id="exampleModalLabel">Modification du mot de passe pour <span id="nameModif" style="font-weight:bold;"></span>  </h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -132,11 +132,43 @@
                             <button type="submit" class="btn btn-primary">Sauvegarder</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                         </div>
+                        <input type="hidden" id="id" name="id" class="form-control col-md-4">
                     </form>
               </div>
             </div>
         </div>
  <!-- Fin Model modification du mot de passe  -->
 
+@endsection 
+
+
+
+@section('scripts')
+    <script>
+        $(document).on("click", ".data", function () {
+            var myBookId = $(this).data('id');
+            myBookId = myBookId.split("|") ; 
+           $(".name #name").val( myBookId[1] );
+           $(".email #email").val( myBookId[2] );
+           $("#select").val(myBookId[3]);
+            // As pointed out in comments, 
+            // it is superfluous to have to manually call the modal.
+             $('#exampleModal').modal('show');
+        });
+
+        $(document).on("click", ".data2", function () {
+            var myBookId = $(this).data('id');
+            myBookId = myBookId.split("|") ;
+            myBookId[1] = myBookId[1] ; 
+           $(".modal-title2 #nameModif").text(myBookId[1]);
+           $("#id").val(myBookId[0]);
+
+          // $(".value #value").val(myBookId));
+            // As pointed out in comments, 
+            // it is superfluous to have to manually call the modal.
+             $('#exampleModal2').modal('show');
+        });
+
+    </script>
 
 @endsection 
