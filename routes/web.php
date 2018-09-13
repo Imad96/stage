@@ -35,3 +35,5 @@ Route::get('/admin','AdminController@index')->name('accueil.admin') ;
 Route::get('/admin/ajouter_compte','AdminController@addAccount')->name('add.account') ;
 // Une route vers le controller qui insère un compte dans le base de donnée
 Route::post('/admin/ajouter_compte','AdminController@insertAccount')->name('insert.account') ; 
+// Une route vers le controller qui modifie les information d'un compte donnée et retourne vers la page d'accueil
+Route::post('/admin/modifier_compte','AdminController@updateAccount')->name('update.account') ; 

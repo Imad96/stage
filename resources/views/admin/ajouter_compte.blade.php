@@ -19,7 +19,7 @@
 @section('content')
         <div class="row">
             <div class="col-md-3 col-md-offset-1">
-                {!! Form::open(['url' => '/admin/ajouter_compte']) !!}
+                {!! Form::open(['route' => 'insert.account']) !!}
                     <div class="row">
                         <div class="col-md-12">
                             <div class="from-group {!! $errors->has('name') ? 'has-error' : '' !!} ">

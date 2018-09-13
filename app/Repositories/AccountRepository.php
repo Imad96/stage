@@ -44,4 +44,11 @@ class AccountRepository
 
         return User::select('id','name','email','type')->get() ; 
     }
+
+    public function updateAccount(Array $request){
+        $user = new $this->user ; 
+
+        $user->name = $request['name'] ; 
+        return $user ; 
+    }
 }
