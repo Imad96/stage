@@ -1,13 +1,20 @@
 @extends('main_template')
 
-@section('titre') Accueil @endsection
+@section('titre') Modification @endsection
+@section('sous-titre') -Modifier ou mettre à jour les informations des vols- @endsection
 @section('userName') Haddad Imad @endsection
-@section('userName') Titre de cette section @endsection
 @section('modification_class')active-menu @endsection
 
 
 @section('contenu')
 
-  <p>C'est la page d'accueil</p>
+<div class="panel panel-default">
+      <div class="panel-heading"> </div>
+          <div class="panel-body">
 
+
+
+
+          </div>
+</div>
 @endsection

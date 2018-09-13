@@ -1,14 +1,20 @@
 @extends('main_template')
 
-@section('titre') Accueil @endsection
+@section('titre') Historique @endsection
+@section('sous-titre') -Consulter l'historique d'un vol- @endsection
 @section('userName') Haddad Imad @endsection
-@section('userName') Titre de cette section @endsection
 @section('his_vol_class')active-menu @endsection
-
 
 
 @section('contenu')
 
-  <p>C'est la page d'accueil</p>
+<div class="panel panel-default">
+      <div class="panel-heading"> </div>
+          <div class="panel-body">
 
+
+
+
+          </div>
+</div>
 @endsection

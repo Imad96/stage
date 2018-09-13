@@ -1,15 +1,20 @@
 @extends('main_template')
 
-@section('titre') Accueil @endsection
+@section('titre') Extraction @endsection
+@section('sous-titre') -Extraire la liste des employés concernés par un vol- @endsection
 @section('userName') Haddad Imad @endsection
-@section('userName') Titre de cette section @endsection
 @section('extraction_class')active-menu @endsection
-
-
 
 
 @section('contenu')
 
-  <p>C'est la page d'accueil</p>
+<div class="panel panel-default">
+      <div class="panel-heading"> </div>
+          <div class="panel-body">
 
+
+
+
+          </div>
+</div>
 @endsection

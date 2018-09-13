@@ -14,10 +14,10 @@ class AdminController extends Controller
      * Function that redirects to the admin main page "admin.accueil"
      */
     public function index(AccountRepository $accountRepo){
-       //Récuprer les comptes existants 
+       //Récuprer les comptes existants
 
-       $accounts = $accountRepo->getAll() ; 
-       
+        $accounts = $accountRepo->getAll() ;
+
         return view('admin.accueil',compact('accounts')) ;
 
     }
@@ -41,9 +41,9 @@ class AdminController extends Controller
         InsertAccountRequest $request,
         AccountRepository $accountRepo)
     {
-      $newUser =  $accountRepo->addAccount($request->all()) ; 
+        $newUser =  $accountRepo->addAccount($request->all()) ;
 
-        return redirect()->route('add.account')->withOk("L'utilisateur ".$newUser->name." a été créé avec succès." ) ; 
+        return redirect()->route('add.account')->withOk("L'utilisateur ".$newUser->name." a été créé avec succès." ) ;
     }
 
 
