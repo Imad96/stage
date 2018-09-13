@@ -25,8 +25,8 @@ class UpdateAccountRequest extends FormRequest
     {
         return [
             //
-            'name' => 'bail|required|between:3,20|alpha',
-            'email' => 'bail|required|email',
+            'name' => 'bail|required|between:3,20',
+            'email' => 'bail|required|email'
         ];
     }
 }
