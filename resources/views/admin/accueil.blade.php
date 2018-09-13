@@ -14,6 +14,35 @@
     active-menu
 @endsection 
     <div class="row">
+        @if(session('update'))
+        <div class="col-md-4 col-md-offset-1 alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{session('update')}}
+        </div>
+        <br>
+        @endif
+        @if($errors->has('email') || $errors->has('name'))
+        <div class="col-md-4 col-md-offset-1 alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Erreur ! La modification a échouée </strong> Veuillez respecter les exigences suivantes: <br>
+            <ul>
+                @if($errors->has('email')) 
+                    <li>
+                        {!! $errors->first('email',' <small class="help-block">:message</small> ')  !!}
+                    </li>
+                @endif
+                @if($errors->has('name')) 
+                    <li>
+                        {!! $errors->first('name',' <small class="help-block">:message</small> ') !!}
+                    </li>
+                @endif
+            </ul>
+        </div>
+                        <br>
+        @endif
+    </div>
+    
+    <div class="row">
         <div class="col-md-3">
             <a href="{{route('add.account')}}" class="btn btn-success" > <i class="fa fa-plus"></i> Ajouter un compte </a>
         </div>
@@ -70,34 +99,32 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-                <form action="">
+                {!! Form::open(['route'=>'update.account']) !!}
                     <div class="modal-body">
                         <div class="row">  
                             <div class="form-group col-md-4 name">
-                                <label for="name">Nom : </label>
-                                <input type="text" id="name" name="name" class="form-control col-md-4" value="   ">
+                                {!! Form::label('name','Nom :') !!}
+                                {!! Form::text('name',null,['class'=>'form-control']) !!}
                             </div>
-                            <div class="form-group col-md-6 email">
-                                <label for="email">Email :</label>
-                                <input type="email" name="email" id="email" class="form-control" value="   ">
+                            <div class="from-group col-md-6 email">
+                                {!! Form::label('email','Email :') !!}
+                                {!! Form::email('email',null,['class'=>'form-control']) !!}
                             </div>
-                        </div>  
+                        </div>
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <label>Type de compte : </label>
-                                <select class="form-control" id="select">
-                                    <option value="1">Agent</option>
-                                    <option value="2">Chef de service</option>
-                                    <option value="3">Administrateur</option>
-                                </select>
+                                {!! Form::label('account_type','Type de compte : ') !!}
+                                {!! Form::select('account_type',['1'=>'Agent','2','Chef de service','3'=>'Administrateur'],'1',['class'=>'form-control']) !!}
                             </div>
-                        </div>  
+                        </div>
+                        {!! Form::hidden('id',null,['class'=>'id','id'=>'id']) !!}
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Sauvegarder</button>                       
+                        {!! Form::submit('Sauvegarder',['class'=>'btn btn-primary']) !!}
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                     </div>
-                </form>
+                {!! Form::close() !!}
+
           </div>
         </div>
       </div>
@@ -148,9 +175,10 @@
         $(document).on("click", ".data", function () {
             var myBookId = $(this).data('id');
             myBookId = myBookId.split("|") ; 
+           $("#id").val(myBookId[0]) ; 
            $(".name #name").val( myBookId[1] );
            $(".email #email").val( myBookId[2] );
-           $("#select").val(myBookId[3]);
+           $("#account_type").val(myBookId[3]);
             // As pointed out in comments, 
             // it is superfluous to have to manually call the modal.
              $('#exampleModal').modal('show');

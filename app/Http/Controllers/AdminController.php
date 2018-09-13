@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\InsertAccountRequest;
+use App\Http\Requests\UpdateAccountRequest;
 use App\Repositories\AccountRepository;
 
 class AdminController extends Controller
@@ -35,5 +36,14 @@ class AdminController extends Controller
       $newUser =  $accountRepo->addAccount($request->all()) ; 
 
         return redirect()->route('add.account')->withOk("L'utilisateur ".$newUser->name." a été créé avec succès." ) ; 
+    }
+
+    public function updateAccount(
+        UpdateAccountRequest $request,
+        AccountRepository $accountRepo){
+        
+        $userUpdated = $accountRepo->updateAccount($request->all()); 
+
+        return redirect()->route('accueil.admin')->with('update','Le compte de '.$userUpdated->name.' a été modifié avec succes') ; 
     }
 }
