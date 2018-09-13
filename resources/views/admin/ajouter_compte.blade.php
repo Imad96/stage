@@ -73,14 +73,16 @@
                             Les droits de chaque type de compte
                         </div>
                         <div class="panel-body">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a href="#home" data-toggle="tab" style="color:green;">Agent</a>
-                                </li>
-                                <li class=""><a href="#profile" data-toggle="tab" style="color:orange;">Chef de service</a>
-                                </li>
-                                <li class=""><a href="#messages" data-toggle="tab" style="color:red;">Administrateur</a>
-                                </li>
-                            </ul>
+                            <div class="row">
+                                <ul class="nav nav-tabs">
+                                    <li class="active col-md-3 col-s-3"><a href="#home" data-toggle="tab" style="color:green;">Agent</a>
+                                    </li>
+                                    <li class="col-md-5 col-s-5"><a href="#profile" data-toggle="tab" style="color:orange;">Chef de service</a>
+                                    </li>
+                                    <li class="col-md-4 col-s-4"><a href="#messages" data-toggle="tab" style="color:red;">Administrateur</a>
+                                    </li>
+                                </ul>
+                            </div>
 
                             <div class="tab-content">
                                 <div class="tab-pane fade active in" id="home">
