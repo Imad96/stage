@@ -102,16 +102,16 @@
                     </li>
 
                     <li class="hoveredLink">
-                        <a class="@yield('his_class')" href="#"><i class="fa fa-calendar"></i> Historique<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li class="hoveredLink">
-                                <a class="@yield('his_emp_class')" href="{{route('his.employe')}}" >Par employé</a>
-                            </li>
-                            <li class="hoveredLink">
-                                <a class="@yield('his_vol_class')" href="{{route('his.vol')}}" >Par vol</a>
-                            </li>
-                        </ul>
+                        <a class="@yield('his_emp_class')" href="{{route('his.employe')}}" >
+                          <i class="fa fa-user"></i>Historique par employé
+                        </a>
                     </li>
+                    <li class="hoveredLink">
+                        <a class="@yield('his_vol_class')" href="{{route('his.vol')}}" >
+                          <i class="fa fa-plane"></i>Historique par vol
+                        </a>
+                    </li>
+
 
                     <li class="hoveredLink">
                         <a href=""><i class="fa fa fa-sign-out"></i> Déconnexion</a>

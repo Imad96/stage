@@ -40,8 +40,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+<<<<<<< HEAD
                 <a class="navbar-brand"  href="index.html">
 
+=======
+                <a class="navbar-brand"  href="{{route('accueil.admin')}}">
+                	
+>>>>>>> d48bae79d5a08cdd358ef90157745f5065d0f208
                 	<img src="img/sonatrach.jpg" height="28" width="24" style=" float: left;">
                 	  &nbsp<span style="color: #f6821f;">Flight</span> System  <i class="fa fa-plane" ></i>
                 </a>

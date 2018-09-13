@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\InsertAccountRequest;
+use App\Repositories\AccountRepository;
 
 class AdminController extends Controller
 {
     /**
      * Function that redirect to the admin main page "admin.accueil"
      */
-    public function index(){
-        //...
+    public function index(AccountRepository $accountRepo){
+       //Récuprer les comptes existants 
 
-
-        return view('admin.accueil') ;
+       $accounts = $accountRepo->getAll() ; 
+       
+        return view('admin.accueil',compact('accounts')) ;
 
     }
 
@@ -26,9 +28,12 @@ class AdminController extends Controller
 
     }
 
-    public function insertAccount(InsertAccountRequest $request){
-        //
+    public function insertAccount(
+        InsertAccountRequest $request,
+        AccountRepository $accountRepo)
+    {
+      $newUser =  $accountRepo->addAccount($request->all()) ; 
 
-        return view('admin.accueil') ;
+        return redirect()->route('add.account')->withOk("L'utilisateur ".$newUser->name." a été créé avec succès." ) ; 
     }
 }
