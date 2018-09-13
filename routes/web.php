@@ -29,6 +29,9 @@ Route::get('/extraction','MainController@getList')->name('list');
 Route::get('/historique/employe','MainController@getHistoryEmploye')->name('his.employe');
 // Une route vers la page d'hitorique par vol
 Route::get('/historique/vol','MainController@getHistoryVol')->name('his.vol');
+
+
+
 // Une route vers la page d'accueil de l'admin
 Route::get('/admin','AdminController@index')->name('accueil.admin') ;
 // Une route vers la page d'ajout d'un compte de l'admin  "page de saisie"  
@@ -37,3 +40,7 @@ Route::get('/admin/ajouter_compte','AdminController@addAccount')->name('add.acco
 Route::post('/admin/ajouter_compte','AdminController@insertAccount')->name('insert.account') ; 
 // Une route vers le controller qui modifie les information d'un compte donnée et retourne vers la page d'accueil
 Route::post('/admin/modifier_compte','AdminController@updateAccount')->name('update.account') ; 
+// Une route vers le controller qui modifie le mot de passe d'un compte 
+Route::post('/admin/modifier_password','AdminController@updatePassword')->name('update.password') ; 
+// Une route vers le controlelr qui supprime le un compte 
+Route::delete('/admin/supprimer_compte/{id}','AdminController@deleteAccount')->name('delete.account') ; 
