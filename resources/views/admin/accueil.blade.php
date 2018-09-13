@@ -14,8 +14,42 @@
     active-menu
 @endsection 
     <div class="row">
+        @if(session('update'))
+        <div class="col-md-4 col-md-offset-1 alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{session('update')}}
+        </div>
+        <br>
+        @endif
+        @if($errors->has('email') || $errors->has('name') || $errors->has('new_password') )
+        <div class="col-md-4 col-md-offset-1 alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Erreur ! La modification a échouée </strong> Veuillez respecter les exigences suivantes: <br>
+            <ul>
+                @if($errors->has('email')) 
+                    <li>
+                        {!! $errors->first('email',' <small class="help-block">:message</small> ')  !!}
+                    </li>
+                @endif
+                @if($errors->has('name')) 
+                    <li>
+                        {!! $errors->first('name',' <small class="help-block">:message</small> ') !!}
+                    </li>
+                @endif
+                @if($errors->has('new_password'))
+                    <li>
+                        {!! $errors->first('new_password',' <small class="help-block">:message</small> ') !!}
+                    </li>
+                @endif
+            </ul>
+        </div>
+                        <br>
+        @endif
+    </div>
+    
+    <div class="row">
         <div class="col-md-3">
-            <a href="{{route('add.account')}}" class="btn btn-info" > <i class="fa fa-plus"></i> Ajouter un compte </a>
+            <a href="{{route('add.account')}}" class="btn btn-success" > <i class="fa fa-plus"></i> Ajouter un compte </a>
         </div>
     </div>
     <br>
@@ -28,6 +62,8 @@
                     <th>Nom</th>
                     <th>Email</th>
                     <th>Type de compte</th>
+                    <th></th>
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -47,12 +83,19 @@
                                 @endif
                              </td>
                             <td class="center"> 
-                                <a href="" class="btn btn-default" data-toggle="modal" data-target="#exampleModal"> <i class="fa fa-edit "></i>Modifier</a> 
+                                <a href="" class="data btn btn-default btn-block" data-id="{{$account->id.'|'.$account->name.'|'.$account->email.'|'.$account->type}}"  data-toggle="modal" > <i class="fa fa-edit "></i>Modifier</a> 
                                 &nbsp; &nbsp; &nbsp; 
-                                <a href="" class="btn btn-danger"> <i class="fa fa-pencil" ></i>Supprimer</a> 
-                                &nbsp; &nbsp; &nbsp; 
-                                <a href="" class="btn btn-info" data-toggle="modal" data-target="#exampleModal2"> <i class="fa fa-refresh"></i> Modifier le mot de passe </a>
                             </td>
+                            <td>
+                                <a href="" class="data2 btn btn-info btn-block" data-id="{{$account->id.'|'.$account->name}}"  data-toggle="modal" > <i class="fa fa-refresh"></i> Modifier le mot de passe </a>
+                            </td>
+                            <td>
+                                {!! Form::open(['method' => 'DELETE','route'=>['delete.account',$account->id]]) !!}
+                                    <input type="submit" value=" Supprimer" class="btn btn-danger btn-block" >
+                                {!! Form::close() !!}
+                                &nbsp; &nbsp; &nbsp; 
+                            </td>
+                            
                         </tr>  
                     @endforeach
                 </tbody>
@@ -65,39 +108,37 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modification du compte : </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
+              <h5 class="modal-title" id="exampleModalLabel">Modification du compte : </h5>
             </div>
-                <form action="">
+                {!! Form::open(['route'=>'update.account']) !!}
                     <div class="modal-body">
                         <div class="row">  
-                            <div class="form-group col-md-4">
-                                <label for="name">Nom : </label>
-                                <input type="text" id="name" name="name" class="form-control col-md-4" value="   ">
+                            <div class="form-group col-md-4 name">
+                                {!! Form::label('name','Nom :') !!}
+                                {!! Form::text('name',null,['class'=>'form-control']) !!}
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="email">Email :</label>
-                                <input type="email" name="email" id="email" class="form-control" value="   ">
+                            <div class="from-group col-md-6 email">
+                                {!! Form::label('email','Email :') !!}
+                                {!! Form::email('email',null,['class'=>'form-control']) !!}
                             </div>
-                        </div>  
+                        </div>
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <label>Type de compte : </label>
-                                <select class="form-control">
-                                    <option>Agent</option>
-                                    <option>Chef de service</option>
-                                    <option >Administrateur</option>
-                                </select>
+                                {!! Form::label('account_type','Type de compte : ') !!}
+                                {!! Form::select('account_type',['1'=>'Agent','2'=>'Chef de service','3'=>'Administrateur'],'1',['class'=>'form-control']) !!}
                             </div>
-                        </div>  
+                        </div>
+                        {!! Form::hidden('id',null,['class'=>'id','id'=>'id']) !!}
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Sauvegarder</button>                       
+                        {!! Form::submit('Sauvegarder',['class'=>'btn btn-primary']) !!}
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                     </div>
-                </form>
+                {!! Form::close() !!}
+
           </div>
         </div>
       </div>
@@ -108,35 +149,72 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modification du mot de passe pour  </h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
+                  <h5 class="modal-title2" id="exampleModalLabel">Modification du mot de passe pour <span id="nameModif" style="font-weight:bold;"></span>  </h5>
                 </div>
-                    <form action="">
+                    {!! Form::open(['route'=>'update.password']) !!}
                         <div class="modal-body">
-                            <div class="row">  
+                            <div class="row">
                                 <div class="form-group col-md-6 col-md-offset-3">
-                                    <label for="name">Nouveau mot de passe : </label>
-                                    <input type="password" id="password" name="password" class="form-control col-md-4" placeholder="**********">
+                                    {!! Form::label('new_password','Nouveau mot de passe :') !!}
+                                    {!! Form::password('new_password',['class'=>'form-control','id'=>'new_password','placeholder'=>'*********']) !!}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6 col-md-offset-3">
-                                    <label for="confPassword">Confirmer le nouveau mot de passe :</label>
-                                    <input type="password" name="confPassword" id="confPassword" class="form-control" placeholder="**********">
+                                    {!! Form::label('new_password_confirmation','Confirmer le mot de passe :') !!}
+                                    {!! Form::password('new_password_confirmation',['class'=>'form-control','id'=>'new_password_confirmation','placeholder'=>'*********']) !!}
                                 </div>
-                            </div>   
+                            </div>
+                        {!! Form::hidden('id_new',null,['class'=>'id_new','id'=>'id_new']) !!}
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                            {!! Form::submit('Sauvegarder',['class'=>'btn btn-primary']) !!}
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                         </div>
-                    </form>
+                    {!! Form::close() !!}
               </div>
             </div>
         </div>
  <!-- Fin Model modification du mot de passe  -->
 
+@endsection 
+
+
+
+@section('scripts')
+    <script>
+        $(document).on("click", ".data", function () {
+            var myBookId = $(this).data('id');
+            myBookId = myBookId.split("|") ; 
+           $("#id").val(myBookId[0]) ; 
+           $(".name #name").val( myBookId[1] );
+           $(".email #email").val( myBookId[2] );
+           $("#account_type").val(myBookId[3]);
+            // As pointed out in comments, 
+            // it is superfluous to have to manually call the modal.
+             $('#exampleModal').modal('show');
+        });
+
+        $(document).on("click", ".data2", function () {
+            var myBookId = $(this).data('id');
+            myBookId = myBookId.split("|") ;
+            myBookId[1] = myBookId[1] ; 
+           $(".modal-title2 #nameModif").text(myBookId[1]);
+           $("#id_new").val(myBookId[0]);
+
+          // $(".value #value").val(myBookId));
+            // As pointed out in comments, 
+            // it is superfluous to have to manually call the modal.
+             $('#exampleModal2').modal('show');
+        });
+
+        function supprimer(){
+            return confirm("Voulez-vous supprimer ce compte!") ; 
+        }
+
+    </script>
 
 @endsection 

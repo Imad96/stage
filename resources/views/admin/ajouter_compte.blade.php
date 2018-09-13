@@ -19,7 +19,7 @@
 @section('content')
         <div class="row">
             <div class="col-md-3 col-md-offset-1">
-                {!! Form::open(['url' => '/admin/ajouter_compte']) !!}
+                {!! Form::open(['route' => 'insert.account']) !!}
                     <div class="row">
                         <div class="col-md-12">
                             <div class="from-group {!! $errors->has('name') ? 'has-error' : '' !!} ">
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    {!! Form::submit('Ajouter', ['class' => 'btn btn-info pull-right']) !!}
+                    {!! Form::submit('Ajouter', ['class' => 'btn btn-success pull-right']) !!}
                 {!! Form::close() !!}
             </div>
             <div class="col-md-4 col-sm-4 col-md-offset-2 col-sm-offset-2">
