@@ -15,14 +15,14 @@
 @endsection 
     <div class="row">
         @if(session('update'))
-        <div class="col-md-4 col-md-offset-1 alert alert-success alert-dismissible">
+        <div class="col-md-4 col-md-offset-4 alert alert-success alert-dismissible">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             {{session('update')}}
         </div>
         <br>
         @endif
         @if($errors->has('email') || $errors->has('name') || $errors->has('new_password') )
-        <div class="col-md-4 col-md-offset-1 alert alert-danger alert-dismissible">
+        <div class="col-md-4 col-md-offset-4 alert alert-danger alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <strong>Erreur ! La modification a échouée </strong> Veuillez respecter les exigences suivantes: <br>
             <ul>

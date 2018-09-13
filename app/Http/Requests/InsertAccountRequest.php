@@ -25,8 +25,8 @@ class InsertAccountRequest extends FormRequest
     {
         return [
             //
-            'name' => 'bail|required|between:3,20|alpha',
-            'email' => 'bail|required|email',
+            'name' => 'bail|required|between:3,20|unique:users',
+            'email' => 'bail|required|email|unique:users',
             'password' => 'bail|required|confirmed|min:6',
             'account_type' => 'required'
         ];
