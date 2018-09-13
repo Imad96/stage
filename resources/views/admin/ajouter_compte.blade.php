@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    {!! Form::submit('Ajouter', ['class' => 'btn btn-info pull-right']) !!}
+                    {!! Form::submit('Ajouter', ['class' => 'btn btn-success pull-right']) !!}
                 {!! Form::close() !!}
             </div>
             <div class="col-md-4 col-sm-4 col-md-offset-2 col-sm-offset-2">

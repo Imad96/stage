@@ -162,6 +162,7 @@
     </script>
     <script src={{url('js/custom-scripts.js')}}></script>
 
+    @yield('scripts')
 
 
 </body>
