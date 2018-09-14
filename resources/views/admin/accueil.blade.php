@@ -8,11 +8,19 @@
     mesut zidan
 @endsection
 
+@section('title')
+    Liste des comptes
+@endsection 
+
+@section('sub_title')
+    - Consulter ou modifier les comptes -
+@endsection 
+
 @section('content')
 
-@section('admin_accueil_classe')
-    active-menu
-@endsection 
+    @section('admin_accueil_classe')
+        active-menu
+    @endsection 
     <div class="row">
         @if(session('update'))
         <div class="col-md-4 col-md-offset-4 alert alert-success alert-dismissible">
