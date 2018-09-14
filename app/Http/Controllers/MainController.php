@@ -8,13 +8,11 @@ use App\Repositories\VolRepository;
 
 class MainController extends Controller
 {
-    public function index()
+    public function index(VolRepository $volRepo)
     {
-      // code..
-      //
-      //
+      $vols = $volRepo->getPrimaryKey() ; 
 
-      return view('agent.tableau_de_bord');
+      return view('agent.tableau_de_bord',compact('vols'));
 
     }
 

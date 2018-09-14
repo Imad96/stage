@@ -90,7 +90,7 @@
                                    <thead>
                                        <tr>
                                            <th>Numéro du vol</th>
-                                           <th>Date</th>
+                                           <th>Le jour</th>
                                            <th>Départ</th>
                                            <th>Destination</th>
                                            <th>Heure</th>
@@ -98,129 +98,19 @@
                                        </tr>
                                    </thead>
                                    <tbody>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="text-center">BJA</td>
-                                           <td class="text-center">11:05</td>
-                                           <td><button class="btn btn-info center-block"
-                                              data-toggle="modal" data-target="#myModal"> plus de détails
-                                               </button>
-                                           </td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>1133</td>
-                                           <td>22-09-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
-                                       <tr class="odd gradeX">
-                                           <td>2236</td>
-                                           <td>11-10-2018</td>
-                                           <td>HME</td>
-                                           <td class="center">TEE</td>
-                                           <td class="center">6:07</td>
-                                           <td><button class="btn btn-info center-block"> plus de détails </button></td>
-                                       </tr>
+                                        @foreach($vols as $vol)
+                                            <tr class="odd gradeX">
+                                                <td>{{$vol->vol_nvol}}</td>
+                                                <td>{{$vol->}}</td>
+                                                <td>HME</td>
+                                                <td class="text-center">BJA</td>
+                                                <td class="text-center">11:05</td>
+                                                <td><button class="btn btn-info center-block"
+                                                    data-toggle="modal" data-target="#myModal"> plus de détails
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endfor
                                    </tbody>
                                </table>
                            </div>
