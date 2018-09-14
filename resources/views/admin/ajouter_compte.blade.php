@@ -11,6 +11,9 @@
 @section('title')
     Ajouter un compte
 @endsection
+@section('sub_title')
+    - Veuillez lire d'abord les droits d'accès de chaque type de compte -
+@endsection 
 
 @section('ajouter_compte_classe')
     active-menu
@@ -86,7 +89,7 @@
 
                             <div class="tab-content">
                                 <div class="tab-pane fade active in" id="home">
-                                    <h4>Les droits d'un compte de type Agent</h4>
+                                    <h4>Les droits d'un compte de type <strong> Agent </strong></h4>
                                     <p>Un compte de type Agent possède les droits suivants: <br>
                                         <ul>
                                             <li style="color:green;">Consultation des vols.</li>
@@ -96,7 +99,7 @@
                                     </p>
                                 </div>
                                 <div class="tab-pane fade" id="profile">
-                                    <h4>Les droits d'un compte de type Chef de service</h4>                                    
+                                    <h4>Les droits d'un compte de type <strong> Chef de service </strong></h4>                                    
                                     <p>Un compte de type Chef de service possède les droits suivants: <br>
                                         <ul>
                                             <li style="color:green;">Consultation des vols.</li>
@@ -107,7 +110,7 @@
                                     </p>
                                 </div>
                                 <div class="tab-pane fade" id="messages">
-                                    <h4>Les droits d'un compte de type Administrateur</h4>                                    
+                                    <h4>Les droits d'un compte de type <strong> Administrateur </strong></h4>                                    
                                     <p>Un compte de type Administrateur possède les droits suivant: 
                                         <ul>
                                             <li style="color:red;">Consultation des listes des comptes.</li>

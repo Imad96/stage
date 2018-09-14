@@ -108,7 +108,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-header">@yield('title')</h1>
+                        <h1 class="page-header">@yield('title') <small> @yield('sub_title') </small> </h1>
                     </div>
                 </div>
 
