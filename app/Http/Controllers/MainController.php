@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\VolRequest;
+use App\Repositories\VolRepository;
 
 class MainController extends Controller
 {
@@ -16,12 +18,10 @@ class MainController extends Controller
 
     }
 
-    public function getVol()
+    public function getVol(VolRepository $volRepo)
     {
-      // code...
-      //
-      //
-      return view('agent.modification');
+      $primaryKey= $volRepo->getPrimaryKey();
+      return view('agent.modification',compact('primaryKey'));
     }
 
     public function postVol()
