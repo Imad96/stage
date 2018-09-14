@@ -24,7 +24,7 @@
 
 
 <div class="panel panel-default">
-      <div class="panel-heading"> Statistique générales (Semaine courante) </div>
+      <div class="panel-heading"> Statistiques générales (Semaine courante) </div>
           <div class="panel-body">
 
             <div class="row">
