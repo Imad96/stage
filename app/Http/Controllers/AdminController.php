@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\InsertAccountRequest;
-use App\Http\Requests\UpdateAccountRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Repositories\AccountRepository;
 
@@ -51,8 +50,17 @@ class AdminController extends Controller
      * Function that updates 'Name', 'email' and 'type' of an exesting User
      */
     public function updateAccount(
-        UpdateAccountRequest $request,
+        Request $request,
         AccountRepository $accountRepo){
+            /**
+             * Validation Rules
+             * Je les ai fait ici au lieu de faire une classe request car il faut passer des arguments à cette validation
+             * 
+             */
+            $this->validate($request,[
+                'name' => 'bail|required|between:3,20|unique:users,name,'.$request['id'],
+                'email' => 'bail|required|email|unique:users,email,'.$request['id']
+            ]) ; 
         
         $userUpdated = $accountRepo->updateAccount($request->all()); 
 
