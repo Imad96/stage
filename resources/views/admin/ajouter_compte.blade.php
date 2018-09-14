@@ -67,7 +67,7 @@
                     {!! Form::submit('Ajouter', ['class' => 'btn btn-success pull-right']) !!}
                 {!! Form::close() !!}
             </div>
-            <div class="col-md-4 col-sm-4 col-md-offset-2 col-sm-offset-2">
+            <div class="col-md-4 col-sm-4 col-md-offset-1 col-sm-offset-1">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Les droits de chaque type de compte
@@ -75,11 +75,11 @@
                         <div class="panel-body">
                             <div class="row">
                                 <ul class="nav nav-tabs">
-                                    <li class="active col-md-3 col-s-3"><a href="#home" data-toggle="tab" style="color:green;">Agent</a>
+                                    <li class="active col-md-4 col-sm-4 col-xs-4"><a href="#home" data-toggle="tab" style="color:green;"> <i class="fa fa-users fa-lg " style="color:black;"></i></a>
                                     </li>
-                                    <li class="col-md-5 col-s-5"><a href="#profile" data-toggle="tab" style="color:orange;">Chef de service</a>
+                                    <li class="col-md-4 col-sm-4 col-xs-4"><a href="#profile" data-toggle="tab" style="color:orange;"><i class="fa fa-user fa-lg" style="color:black;"></i></a>
                                     </li>
-                                    <li class="col-md-4 col-s-4"><a href="#messages" data-toggle="tab" style="color:red;">Administrateur</a>
+                                    <li class="col-md-4 col-sm-4 col-xs-4"><a href="#messages" data-toggle="tab" style="color:red;"> <i class="fa fa-cogs fa-lg" style="color:black;"></i></a>
                                     </li>
                                 </ul>
                             </div>

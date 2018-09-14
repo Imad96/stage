@@ -133,7 +133,7 @@
             </div>
             <!-- /. PAGE INNER  -->
 
-             <footer><p><em style="float: right;">All right reserved. Designed by: <a href="">Imad & Messaoud</a></em></p></footer>
+             <footer style="margin-top:5px;"><p><em style="float: right;">All right reserved. Designed by: <a href="">Imad & Messaoud</a></em></p></footer>
 
 
         </div>
