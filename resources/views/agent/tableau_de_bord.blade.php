@@ -102,8 +102,8 @@
                                            <td>1133</td>
                                            <td>22-09-2018</td>
                                            <td>HME</td>
-                                           <td class="center">BJA</td>
-                                           <td class="center">11:05</td>
+                                           <td class="text-center">BJA</td>
+                                           <td class="text-center">11:05</td>
                                            <td><button class="btn btn-info center-block"
                                               data-toggle="modal" data-target="#myModal"> plus de détails
                                                </button>
