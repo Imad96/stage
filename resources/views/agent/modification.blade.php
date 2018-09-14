@@ -75,7 +75,7 @@
                               <table class="table table-hover">
                                   <thead>
                                       <tr>
-                                          <th># </th>
+                                          <th>Numéro du vol </th>
                                           <th>Départ</th>
                                           <th>arrivé</th>
                                           <th>Le jour</th>
@@ -93,36 +93,7 @@
                                               </button>
                                           </td>
                                       </tr>
-                                          <tr>
-                                              <td>1289</td>
-                                              <td>Mark</td>
-                                              <td>Otto</td>
-                                              <td>Mardi</td>
-                                              <td><button class="btn btn-info center-block"
-                                                 data-toggle="modal" data-target="#myModal"> modifier
-                                                  </button>
-                                              </td>
-                                          </tr>
-                                              <tr>
-                                                  <td>1289</td>
-                                                  <td>Mark</td>
-                                                  <td>Otto</td>
-                                                  <td>Mardi</td>
-                                                  <td><button class="btn btn-info center-block"
-                                                     data-toggle="modal" data-target="#myModal"> modifier
-                                                      </button>
-                                                  </td>
-                                              </tr>
-                                                  <tr>
-                                                      <td>1289</td>
-                                                      <td>Mark</td>
-                                                      <td>Otto</td>
-                                                      <td>Mardi</td>
-                                                      <td><button class="btn btn-info center-block"
-                                                         data-toggle="modal" data-target="#myModal"> modifier
-                                                          </button>
-                                                      </td>
-                                                  </tr>
+                                        
                                   </tbody>
                               </table>
                           </div>
