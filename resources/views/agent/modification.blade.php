@@ -78,7 +78,7 @@
                                       <tr>
                                           <th class="text-center">Numéro du vol </th>
                                           <th class="text-center">Départ</th>
-                                          <th class="text-center">arrivé</th>
+                                          <th class="text-center">Arrivé</th>
                                           <th class="text-center">Le jour</th>
                                           <th></th>
                                       </tr>
