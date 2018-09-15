@@ -89,28 +89,44 @@
                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                    <thead>
                                        <tr>
-                                           <th>Numéro du vol</th>
-                                           <th>Le jour</th>
-                                           <th>Départ</th>
-                                           <th>Destination</th>
-                                           <th>Heure</th>
+                                           <th class="text-center">Numéro du vol</th>
+                                           <th class="text-center">Le jour</th>
+                                           <th class="text-center">Départ</th>
+                                           <th class="text-center">Destination</th>
+                                           <th class="text-center">Heure</th>
                                            <th> </th>
                                        </tr>
                                    </thead>
                                    <tbody>
                                         @foreach($vols as $vol)
                                             <tr class="odd gradeX">
-                                                <td>{{$vol->vol_nvol}}</td>
-                                                <td>{{$vol->}}</td>
-                                                <td>HME</td>
-                                                <td class="text-center">BJA</td>
-                                                <td class="text-center">11:05</td>
-                                                <td><button class="btn btn-info center-block"
-                                                    data-toggle="modal" data-target="#myModal"> plus de détails
-                                                    </button>
+                                                <td class="text-center">{{$vol->vol_nvol}}</td>
+                                                <td class="text-center"> 
+                                                    @if($vol->vol_jour == 1)  Dimanche 
+                                                    @elseif($vol->vol_jour == 2) Lundi 
+                                                    @elseif($vol->vol_jour == 3) Mardi 
+                                                    @elseif($vol->vol_jour == 4) Mercredi
+                                                    @elseif($vol->vol_jour == 5) Jeudi
+                                                    @elseif($vol->vol_jour == 6) Vendredi
+                                                    @elseif($vol->vol_jour == 7) Samedi
+                                                    @endif
+                                                    
+                                                     </td>
+                                                <td class="text-center">{{$vol->vol_depart}}</td>
+                                                <td class="text-center">{{$vol->vol_destin}}</td>
+                                                <td class="text-center">{{$vol->vol_heurdpr}}</td>
+                                                <td>
+                                                       <form method="POST" action="{{route('vol.information')}}" id="form_info">
+                                                        {{ csrf_field() }} 
+                                                        <input type="hidden" id="nvol" name="nvol" value="{{$vol->vol_nvol}}">
+                                                        <input type="hidden" id="jour" name="jour" value="{{$vol->vol_jour}}">
+                                                        <input type="hidden" id="depart" name="depart" value="{{$vol->vol_depart}}">
+                                                        <input type="hidden" id="dest" name="dest" value="{{$vol->vol_destin}}">
+                                                        <button type="submit"  id="subForm" class="btn btn-info center-block">Plus de détails</button>
+                                                       </form>
                                                 </td>
                                             </tr>
-                                        @endfor
+                                        @endforeach
                                    </tbody>
                                </table>
                            </div>
@@ -120,12 +136,12 @@
 </div>
 
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h3 class="modal-title text-center" id="myModalLabel">Détails du vol numéro 1133</h3>
+                                            <h3 class="modal-title text-center" id="myModalLabel">Détails du vol numéro <span id="vol_nvol"></span> </h3>
                                         </div>
                                         <div class="modal-body">
 
@@ -134,7 +150,7 @@
                                                   <div class="panel panel-danger">
                                                    <div class="panel-heading "> Heure départ</div>
                                                      <div class="panel-body text-center">
-                                                      <strong>11:24</strong>
+                                                      <strong id="vol_heurdpr"></strong>
                                                      </div>
                                                    </div>
                                             </div>
@@ -142,23 +158,23 @@
                                                   <div class="panel panel-success">
                                                     <div class="panel-heading text-center"> Heure arrivé </div>
                                                      <div class="panel-body text-center">
-                                                      <strong>12:45</strong>
+                                                      <strong id="vol_heurarriv"></strong>
                                                      </div>
                                                    </div>
                                             </div>
                                             <div class="col-md-3 col-sm-2">
                                                   <div class="panel panel-info">
-                                                   <div class="panel-heading text-center"> Date</div>
+                                                   <div class="panel-heading text-center"> Jour</div>
                                                      <div class="panel-body text-center">
-                                                     <strong>11-02-2019</strong>
+                                                     <strong id="vol_jour"></strong>
                                                      </div>
                                                    </div>
                                             </div>
                                             <div class="col-md-3 col-sm-2">
                                                   <div class="panel panel-warning">
-                                                    <div class="panel-heading text-center"> Type du vol </div>
+                                                    <div class="panel-heading text-center" > Type du vol </div>
                                                      <div class="panel-body text-center">
-                                                      <strong>DPRG</strong>
+                                                      <strong id="vol_type"></strong>
                                                      </div>
                                                    </div>
                                             </div>
@@ -168,26 +184,26 @@
                                     <div class="row">
                                     	    <div class="col-md-3 col-sm-2">
                                                   <div class="panel panel-primary">
-                                                    <div class="panel-heading text-center"> Départ </div>
+                                                    <div class="panel-heading text-center" > Départ </div>
                                                      <div class="panel-body text-center">
-                                                      <strong>HME</strong>
+                                                      <strong id="vol_depart"></strong>
                                                      </div>
                                                    </div>
                                             </div>
                                             <div class="col-md-3 col-sm-2">
                                                   <div class="panel panel-warning">
-                                                    <div class="panel-heading text-center"> Destination </div>
+                                                    <div class="panel-heading text-center" > Destination </div>
                                                      <div class="panel-body text-center">
-                                                      <strong>BJA</strong>
+                                                      <strong id="vol_dest"></strong>
                                                      </div>
                                                    </div>
                                             </div>
 
                                             <div class="col-md-3 col-sm-2">
                                                   <div class="panel panel-info">
-                                                    <div class="panel-heading text-center"> Nb places 'C' </div>
+                                                    <div class="panel-heading text-center" > Nb places 'C' </div>
                                                      <div class="panel-body text-center">
-                                                     <strong>24</strong>
+                                                     <strong id="vol_c"></strong>
                                                      </div>
                                                    </div>
                                             </div>
@@ -195,7 +211,7 @@
                                                   <div class="panel panel-success">
                                                     <div class="panel-heading text-center"> Nb places 'Y' </div>
                                                      <div class="panel-body text-center">
-                                                      <strong>90</strong>
+                                                      <strong id="vol_y"></strong>
                                                      </div>
                                                    </div>
                                             </div>
@@ -203,7 +219,7 @@
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                                         </div>
                                     </div>
                                 </div>
@@ -231,6 +247,62 @@
 
 <!-- Custom Js -->
 <script src={{url('js/custom-scripts.js')}}></script>
+
+
+<script>
+    $(document).on("submit", "#form_info", function (event) {
+            //arreter l'envoi du formulaire
+            event.preventDefault();
+          /**
+            * Envoie de la requette ajax
+           */
+         $.ajax({
+             method: $(this).attr('method'),
+             url: $(this).attr('action'),
+             data: $(this).serialize(),
+             dataType: "json",
+             success: function(data){
+                 //Récupération des données de la réponse et les mettre dans les champs du Model
+                 $('#vol_nvol').html(data.data['0'].vol_nvol); 
+                 $('#vol_heurdpr').html(data.data['0'].vol_heurdpr); 
+                 $('#vol_heurarriv').html(data.data['0'].vol_heutarv); 
+                 var jour
+                switch(data.data['0'].vol_jour){
+                    case '1' :
+                        jour = "Dimanche" ; 
+                    break; 
+                    case '2':
+                        jour = "Lundi" ; 
+                    break;
+                    case '3':
+                        jour = "Mardi"; 
+                    break;
+                    case '4':
+                        jour = "Mercredi" ; 
+                    break;
+                    case '5':
+                        jour = "Jeudi" ; 
+                    break;
+                    case '6':
+                        jour = "Vendredi" ; 
+                    break;
+                    case '7':
+                        jour = "Samedi" ; 
+                    break;
+                }
+                 $('#vol_jour').html(jour); 
+                 $('#vol_type').html(data.data['0'].vol_type); 
+                 $('#vol_depart').html(data.data['0'].vol_depart); 
+                 $('#vol_dest').html(data.data['0'].vol_destin); 
+                 $('#vol_c').html(data.data['0'].vol_np_c_first); 
+                 $('#vol_y').html(data.data['0'].vol_np_y_eco); 
+                 //faire apparaitre le model
+                 $('#myModalInfo').modal('show');
+                    
+             }, 
+         })
+        });
+</script>
 
 
 @endsection
