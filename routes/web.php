@@ -29,6 +29,8 @@ Route::get('/extraction','MainController@getList')->name('list');
 Route::get('/historique/employe','MainController@getHistoryEmploye')->name('his.employe');
 // Une route vers la page d'hitorique par vol
 Route::get('/historique/vol','MainController@getHistoryVol')->name('his.vol');
+// Une route vers la fonction qui récupère les données d'un vol et les retourne en ajax 
+Route::post('/home','MainController@getVolInformation')->name('vol.information') ; 
 
 
 

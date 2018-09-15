@@ -8,13 +8,16 @@ use App\Repositories\VolRepository;
 
 class MainController extends Controller
 {
-    public function index()
-    {
-      // code..
-      //
-      //
+    public function __construct(){
+      //This function is called in 'tableau_de_bord' with ajax
+        $this->middleware('ajax')->only('getVolInformation');
+    }
 
-      return view('agent.tableau_de_bord');
+    public function index(VolRepository $volRepo)
+    {
+      $vols = $volRepo->getWeekVols() ; 
+
+      return view('agent.tableau_de_bord',compact('vols'));
 
     }
 
@@ -54,6 +57,11 @@ class MainController extends Controller
       //
       //
       return view('agent.historique_vol');
+    }
+
+    public function getVolInformation(Request $request, VolRepository $volRepo){
+      $data = $volRepo->getInfo($request->all()) ; 
+      return response()->json(['data'=>$data])  ;
     }
 
 

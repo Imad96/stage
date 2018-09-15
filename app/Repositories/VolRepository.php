@@ -33,6 +33,19 @@ class VolRepository
       return Vol::select('VOL_JOUR', 'VOL_NVOL', 'VOL_DEPART',	'VOL_DESTIN')->get() ;
   }
 
+  /**
+   * Function that returns the week flights
+   */
+  public function getWeekVols(){
+    return Vol::select('VOL_JOUR', 'VOL_NVOL', 'VOL_DEPART',	'VOL_DESTIN','VOL_HEURDPR')->get() ;
+  }
+
+  public function getInfo(Array $request){
+
+    return Vol::where('VOL_JOUR','=',$request['jour'])->where('VOL_NVOL','=',$request['nvol'])->where('VOL_DEPART','=',$request['depart'])->where('VOL_DESTIN','=',$request['dest'])->get() ; 
+
+  }
+
 
 
 
