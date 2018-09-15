@@ -22,7 +22,7 @@
 @section('contenu')
 
 <div class="panel panel-default">
-      <div class="panel-heading"> Veuillez rechercher le vol à modifier ! </div>
+      <div class="panel-heading"> Veuillez rechercher le vol à Modifier ! </div>
           <div class="panel-body">
             <div class="row">
               <div class="col-md-6 col-sm-6">
@@ -66,14 +66,12 @@
                   <button type="submit" class="btn btn-primary pull-right"> Rechercher
                       <i class=" fa fa-search "></i>
                   </button>
-
-
                </form>
             </div>
             <div class="col-md-6 col-sm-6" id="result1">
                <!-- REsult of searching goes here -->
                <div class="table-responsive">
-                              <table class="table table-hover">
+                              <table class="table table-hover table-striped">
                                   <thead>
                                       <tr>
                                           <th class="text-center">Numéro du vol </th>
@@ -90,7 +88,7 @@
                                           <td class="text-center">BJA</td>
                                           <td class="text-center">Mardi</td>
                                           <td><button class="btn btn-info center-block"
-                                             data-toggle="modal" data-target="#myModal"> modifier
+                                              > Modifier
                                               </button>
                                           </td>
                                       </tr>
@@ -100,7 +98,7 @@
                                           <td class="text-center">BJA</td>
                                           <td class="text-center">Mardi</td>
                                           <td><button class="btn btn-info center-block"
-                                             data-toggle="modal" data-target="#myModal"> modifier
+                                              > Modifier
                                               </button>
                                           </td>
                                       </tr>
@@ -110,7 +108,7 @@
                                           <td class="text-center">BJA</td>
                                           <td class="text-center">Mardi</td>
                                           <td><button class="btn btn-info center-block"
-                                             data-toggle="modal" data-target="#myModal"> modifier
+                                              > Modifier
                                               </button>
                                           </td>
                                       </tr>
@@ -120,7 +118,7 @@
                                           <td class="text-center">BJA</td>
                                           <td class="text-center">Mardi</td>
                                           <td><button class="btn btn-info center-block"
-                                             data-toggle="modal" data-target="#myModal"> modifier
+                                              > Modifier
                                               </button>
                                           </td>
                                       </tr>
@@ -130,7 +128,7 @@
                                           <td class="text-center">BJA</td>
                                           <td class="text-center">Mardi</td>
                                           <td><button class="btn btn-info center-block"
-                                             data-toggle="modal" data-target="#myModal"> modifier
+                                              > Modifier
                                               </button>
                                           </td>
                                       </tr>
