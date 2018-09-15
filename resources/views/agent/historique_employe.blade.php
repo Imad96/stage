@@ -63,9 +63,8 @@
 <div id="result" class="panel panel-default">
       <div class="panel-heading"> Liste des vols de Haddad Imad </div>
           <div class="panel-body">
-
-            <div class="table-responsive">
-                                <table class="table table-hover">
+              <div class="table-responsive">
+                                <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
                                           <th class="text-center">Numéro du vol </th>
@@ -75,25 +74,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="success">
+                                        <tr>
                                           <td class="text-center">1289</td>
                                           <td class="text-center">ALG</td>
                                           <td class="text-center">HMD</td>
                                           <td class="text-center">22-08-2018</td>
                                         </tr>
-                                        <tr class="info">
+                                        <tr>
                                           <td class="text-center">1289</td>
                                           <td class="text-center">ALG</td>
                                           <td class="text-center">HMD</td>
                                           <td class="text-center">19-02-2019</td>
                                         </tr>
-                                        <tr class="info">
+                                        <tr>
                                           <td class="text-center">1289</td>
                                           <td class="text-center">ALG</td>
                                           <td class="text-center">HMD</td>
                                           <td class="text-center">07-07-2019</td>
                                         </tr>
-                                        <tr class="danger">
+                                        <tr>
                                           <td class="text-center">1289</td>
                                           <td class="text-center">ALG</td>
                                           <td class="text-center">HMD</td>
