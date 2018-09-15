@@ -34,7 +34,7 @@
                                <i class="fa fa-level-up fa-5x"></i>
                            </div>
                            <div class="panel-right pull-right">
-                             <h3>23</h3>
+                             <h3>{{$nbrDepart}}</h3>
                               <strong> VOLS PARTANS </strong>
                            </div>
                        </div>
@@ -46,7 +46,7 @@
                                <i class="fa fa-level-down fa-5x"></i>
 								           </div>
                            <div class="panel-right pull-right">
-							               <h3>17 </h3>
+							               <h3>{{$nbrArrive}} </h3>
                               <strong> Vols arrivants</strong>
                            </div>
                        </div>
@@ -58,7 +58,7 @@
                                <i class="fa fa-home fa-5x"></i>
                            </div>
                            <div class="panel-right pull-right">
-                             <h3>127</h3>
+                             <h3>{{$nbrPartant}}</h3>
                               <strong>Employés partants </strong>
                            </div>
                        </div>
@@ -70,7 +70,7 @@
                                <i class="fa fa-users fa-5x"></i>
 								           </div>
                            <div class="panel-right pull-right">
-							               <h3>160 </h3>
+							               <h3>{{$nbrArrivant}} </h3>
                               <strong> Employés arrivants</strong>
                            </div>
                        </div>

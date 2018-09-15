@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\VolRequest;
 use App\Repositories\VolRepository;
+use App\Repositories\AgentRepository;
 
 class MainController extends Controller
 {
@@ -13,11 +14,21 @@ class MainController extends Controller
         $this->middleware('ajax')->only('getVolInformation');
     }
 
-    public function index(VolRepository $volRepo)
+    public function index(VolRepository $volRepo,AgentRepository $agentRepo)
     {
+      //Returns the numbre of flights having 'Depart' 'Destination' == 'HME
+      $nbrDepart = $volRepo->getNumberDepart('HME')  ; 
+      $nbrArrive = $volRepo->getNumberArrive('HME') ; 
+      //déterminer la date de samedi et vendredi de cette semaine (pour récupérer le nombre entre le samedi et vendredi)
+      $saturdayOfThisWeek = date('D',strtotime('today')) == 'Sat' ? date('Y-m-d',strtotime('today')): date('Y-m-d',strtotime('last saturday')) ; 
+      $fridayOfThisWeek = date('D',strtotime('today')) == 'Fri' ? date('Y-m-d',strtotime('today')): date('Y-m-d',strtotime('next friday')) ; 
+      //récupérer le nombre de partants et d'arrivants entre samedi de cette semaine et le prochain vendredi
+      $nbrArrivant = $agentRepo->nbrArrivant($saturdayOfThisWeek,$fridayOfThisWeek) ; 
+      $nbrPartant =  $agentRepo->nbrPartant($saturdayOfThisWeek,$fridayOfThisWeek) ; 
+
       $vols = $volRepo->getWeekVols() ; 
 
-      return view('agent.tableau_de_bord',compact('vols'));
+      return view('agent.tableau_de_bord',compact('vols','nbrDepart','nbrArrive','nbrArrivant','nbrPartant'));
 
     }
 

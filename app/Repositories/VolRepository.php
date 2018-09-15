@@ -40,13 +40,27 @@ class VolRepository
     return Vol::select('VOL_JOUR', 'VOL_NVOL', 'VOL_DEPART',	'VOL_DESTIN','VOL_HEURDPR')->get() ;
   }
 
+    /**
+     * Functions that returns informations about a specific flight
+     */
   public function getInfo(Array $request){
 
     return Vol::where('VOL_JOUR','=',$request['jour'])->where('VOL_NVOL','=',$request['nvol'])->where('VOL_DEPART','=',$request['depart'])->where('VOL_DESTIN','=',$request['dest'])->get() ; 
-
   }
 
+  /**
+   * Function that returns the number of flights having 'departure' == departure
+   */
+  public function getNumberDepart($departure){
+    return Vol::where('VOL_DEPART','=',$departure)->count() ;
+  }
 
+  /**
+   * Function that returns the number of flights having 'destination' == destination 
+   */
+  public function getNumberArrive($destination){
+    return Vol::where('VOL_DESTIN','=',$destination)->count() ;
+  }
 
 
 }
