@@ -102,7 +102,7 @@
 
             <!-- REsult of searching goes here -->
             <div class="table-responsive">
-                  <table class="table table-hover">
+                  <table class="table table-hover table-striped">
                      <thead>
                                    <tr>
                                        <th class="text-center">Numéro du vol </th>
@@ -119,7 +119,7 @@
                                        <td class="text-center">HMD</td>
                                        <td class="text-center">Mercredi</td>
                                        <td><button class="btn btn-info center-block"
-                                          data-toggle="modal" data-target="#myModal"> extraire la liste des employés
+                                           > Extraire la liste des employés
                                            </button>
                                        </td>
                                    </tr>
@@ -129,7 +129,7 @@
                                        <td class="text-center">BJA</td>
                                        <td class="text-center">Mardi</td>
                                        <td><button class="btn btn-info center-block"
-                                          data-toggle="modal" data-target="#myModal"> extraire la liste des employés
+                                           > Extraire la liste des employés
                                            </button>
                                        </td>
                                    </tr>
@@ -139,7 +139,7 @@
                                        <td class="text-center">BJA</td>
                                        <td class="text-center">Mardi</td>
                                        <td><button class="btn btn-info center-block"
-                                          data-toggle="modal" data-target="#myModal"> extraire la liste des employés
+                                           > Extraire la liste des employés
                                            </button>
                                        </td>
                                    </tr>
@@ -149,7 +149,7 @@
                                        <td class="text-center">BJA</td>
                                        <td class="text-center">Mardi</td>
                                        <td><button class="btn btn-info center-block"
-                                          data-toggle="modal" data-target="#myModal"> extraire la liste des employés
+                                           > Extraire la liste des employés
                                            </button>
                                        </td>
                                    </tr>
@@ -159,7 +159,7 @@
                                        <td class="text-center">BJA</td>
                                        <td class="text-center">Mardi</td>
                                        <td><button class="btn btn-info center-block"
-                                          data-toggle="modal" data-target="#myModal"> extraire la liste des employés
+                                           > Extraire la liste des employés
                                            </button>
                                        </td>
                                    </tr>

@@ -17,7 +17,6 @@
 <!-- TABLE STYLES-->
 <link href={{url('js/dataTables/dataTables.bootstrap.css')}} rel="stylesheet" />
 
-
 @endsection
 
 @section('contenu')
@@ -61,7 +60,7 @@
           </div>
 </div>
 <div id="result" class="panel panel-default">
-      <div class="panel-heading"> Liste des vols de Haddad Imad </div>
+      <div class="panel-heading"> Liste des vols de <span style="color:#1cc09f;">Haddad Imad</span> </div>
           <div class="panel-body">
               <div class="table-responsive">
                                 <table class="table table-hover table-striped">
