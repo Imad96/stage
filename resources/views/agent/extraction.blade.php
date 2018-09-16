@@ -27,13 +27,14 @@
 <div class="panel panel-default">
       <div class="panel-heading">Veuillez introduire au moins un critère pour rechercher le vol  !</div>
           <div class="panel-body">
-            <form role="form" method="POST" action="" id="form_search">
+            <form method="POST" action="{{ route('search.vol') }}" id="form_search">
+                    {{ csrf_field() }}
                     <div class="row">
                     <div class="col-md-3">
                         <label> Le numéro du vol:</label>
                         <div class="form-group input-group">
                             <span class="input-group-addon">#</span>
-                            <select class="form-control  select-cls" id="numero_vol">
+                            <select class="form-control" id="numero_vol"  name="numero_vol">
                                     <option value="0"></option>
                                     @foreach ($vols as $vol)
                                         <option value="{{ $vol->numero }}">{{ $vol->numero }}</option>
@@ -45,7 +46,7 @@
                         <label> Le jour</label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                            <select class="form-control select-cls" placeholder="Le jour:" id="jour_vol">
+                            <select class="form-control" id="jour_vol"  name="jour_vol">
                                     <option value="0"></option>
                                     <option value="1">Dimanche</option>
                                     <option value="2">Lundi</option>
@@ -61,7 +62,7 @@
                         <label>Le départ:</label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-level-up"></i></span>
-                            <select class="form-control select-cls" id="depart_vol">
+                            <select class="form-control" id="depart_vol"  name="depart_vol">
                                     <option value="0"></option>
                                     @foreach ($departs as $depart)
                                         <option value="{{ $depart->depart }}">{{ $depart->depart }}</option>
@@ -73,7 +74,7 @@
                         <label>La déstination:</label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-level-down"></i></span>
-                            <select class="form-control select-cls" id="destination_vol">
+                            <select class="form-control" id="destination_vol"  name="destination_vol">
                                     <option value="0"></option>
                                     @foreach ($departs as $depart)
                                         <option value="{{ $depart->depart }}">{{ $depart->depart }}</option>
@@ -83,20 +84,22 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-md-4 col-md-offset-3">
-                                <div class=" alert alert-danger alert-dismissible" hidden id="alert_dngr">
-                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                        <strong>Erreur ! Veuillez introduire au moins un champ.
-                                </div>
-                        </div>
-                        <div class="col-md-3  col-md-offset-1">
-                        <button type="submit" class="btn btn-primary pull-right"> Rechercher
+                        <div class="col-md-3  col-md-offset-8">
+                        <button type="submit" class="btn btn-primary pull-right" > Rechercher
                             <i class=" fa fa-search "></i>
                         </button>
                         </div>
                     </div>
 
             </form>
+            <div class="row">
+                    <div class="col-md-4 col-md-offset-3">
+                            <div class=" alert alert-danger alert-dismissible" hidden id="alert_dngr">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Erreur ! Veuillez introduire au moins un champ.
+                            </div>
+                    </div>
+            </div>
             </div>
           </div>
 </div>
@@ -174,6 +177,8 @@
           </div>
 </div>
 
+
+
 @endsection
 
 
@@ -184,33 +189,33 @@
 
     <!-- Metis Menu Js -->
     <script src={{url('js/jquery.metisMenu.js')}}></script>
-    <script>
+    
 
-        $(document).on("submit",'#form_search' ,function (event) {
-            event.preventDefault();
-            
-            var numero = $('#numero_vol option:selected').val() ; 
+    <script>
+            $(document).on("submit", "#form_search", function (event) {
+                //arreter l'envoi du formulaire
+                event.preventDefault();
+                var numero = $('#numero_vol option:selected').val() ; 
             var jour = $('#jour_vol option:selected').val() ; 
             var depart = $('#depart_vol option:selected').val() ; 
             var destination = $('#destination_vol option:selected').val() ; 
             var dataSend = numero + ','+jour+','+depart+','+destination;  
-            if(dataSend == '0,0,0,0'){
-                $('#alert_dngr').show();
+                if(dataSend == '0,0,0,0'){
+                    $('#alert_dngr').show();
+                }
+              /**
+                * Envoie de la requette ajax
+               */else{
+               $.ajax({
+                method: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                dataType: "json",
+                 success: function(data){
+                        alert('done') ; 
+                 },
+             })
             }
-            else{
-                $('#alert_dngr').hide();
-                
-            }
-            /*
-            $.ajax({
-                method: 'POST',
-                url: {{ route('get.vols.par.numero') }} ,
-                data: ,
-                dataType:,
-                success: function(data){
-
-                }, 
-            }) */
-        });
+            });
     </script>
 @endsection 
