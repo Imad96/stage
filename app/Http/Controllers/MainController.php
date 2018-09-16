@@ -87,9 +87,13 @@ class MainController extends Controller
       /**
        * 
        */
-      $data = $volRepo->searchVol($request->al()) ; 
+      if($request['numero_vol'] != '0' || $request['jour_vol'] != '0' || $request['depart_vol'] != '0' || $request['destination_vol'] != '0' ){
+        $data = $volRepo->searchVol($request->all()) ; 
 
-       return response()->json(['ss'=>'12']) ; 
+        return response()->json(['data'=>$data]) ; 
+      }else{
+        return response()->json(['erreur'=>'1']) ;
+      }
 
     }
 

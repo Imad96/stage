@@ -195,11 +195,13 @@
             $(document).on("submit", "#form_search", function (event) {
                 //arreter l'envoi du formulaire
                 event.preventDefault();
-                var numero = $('#numero_vol option:selected').val() ;
-            var jour = $('#jour_vol option:selected').val() ;
-            var depart = $('#depart_vol option:selected').val() ;
-            var destination = $('#destination_vol option:selected').val() ;
-            var dataSend = numero + ','+jour+','+depart+','+destination;
+
+            var numero = $('#numero_vol option:selected').val() ; 
+            var jour = $('#jour_vol option:selected').val() ; 
+            var depart = $('#depart_vol option:selected').val() ; 
+            var destination = $('#destination_vol option:selected').val() ; 
+            var dataSend = numero + ','+jour+','+depart+','+destination;  
+            
                 if(dataSend == '0,0,0,0'){
                     $('#alert_dngr').show();
                 }
@@ -212,6 +214,8 @@
                 data: $(this).serialize(),
                 dataType: "json",
                  success: function(data){
+
+                        console.log(data) ; 
                         alert('done') ;
                  },
              })
