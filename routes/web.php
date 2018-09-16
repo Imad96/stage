@@ -31,6 +31,9 @@ Route::get('/historique/employe','MainController@getHistoryEmploye')->name('his.
 Route::get('/historique/vol','MainController@getHistoryVol')->name('his.vol');
 // Une route vers la fonction qui récupère les données d'un vol et les retourne en ajax 
 Route::post('/home','MainController@getVolInformation')->name('vol.information') ; 
+// Une fonction qui retourne des informations sur les vols ayant le numéro selectionnée dans la page agent/extraction
+Route::post('/extraction','MainController@getVolsParNum')->name('get.vols.par.numero');
+
 
 
 

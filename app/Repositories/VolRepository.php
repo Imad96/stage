@@ -65,5 +65,25 @@ class VolRepository
     return Vol::where('VOL_DESTIN','=',$destination)->count() ;
   }
 
+  /**
+   * Function that returns vol numbres (all numbres of vols)
+   */
+  public function getVolNums(){
+    return Vol::select('VOL_NVOL as numero')->distinct('numero')->orderby('numero')->get() ; 
+  }
+
+  /** 
+  *Function that returns flight days (all days whene there is at least one flight) 
+  */
+  public function getVolDays(){
+    return Vol::select('VOL_JOUR as jour')->distinct('jour')->orderby('jour')->get() ; 
+  }
+
+  /**
+   * Function that returns all flight destinations == Departure
+   */
+  public function getVolDestinations(){
+    return Vol::select('VOL_DEPART as depart')->distinct('depart')->orderby('depart')->get() ; 
+  }
 
 }
