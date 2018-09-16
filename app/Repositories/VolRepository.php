@@ -77,7 +77,14 @@ class VolRepository
    * Function that returns all flight destinations == Departure
    */
   public function getVolDestinations(){
-    return Vol::select('VOL_DEPART as depart')->distinct('depart')->orderby('depart')->get() ; 
+    return Vol::select('VOL_DEPART as depart')->distinct('depart')->orderby('depart')->get() ;   
+  }
+
+  /**
+   * 
+   */
+  public function searchVol(Array $request){
+    return Vol:select('VOL_NVOL','VOL_DEPART','VOL_DESTIN','VOL_JOUR')->get() ; 
   }
 
 }

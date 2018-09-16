@@ -11,7 +11,8 @@ class MainController extends Controller
 {
     public function __construct(){
       //This function is called in 'tableau_de_bord' with ajax
-        $this->middleware('ajax')->only('getVolInformation');
+        $this->middleware('ajax',['only'=>['getVolInformation','searchVol']]);
+
     }
 
     public function index(VolRepository $volRepo,AgentRepository $agentRepo)
@@ -79,5 +80,17 @@ class MainController extends Controller
       return response()->json(['data'=>$data])  ;
     }
 
+    /**
+     * 
+     */
+    public function searchVol(Request $request, VolRepository $volRepo){
+      /**
+       * 
+       */
+      $data = $volRepo->searchVol($request->al()) ; 
+
+       return response()->json(['ss'=>'12']) ; 
+
+    }
 
 }
