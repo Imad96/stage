@@ -189,12 +189,13 @@
 
     <!-- Metis Menu Js -->
     <script src={{url('js/jquery.metisMenu.js')}}></script>
-    
+
 
     <script>
             $(document).on("submit", "#form_search", function (event) {
                 //arreter l'envoi du formulaire
                 event.preventDefault();
+
             var numero = $('#numero_vol option:selected').val() ; 
             var jour = $('#jour_vol option:selected').val() ; 
             var depart = $('#depart_vol option:selected').val() ; 
@@ -213,10 +214,12 @@
                 data: $(this).serialize(),
                 dataType: "json",
                  success: function(data){
+
                         console.log(data) ; 
+                        alert('done') ;
                  },
              })
             }
             });
     </script>
-@endsection 
+@endsection
