@@ -109,7 +109,7 @@
 
             <!-- REsult of searching goes here -->
             <div class="table-responsive">
-                  <table class="table table-hover table-striped">
+                  <table class="table table-hover table-striped" id="vols_table">
                      <thead>
                                    <tr>
                                        <th class="text-center">Numéro du vol </th>
@@ -120,56 +120,6 @@
                                    </tr>
                      </thead>
                      <tbody>
-                                   <tr>
-                                       <td class="text-center">1289</td>
-                                       <td class="text-center">ALG</td>
-                                       <td class="text-center">HMD</td>
-                                       <td class="text-center">Mercredi</td>
-                                       <td><button class="btn btn-info center-block"
-                                           > Extraire la liste des employés
-                                           </button>
-                                       </td>
-                                   </tr>
-                                   <tr>
-                                       <td class="text-center">1123</td>
-                                       <td class="text-center">HMD</td>
-                                       <td class="text-center">BJA</td>
-                                       <td class="text-center">Mardi</td>
-                                       <td><button class="btn btn-info center-block"
-                                           > Extraire la liste des employés
-                                           </button>
-                                       </td>
-                                   </tr>
-                                   <tr>
-                                       <td class="text-center">1289</td>
-                                       <td class="text-center">HMD</td>
-                                       <td class="text-center">BJA</td>
-                                       <td class="text-center">Mardi</td>
-                                       <td><button class="btn btn-info center-block"
-                                           > Extraire la liste des employés
-                                           </button>
-                                       </td>
-                                   </tr>
-                                   <tr>
-                                       <td class="text-center">1120</td>
-                                       <td class="text-center">HMD</td>
-                                       <td class="text-center">BJA</td>
-                                       <td class="text-center">Mardi</td>
-                                       <td><button class="btn btn-info center-block">
-                                            Extraire la liste des employés
-                                           </button>
-                                       </td>
-                                   </tr>
-                                   <tr>
-                                       <td class="text-center">1289</td>
-                                       <td class="text-center">HMD</td>
-                                       <td class="text-center">BJA</td>
-                                       <td class="text-center">Mardi</td>
-                                       <td><button class="btn btn-info center-block"
-                                           > Extraire la liste des employés
-                                           </button>
-                                       </td>
-                                   </tr>
 
                      </tbody>
                   </table>
@@ -200,7 +150,7 @@
             var depart = $('#depart_vol option:selected').val() ; 
             var destination = $('#destination_vol option:selected').val() ; 
             var dataSend = numero + ','+jour+','+depart+','+destination;  
-            
+                
                 if(dataSend == '0,0,0,0'){
                     $('#alert_dngr').show();
                 }
@@ -213,7 +163,15 @@
                 data: $(this).serialize(),
                 dataType: "json",
                  success: function(data){
-                        console.log(data) ; 
+                        if(data != null){
+                            /*$('#vols_table > tbody').html("") ; 
+                            $('#vols_table tr:last').after('<tr><td>'+''+'</td><td>'+''+'</td>'+''+'<td></td>'+''+'<td></td>'+''+'<td>'+''+'</td></tr>');*/
+                            console.log(data) ; 
+                        }else{
+                           /* $('#alert_dngr').show();
+                            alert('failed') ;*/
+                            console.log(data) ; 
+                        } 
                  },
              })
             }
