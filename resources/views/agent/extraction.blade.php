@@ -151,8 +151,8 @@
                                        <td class="text-center">HMD</td>
                                        <td class="text-center">BJA</td>
                                        <td class="text-center">Mardi</td>
-                                       <td><button class="btn btn-info center-block"
-                                           > Extraire la liste des employés
+                                       <td><button class="btn btn-info center-block">
+                                            Extraire la liste des employés
                                            </button>
                                        </td>
                                    </tr>
@@ -187,6 +187,7 @@
 
         $(document).on("submit",'#form_search' ,function (event) {
             event.preventDefault();
+            
             var numero = $('#numero_vol option:selected').val() ; 
             var jour = $('#jour_vol option:selected').val() ; 
             var depart = $('#depart_vol option:selected').val() ; 
@@ -197,8 +198,8 @@
             }
             else{
                 $('#alert_dngr').hide();
+                
             }
-           // alert('This is str('+dataSend+')');
             /*
             $.ajax({
                 method: 'POST',
