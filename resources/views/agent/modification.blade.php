@@ -16,8 +16,9 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css">
 
-
 @endsection
+
+@section('body_tag') <body onload="hide_div('result1');hide_div('result2')"> @endsection
 
 @section('contenu')
 
@@ -27,12 +28,20 @@
             <div class="row">
               <div class="col-md-6 col-sm-6">
                 <form role="form">
-
                   <div class="form-group input-group ">
-                       <span class="input-group-addon">#</span>
-                       <input type="text" class="form-control" placeholder="Numéro du vol" required>
+                    <span class="input-group-addon">#</span>
+                     <select class="form-control">
+                            <option disabled selected><span style="color:#a9a9a9;">
+                               Le numéro du vol</span></option>
+                            @foreach ($primaryKey as $data)
+                            <option> {{$data->vol_nvol}}</option>
+                            @endforeach
+                     </select>
                   </div>
                   <div class="form-group input-group">
+
+                       
+
                        <span class="input-group-addon"><i class="fa fa-level-up "></i></span>
                        <input type="text" class="form-control" placeholder="Départ du vol" required>
                   </div>
@@ -63,7 +72,7 @@
                           </label>
                       </div>
                   </div>
-                  <button type="submit" class="btn btn-primary pull-right"> Rechercher
+                  <button type="submit" class="btn btn-primary pull-right" onclick="show_div('result1');" > Rechercher
                       <i class=" fa fa-search "></i>
                   </button>
                </form>
@@ -87,7 +96,7 @@
                                           <td class="text-center">HMD</td>
                                           <td class="text-center">BJA</td>
                                           <td class="text-center">Mardi</td>
-                                          <td><button class="btn btn-info center-block"
+                                          <td><button class="btn btn-info center-block" onclick="show_div('result2')"
                                               > Modifier
                                               </button>
                                           </td>
@@ -97,7 +106,7 @@
                                           <td class="text-center">HMD</td>
                                           <td class="text-center">BJA</td>
                                           <td class="text-center">Mardi</td>
-                                          <td><button class="btn btn-info center-block"
+                                          <td><button class="btn btn-info center-block" onclick="show_div('result2')"
                                               > Modifier
                                               </button>
                                           </td>
@@ -107,7 +116,7 @@
                                           <td class="text-center">HMD</td>
                                           <td class="text-center">BJA</td>
                                           <td class="text-center">Mardi</td>
-                                          <td><button class="btn btn-info center-block"
+                                          <td><button class="btn btn-info center-block" onclick="show_div('result2')"
                                               > Modifier
                                               </button>
                                           </td>
@@ -117,7 +126,7 @@
                                           <td class="text-center">HMD</td>
                                           <td class="text-center">BJA</td>
                                           <td class="text-center">Mardi</td>
-                                          <td><button class="btn btn-info center-block"
+                                          <td><button class="btn btn-info center-block" onclick="show_div('result2')"
                                               > Modifier
                                               </button>
                                           </td>
@@ -127,7 +136,7 @@
                                           <td class="text-center">HMD</td>
                                           <td class="text-center">BJA</td>
                                           <td class="text-center">Mardi</td>
-                                          <td><button class="btn btn-info center-block"
+                                          <td><button class="btn btn-info center-block" onclick="show_div('result2')"
                                               > Modifier
                                               </button>
                                           </td>
@@ -230,6 +239,7 @@
           </div>
 </div>
 
+ {{$primaryKey[0]['vol_nvol']}}
 
 @endsection
 
@@ -245,11 +255,33 @@
 <!-- Custom Js -->
 <script src={{url('js/custom-scripts.js')}}></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
+<!-- Time picker script  -->
 <script type="text/javascript">
     $('#timepicker1').timepicker();
     $('#timepicker2').timepicker();
 </script>
+<!-- Scripts for showing and hiding DIVs -->
+<script>
 
+			function hide_div(id)
+			{
+        if (document.getElementById(id).style.display == 'none')
+        {
+             document.getElementById(id).style.display = 'block';
+        }
+        else
+        {
+           document.getElementById(id).style.display = 'none';
+        }
+			}
+      function show_div(id)
+			{
+        if (document.getElementById(id).style.display == 'none')
+        {
+             document.getElementById(id).style.display = 'block';
+        }
+			}
 
+</script>
 
 @endsection
