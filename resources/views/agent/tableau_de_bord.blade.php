@@ -20,6 +20,8 @@
 
 @endsection
 
+@section('body_tag') <body> @endsection
+
 @section('contenu')
 
 
@@ -101,23 +103,23 @@
                                         @foreach($vols as $vol)
                                             <tr class="odd gradeX">
                                                 <td class="text-center">{{$vol->vol_nvol}}</td>
-                                                <td class="text-center"> 
-                                                    @if($vol->vol_jour == 1)  Dimanche 
-                                                    @elseif($vol->vol_jour == 2) Lundi 
-                                                    @elseif($vol->vol_jour == 3) Mardi 
+                                                <td class="text-center">
+                                                    @if($vol->vol_jour == 1)  Dimanche
+                                                    @elseif($vol->vol_jour == 2) Lundi
+                                                    @elseif($vol->vol_jour == 3) Mardi
                                                     @elseif($vol->vol_jour == 4) Mercredi
                                                     @elseif($vol->vol_jour == 5) Jeudi
                                                     @elseif($vol->vol_jour == 6) Vendredi
                                                     @elseif($vol->vol_jour == 7) Samedi
                                                     @endif
-                                                    
+
                                                      </td>
                                                 <td class="text-center">{{$vol->vol_depart}}</td>
                                                 <td class="text-center">{{$vol->vol_destin}}</td>
                                                 <td class="text-center">{{$vol->vol_heurdpr}}</td>
                                                 <td>
                                                        <form method="POST" action="{{route('vol.information')}}" id="form_info">
-                                                        {{ csrf_field() }} 
+                                                        {{ csrf_field() }}
                                                         <input type="hidden" id="nvol" name="nvol" value="{{$vol->vol_nvol}}">
                                                         <input type="hidden" id="jour" name="jour" value="{{$vol->vol_jour}}">
                                                         <input type="hidden" id="depart" name="depart" value="{{$vol->vol_depart}}">
@@ -263,43 +265,43 @@
              dataType: "json",
              success: function(data){
                  //Récupération des données de la réponse et les mettre dans les champs du Model
-                 $('#vol_nvol').html(data.data['0'].vol_nvol); 
-                 $('#vol_heurdpr').html(data.data['0'].vol_heurdpr); 
-                 $('#vol_heurarriv').html(data.data['0'].vol_heutarv); 
+                 $('#vol_nvol').html(data.data['0'].vol_nvol);
+                 $('#vol_heurdpr').html(data.data['0'].vol_heurdpr);
+                 $('#vol_heurarriv').html(data.data['0'].vol_heutarv);
                  var jour
                 switch(data.data['0'].vol_jour){
                     case '1' :
-                        jour = "Dimanche" ; 
-                    break; 
+                        jour = "Dimanche" ;
+                    break;
                     case '2':
-                        jour = "Lundi" ; 
+                        jour = "Lundi" ;
                     break;
                     case '3':
-                        jour = "Mardi"; 
+                        jour = "Mardi";
                     break;
                     case '4':
-                        jour = "Mercredi" ; 
+                        jour = "Mercredi" ;
                     break;
                     case '5':
-                        jour = "Jeudi" ; 
+                        jour = "Jeudi" ;
                     break;
                     case '6':
-                        jour = "Vendredi" ; 
+                        jour = "Vendredi" ;
                     break;
                     case '7':
-                        jour = "Samedi" ; 
+                        jour = "Samedi" ;
                     break;
                 }
-                 $('#vol_jour').html(jour); 
-                 $('#vol_type').html(data.data['0'].vol_type); 
-                 $('#vol_depart').html(data.data['0'].vol_depart); 
-                 $('#vol_dest').html(data.data['0'].vol_destin); 
-                 $('#vol_c').html(data.data['0'].vol_np_c_first); 
-                 $('#vol_y').html(data.data['0'].vol_np_y_eco); 
+                 $('#vol_jour').html(jour);
+                 $('#vol_type').html(data.data['0'].vol_type);
+                 $('#vol_depart').html(data.data['0'].vol_depart);
+                 $('#vol_dest').html(data.data['0'].vol_destin);
+                 $('#vol_c').html(data.data['0'].vol_np_c_first);
+                 $('#vol_y').html(data.data['0'].vol_np_y_eco);
                  //faire apparaitre le model
                  $('#myModalInfo').modal('show');
-                    
-             }, 
+
+             },
          })
         });
 </script>

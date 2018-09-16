@@ -20,7 +20,7 @@
 
 </head>
 
-<body>
+@yield('body_tag') 
 
   <nav class="navbar-default top-navbar" role="navigation">
       <div class="navbar-header">

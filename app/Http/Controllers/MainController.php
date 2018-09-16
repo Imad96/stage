@@ -17,16 +17,16 @@ class MainController extends Controller
     public function index(VolRepository $volRepo,AgentRepository $agentRepo)
     {
       //Returns the numbre of flights having 'Depart' 'Destination' == 'HME
-      $nbrDepart = $volRepo->getNumberDepart('HME')  ; 
-      $nbrArrive = $volRepo->getNumberArrive('HME') ; 
+      $nbrDepart = $volRepo->getNumberDepart('HME')  ;
+      $nbrArrive = $volRepo->getNumberArrive('HME') ;
       //déterminer la date de samedi et vendredi de cette semaine (pour récupérer le nombre entre le samedi et vendredi)
-      $saturdayOfThisWeek = date('D',strtotime('today')) == 'Sat' ? date('Y-m-d',strtotime('today')): date('Y-m-d',strtotime('last saturday')) ; 
-      $fridayOfThisWeek = date('D',strtotime('today')) == 'Fri' ? date('Y-m-d',strtotime('today')): date('Y-m-d',strtotime('next friday')) ; 
+      $saturdayOfThisWeek = date('D',strtotime('today')) == 'Sat' ? date('Y-m-d',strtotime('today')): date('Y-m-d',strtotime('last saturday')) ;
+      $fridayOfThisWeek = date('D',strtotime('today')) == 'Fri' ? date('Y-m-d',strtotime('today')): date('Y-m-d',strtotime('next friday')) ;
       //récupérer le nombre de partants et d'arrivants entre samedi de cette semaine et le prochain vendredi
-      $nbrArrivant = $agentRepo->nbrArrivant($saturdayOfThisWeek,$fridayOfThisWeek) ; 
-      $nbrPartant =  $agentRepo->nbrPartant($saturdayOfThisWeek,$fridayOfThisWeek) ; 
+      $nbrArrivant = $agentRepo->nbrArrivant($saturdayOfThisWeek,$fridayOfThisWeek) ;
+      $nbrPartant =  $agentRepo->nbrPartant($saturdayOfThisWeek,$fridayOfThisWeek) ;
 
-      $vols = $volRepo->getWeekVols() ; 
+      $vols = $volRepo->getWeekVols() ;
 
       return view('agent.tableau_de_bord',compact('vols','nbrDepart','nbrArrive','nbrArrivant','nbrPartant'));
 
@@ -34,8 +34,9 @@ class MainController extends Controller
 
     public function getVol(VolRepository $volRepo)
     {
-      $primaryKey= $volRepo->getPrimaryKey();
-      return view('agent.modification',compact('primaryKey'));
+      $volNums= $volRepo->getVolNums();
+      $destinations = $volRepo->getVolDestinations();
+      return view('agent.modification',compact('volNums', 'destinations'));
     }
 
     public function postVol()
@@ -48,11 +49,12 @@ class MainController extends Controller
 
     public function getList(VolRepository $volRepo)
     {
-      //récupérer les numéro des vols 
-      $vols = $volRepo->getVolNums() ;  
-      //récupérer les départs == destinations 
-      $departs = $volRepo->getVolDestinations() ; 
-      //retourner la page d'extraction agent/extraction 
+
+      //récupérer les numéro des vols
+      $vols = $volRepo->getVolNums() ;
+      //récupérer les départs == destinations
+      $departs = $volRepo->getVolDestinations() ;
+      //retourner la page d'extraction agent/extraction
       return view('agent.extraction',compact('vols','departs'));
     }
 
@@ -73,7 +75,7 @@ class MainController extends Controller
     }
 
     public function getVolInformation(Request $request, VolRepository $volRepo){
-      $data = $volRepo->getInfo($request->all()) ; 
+      $data = $volRepo->getInfo($request->all()) ;
       return response()->json(['data'=>$data])  ;
     }
 

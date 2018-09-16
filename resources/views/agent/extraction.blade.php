@@ -20,6 +20,7 @@
 
 @endsection
 
+@section('body_tag') <body> @endsection
 
 @section('contenu')
 
