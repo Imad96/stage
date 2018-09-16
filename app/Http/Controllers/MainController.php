@@ -49,14 +49,13 @@ class MainController extends Controller
 
     public function getList(VolRepository $volRepo)
     {
+
       //récupérer les numéro des vols
       $vols = $volRepo->getVolNums() ;
-      //récupérer les jours
-      $days = $volRepo->getVolDays() ;
       //récupérer les départs == destinations
       $departs = $volRepo->getVolDestinations() ;
       //retourner la page d'extraction agent/extraction
-      return view('agent.extraction',compact('vols','days','departs'));
+      return view('agent.extraction',compact('vols','departs'));
     }
 
     public function getHistoryEmploye()
