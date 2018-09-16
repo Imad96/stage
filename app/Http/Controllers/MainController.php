@@ -92,7 +92,7 @@ class MainController extends Controller
 
         return response()->json(['data'=>$data]) ; 
       }else{
-        return response()->json(['erreur'=>'1']) ;
+        return response()->json(['data'=>null]) ;
       }
 
     }
