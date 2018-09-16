@@ -65,17 +65,17 @@
                       <label>Le jour</label>
                       <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" id="jour2" value="jour2">Mardi
+                            <input type="radio" name="optionsRadios" id="jour3" value="3">Mardi
                           </label>
                       </div>
                       <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" id="jour3" value="jour3">Mercredi
+                            <input type="radio" name="optionsRadios" id="jour4" value="4">Mercredi
                           </label>
                       </div>
                       <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" id="jour4" value="jour4">Jeudi
+                            <input type="radio" name="optionsRadios" id="jour5" value="5">Jeudi
                           </label>
                       </div>
                       <div class="radio">
@@ -89,9 +89,17 @@
                   </button>
                </form>
             </div>
-            <div class="col-md-6 col-sm-6" id="result1">
+            <div class="col-md-6 col-sm-6">
                <!-- REsult of searching goes here -->
-               <div class="table-responsive">
+               <div class=" alert alert-danger alert-dismissible" hidden id="missing_field">
+                       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                       <strong>Erreur ! Veuillez introduire au moins un champ.
+               </div>
+               <div class=" alert alert-danger alert-dismissible" hidden id="!exists">
+                       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                       <strong>Erreur ! Ce vol n'existe pas.
+               </div>
+               <div class="table-responsive" id="result1">
                               <table class="table table-hover table-striped">
                                   <thead>
                                       <tr>

@@ -188,18 +188,18 @@
 
         $(document).on("submit",'#form_search' ,function (event) {
             event.preventDefault();
-            
-            var numero = $('#numero_vol option:selected').val() ; 
-            var jour = $('#jour_vol option:selected').val() ; 
-            var depart = $('#depart_vol option:selected').val() ; 
-            var destination = $('#destination_vol option:selected').val() ; 
-            var dataSend = numero + ','+jour+','+depart+','+destination;  
+
+            var numero = $('#numero_vol option:selected').val() ;
+            var jour = $('#jour_vol option:selected').val() ;
+            var depart = $('#depart_vol option:selected').val() ;
+            var destination = $('#destination_vol option:selected').val() ;
+            var dataSend = numero + ','+jour+','+depart+','+destination;
             if(dataSend == '0,0,0,0'){
                 $('#alert_dngr').show();
             }
             else{
                 $('#alert_dngr').hide();
-                
+
             }
             /*
             $.ajax({
@@ -209,8 +209,8 @@
                 dataType:,
                 success: function(data){
 
-                }, 
+                },
             }) */
         });
     </script>
-@endsection 
+@endsection
