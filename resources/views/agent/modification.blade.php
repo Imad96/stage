@@ -30,24 +30,36 @@
                 <form role="form">
                   <div class="form-group input-group ">
                     <span class="input-group-addon">#</span>
-                     <select class="form-control">
+                     <select id="numVol" class="form-control">
                             <option disabled selected><span style="color:#a9a9a9;">
                                Le numéro du vol</span></option>
-                            @foreach ($primaryKey as $data)
-                            <option> {{$data->vol_nvol}}</option>
+                            <option value="null"></option>
+                            @foreach ($volNums as $data)
+                            <option vlaue="{{$data->numero}}"> {{$data->numero}}</option>
                             @endforeach
                      </select>
                   </div>
                   <div class="form-group input-group">
-
-                       
-
                        <span class="input-group-addon"><i class="fa fa-level-up "></i></span>
-                       <input type="text" class="form-control" placeholder="Départ du vol" required>
+                       <select id="depart" class="form-control">
+                              <option disabled selected><span style="color:#a9a9a9;">
+                                 Départ du vol</span></option>
+                                 <option value="null"></option>
+                              @foreach ($destinations as $data)
+                              <option value="{{$data->depart}}"> {{$data->depart}}</option>
+                              @endforeach
+                       </select>
                   </div>
                   <div class="form-group input-group">
                        <span class="input-group-addon"><i class="fa fa-level-down "></i></span>
-                       <input type="text" class="form-control" placeholder="Déstination du vol" required>
+                       <select class="form-control">
+                              <option disabled selected><span style="color:#a9a9a9;">
+                                 Déstination du vol</span></option>
+                              <option value="null"></option>
+                              @foreach ($destinations as $data)
+                              <option value="{{$data->depart}}"> {{$data->depart}}</option>
+                              @endforeach
+                       </select>
                   </div>
                   <div class="form-group">
                       <label>Le jour</label>
@@ -239,8 +251,6 @@
           </div>
 </div>
 
- {{$primaryKey[0]['vol_nvol']}}
-
 @endsection
 
 @section('include_js')
@@ -271,7 +281,7 @@
         }
         else
         {
-           document.getElementById(id).style.display = 'none';
+             document.getElementById(id).style.display = 'none';
         }
 			}
       function show_div(id)
@@ -281,7 +291,7 @@
              document.getElementById(id).style.display = 'block';
         }
 			}
-
 </script>
+
 
 @endsection
