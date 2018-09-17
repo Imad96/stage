@@ -96,14 +96,14 @@
                     <div class="col-md-4 col-md-offset-3">
                             <div class=" alert alert-danger alert-dismissible" hidden id="alert_dngr">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    <strong>Erreur ! Veuillez introduire au moins un champ.
+                                    <strong>Erreur ! Veuillez introduire au moins un champ. </strong>
                             </div>
                     </div>
             </div>
             </div>
           </div>
 </div>
-<div id="result" class="panel panel-default">
+<div id="result" class="panel panel-default" hidden>
       <div class="panel-heading"> Liste des vols </div>
           <div class="panel-body">
 
@@ -126,7 +126,18 @@
             </div>
           </div>
 </div>
-
+<div id="no_vols" class="panel panel-default" hidden>
+            <div class="panel-body">
+                    <div class="row">
+                            <div class="col-md-4 col-md-offset-3">
+                                    <div class=" alert alert-warnning alert-dismissible" id="alert_dngr">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <strong>Aucun vol trouvé.</strong>
+                                    </div>
+                            </div>
+                    </div>
+            </div>
+  </div>
 
 
 @endsection
@@ -164,17 +175,24 @@
                 data: $(this).serialize(),
                 dataType: "json",
                  success: function(data){
-                        if(data != null){
-                            var vol;
-                            console.log(data) ; 
+                     console.log(data) ; 
+                        if(data != null){ //les données envoyées sont valides 
+                            if(data.found != false){ //il a trouvé au moins un vol ayant les informations envoyées    
+                                var vol;
                                 //$('#vols_table').tabs().remove() ; 
-                            // $('#vols_table').tabs( "refresh" ) ;
-                            for(vol in data.data){ 
-                                btn_extraire = "<form action=\"{{route('vol.extract')}}\" method=\"POST\" id=\"extract_form \" > <input type=\"hidden\" name=\"_token\" value=\"{{csrf_token()}}\" > <input type=\"hidden\" name=\"vol_id\" id=\"vol_id\" value=\" "+data.data[vol].vol_nvol+"|"+data.data[vol].vol_depart+"|"+data.data[vol].vol_destin+"|"+data.data[vol].vol_jour+"\" > <button type=\"submit\" class=\"btn btn-info\" >Extraire </button> </form> "                                                                      
-                                $('#vols_table tr:last').after('<tr><td class="text-center">'+data.data[vol].vol_nvol+'</td><td class="text-center">'
-                                    +data.data[vol].vol_depart+'</td><td class="text-center">'+data.data[vol].vol_destin+'</td><td class="text-center">'
-                                        +data.data[vol].vol_jour+'</td><td class="text-center">'+btn_extraire+'   </td></tr>');
-                               console.log(vol) ; 
+                                // $('#vols_table').tabs( "refresh" ) ;
+                                for(vol in data.data){ 
+                                    btn_extraire = "<form action=\"{{route('vol.extract')}}\" method=\"POST\" id=\"extract_form \" > <input type=\"hidden\" name=\"_token\" value=\"{{csrf_token()}}\" > <input type=\"hidden\" name=\"vol_id\" id=\"vol_id\" value=\" "+data.data[vol].vol_nvol+"|"+data.data[vol].vol_depart+"|"+data.data[vol].vol_destin+"|"+data.data[vol].vol_jour+"\" > <button type=\"submit\" class=\"btn btn-info\" >Extraire </button> </form> "                                                                      
+                                    $('#vols_table tr:last').after('<tr><td class="text-center">'+data.data[vol].vol_nvol+'</td><td class="text-center">'
+                                        +data.data[vol].vol_depart+'</td><td class="text-center">'+data.data[vol].vol_destin+'</td><td class="text-center">'
+                                            +data.data[vol].vol_jour+'</td><td class="text-center">'+btn_extraire+'   </td></tr>');
+                                }
+                                console.log(data.found) ; 
+                                $('#no_vols').hide();                                
+                                $("#result").show(); 
+                            }else{
+                                $("#result").hide(); 
+                                $('#no_vols').show();
                             }
                             
                         }else{
