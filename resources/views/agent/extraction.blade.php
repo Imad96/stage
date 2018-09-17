@@ -158,6 +158,7 @@
               /**
                 * Envoie de la requette ajax
                */else{
+                  // alert($(this).serialize());
                $.ajax({
                 method: $(this).attr('method'),
                 url: $(this).attr('action'),
