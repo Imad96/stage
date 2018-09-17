@@ -101,4 +101,11 @@ class MainController extends Controller
 
     }
 
+    /**
+     * Function that extracts vol list
+     */
+    public function extraireVol(Request $reques){
+     // var_dump($reques) ; 
+    }
+
 }

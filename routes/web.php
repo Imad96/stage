@@ -35,9 +35,8 @@ Route::post('/home','MainController@getVolInformation')->name('vol.information')
 Route::post('/extraction','MainController@searchVol')->name('search.vol') ;
 // Une fonction qui retourne des informations sur les vols ayant le numéro selectionnée dans la page agent/modification
 Route::post('/modification','MainController@searchVol')->name('search.vol.2') ;
-
-
-
+// Une fonction qui extrait les liste des employes d'un vol donnée
+Route::post('/extraction/extraire','MainController@extraireVol')->name('vol.extract') ; 
 
 
 // Une route vers la page d'accueil de l'admin
