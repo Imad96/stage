@@ -20,4 +20,8 @@ class Agent extends Model
     public function releveAgents(){
         return $this->hasMany('App\ReleveAgt') ; 
     }
+
+    public function fonction(){
+        return $this->belongsTo('App\Fonction') ; 
+    }
 }

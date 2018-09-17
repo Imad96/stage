@@ -98,7 +98,10 @@ class VolRepository
    * Function that returns a list of people concerned by the flight given 
    */
   public function volList(Array $request){
+    //return Vol::with(['volReleves','circAdmin','releveAgts','agent','plannings'])->first() ;  
+    //return Vol::find(1)->volReleves() ; 
     return $request ; 
+
   }
 
 }
