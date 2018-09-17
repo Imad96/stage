@@ -105,13 +105,10 @@ class MainController extends Controller
     /**
      * Function that extracts vol list
      */
-    public function extraireVol(Request $reques){
-     // var_dump($reques) ;
-<<<<<<< HEAD
-     //echo $reques ;  
+    public function extraireVol(Request $request,VolRepository $volRepo){
+     
+      $list = $volRepo->volList($request->all()) ;
      return response()->json(['data'=>12]) ; 
-=======
->>>>>>> 9e8f13ee7f54ffb753da67007b81307d463a32b8
     }
 
 }

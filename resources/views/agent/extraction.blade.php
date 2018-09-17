@@ -178,7 +178,7 @@
                                 //$('#vols_table').tabs().remove() ; 
                                 // $('#vols_table').tabs( "refresh" ) ;
                                 for(vol in data.data){ 
-                                    btn_extraire = "<form action=\"{{route('vol.extract')}}\" method=\"POST\" id=\"extract_form\" > <input type=\"hidden\" name=\"_token\" value=\"{{csrf_token()}}\" > <input type=\"hidden\" name=\"numero_vol\" id=\"numero_vol\" value=\""+data.data[vol].vol_nvol+"\" > <input type=\"hidden\" name=\"jour_vol\" id=\"jour_vol\" value=\""+data.data[vol].vol_jour+"\" > <input type=\"hidden\" name=\"depart_vol\" id=\"depart_vol\" value=\""+data.data[vol].vol_depart+"\" > <input type=\"hidden\" name=\"destination_vol\" id=\"destination_vol\" value=\""+data.data[vol].vol_destin+"\" > <button type=\"submit\" class=\"btn btn-info\" >Extraire </button> </form> "                                                                      
+                                    btn_extraire = "<form action=\"{{route('vol.extract')}}\" method=\"POST\" class=\"extract_form\" > <input type=\"hidden\" name=\"_token\" value=\"{{csrf_token()}}\" > <input type=\"hidden\" name=\"numero_vol\" id=\"numero_vol\" value=\""+data.data[vol].vol_nvol+"\" > <input type=\"hidden\" name=\"jour_vol\" id=\"jour_vol\" value=\""+data.data[vol].vol_jour+"\" > <input type=\"hidden\" name=\"depart_vol\" id=\"depart_vol\" value=\""+data.data[vol].vol_depart+"\" > <input type=\"hidden\" name=\"destination_vol\" id=\"destination_vol\" value=\""+data.data[vol].vol_destin+"\" > <button type=\"submit\" class=\"btn btn-info\" >Extraire </button> </form> "                                                                      
                                     $('#vols_table tr:last').after('<tr class=\"my_clmn\" ><td class="text-center">'+data.data[vol].vol_nvol+'</td><td class="text-center">'
                                         +data.data[vol].vol_depart+'</td><td class="text-center">'+data.data[vol].vol_destin+'</td><td class="text-center">'
                                             +data.data[vol].vol_jour+'</td><td class="text-center">'+btn_extraire+'   </td></tr>');
@@ -202,9 +202,8 @@
             }
             });
 
-            $(document).on("submit","#extract_form",function(e){
+            $(document).on("submit",".extract_form",function(e){
                 e.preventDefault() ;
-                console.log($(this).serialize()) ; 
                 $.ajax({
                     method: $(this).attr("method"), 
                     url: $(this).attr("action"),
@@ -212,8 +211,20 @@
                     dataType: "json",
                     success: function (data){
                         //alert("Voulez vos extraire "+data+ "ici") ; 
+                        /*var  a = "Alllle" ; 
+                        var blob = new Blob([a],{type:"text/csv;charset=utf8"}) ;
+                        //window.navigator.msSaveBlob(blob, "extract.txt");
+                        /*var anchor = document.createElement('aakd'); 
+                        anchor.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(a);
+                        anchor.download = 'export.txt';    
+                        window.navigator.msSaveBlob(blob) ; */
+                        console.log(data) ;
+
                     },
+
                 }) 
             });
+
+
     </script>
 @endsection
