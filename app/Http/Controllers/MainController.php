@@ -108,7 +108,7 @@ class MainController extends Controller
     public function extraireVol(Request $request,VolRepository $volRepo){
      
       $list = $volRepo->volList($request->all()) ;
-     return response()->json(['data'=>12]) ; 
+     return response()->json(['data'=>$list]) ; 
     }
 
 }
