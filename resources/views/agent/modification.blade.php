@@ -14,6 +14,8 @@
 <link href={{url('css/custom-styles.css')}} rel="stylesheet" />
 <!-- Google Fonts-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+<!-- TABLE STYLES-->
+<link href={{url('js/dataTables/dataTables.bootstrap.css')}} rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css">
 
 @endsection
@@ -29,33 +31,30 @@
               <div class="col-md-6 col-sm-6">
                 <form method="POST" action="{{ route('search.vol.2') }}" id="form_search">
                         {{ csrf_field() }}
+                  <label>Le numéro du vol</label>      
                   <div class="form-group input-group ">
                     <span class="input-group-addon">#</span>
                     <select class="form-control" id="numero_vol"  name="numero_vol">
-                            <option disabled selected value="0"><span style="color:#a9a9a9;">
-                               Le numéro du vol</span></option>
                             <option value="0"></option>
                             @foreach ($volNums as $data)
                             <option vlaue="{{$data->numero}}"> {{$data->numero}}</option>
                             @endforeach
                     </select>
                   </div>
+                  <label>Départ du vol</label>
                   <div class="form-group input-group">
                        <span class="input-group-addon"><i class="fa fa-level-up "></i></span>
                        <select class="form-control" id="depart_vol"  name="depart_vol">
-                              <option disabled selected value="0"><span style="color:#a9a9a9;">
-                                 Départ du vol</span></option>
                                  <option value="0"></option>
                               @foreach ($destinations as $data)
                               <option value="{{$data->depart}}"> {{$data->depart}}</option>
                               @endforeach
                        </select>
                   </div>
+                  <label>Déstination du vol</label>
                   <div class="form-group input-group">
                        <span class="input-group-addon"><i class="fa fa-level-down "></i></span>
                        <select class="form-control" id="destination_vol"  name="destination_vol">
-                              <option disabled selected value="0"><span style="color:#a9a9a9;">
-                                 Déstination du vol</span></option>
                               <option value="0"></option>
                               @foreach ($destinations as $data)
                               <option value="{{$data->depart}}"> {{$data->depart}}</option>
@@ -66,22 +65,22 @@
                       <label>Le jour</label>
                       <div class="radio">
                           <label>
-                            <input type="radio" name="jour" id="jour3" value="3">Mardi
+                            <input type="radio" name="jour_vol" id="jour3" value="3">Mardi
                           </label>
                       </div>
                       <div class="radio">
                           <label>
-                            <input type="radio" name="jour" id="jour4" value="4">Mercredi
+                            <input type="radio" name="jour_vol" id="jour4" value="4">Mercredi
                           </label>
                       </div>
                       <div class="radio">
                           <label>
-                            <input type="radio" name="jour" id="jour5" value="5">Jeudi
+                            <input type="radio" name="jour_vol" id="jour5" value="5">Jeudi
                           </label>
                       </div>
                       <div class="radio">
                           <label>
-                            <input type="radio" name="jour" id="tous" value="0" checked>Tous les jours
+                            <input type="radio" name="jour_vol" id="tous" value="0" checked>Tous les jours
                           </label>
                       </div>
                   </div>
@@ -96,7 +95,7 @@
                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                        <strong>Erreur ! Veuillez introduire au moins un champ.
                </div>
-               <div class=" alert alert-danger alert-dismissible" hidden id="!exists">
+               <div class=" alert alert-danger alert-dismissible" hidden id="not_exists">
                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                        <strong>Erreur ! Ce vol n'existe pas.
                </div>
@@ -271,8 +270,46 @@
 <script src={{url('js/bootstrap.min.js')}}></script>
 <!-- Metis Menu Js -->
 <script src={{url('js/jquery.metisMenu.js')}}></script>
-<!-- Custom Js -->
-<script src={{url('js/custom-scripts.js')}}></script>
+
+// Ajax pour retourner le tableau du resultats de recherche
+<script>
+        $(document).on("submit", "#form_search", function (event) {
+            //arreter l'envoi du formulaire
+            event.preventDefault();
+
+        var numero = $('#numero_vol option:selected').val() ;
+        var jour =$('#form_search input[type=radio]:checked' ).val();
+        var depart = $('#depart_vol option:selected').val() ;
+        var destination = $('#destination_vol option:selected').val() ;
+        var dataSend = numero + ','+jour+','+depart+','+destination;
+
+
+            if(dataSend == '0,0,0,0'){
+                $('#missing_field').show();
+            }
+          /**
+            * Envoie de la requette ajax
+           */else{
+           $.ajax({
+            method: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            dataType: "json",
+             success: function(data){
+
+                    alert("succeeded request ");
+                    if(data.found){
+                      alert("data is found !");
+                      console.log(data);
+                    }
+                    else {
+                      console.log(data);
+                      $('#not_exists').show();                    }
+             },
+         })
+        }
+        });
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
 <!-- Time picker script  -->
 <script type="text/javascript">
@@ -300,42 +337,6 @@
              document.getElementById(id).style.display = 'block';
         }
 			}
-</script>
-// Ajax pour retourner le tableau du resultats de recherche
-<script>
-        $(document).on("submit", "#form_search", function (event) {
-            //arreter l'envoi du formulaire
-            event.preventDefault();
-
-        var numero = $('#numero_vol option:selected').val() ;
-        var jour = $('#form_search input[type=radio]:checked' ).val();
-        var depart = $('#depart_vol option:selected').val() ;
-        var destination = $('#destination_vol option:selected').val() ;
-        var dataSend = numero + ','+jour+','+depart+','+destination;
-
-            if(dataSend == '0,0,0,0'){
-                $('#missing_field').show();
-            }
-          /**
-            * Envoie de la requette ajax
-           */else{
-           $.ajax({
-            method: $(this).attr('method'),
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-            dataType: "json",
-             success: function(data){
-
-                    alert("succeeded request ");
-                    if(data.found){
-                      console.log(data);
-                    }
-                    else {
-                      $('#!exists').show();                    }
-             },
-         })
-        }
-        });
 </script>
 
 

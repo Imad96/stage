@@ -18,6 +18,7 @@
 <link href={{url('js/dataTables/dataTables.bootstrap.css')}} rel="stylesheet" />
 
 
+
 @endsection
 
 @section('body_tag') <body> @endsection
