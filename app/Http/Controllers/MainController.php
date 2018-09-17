@@ -96,7 +96,6 @@ class MainController extends Controller
         }else{
           return response()->json(['found'=>false,'data'=>$data]) ;
         }
-
       }
       //dans le cas d'eereur de saisi de l'utilisateur
       return response()->json(['found'=>false,'data'=>null]) ;
@@ -107,7 +106,7 @@ class MainController extends Controller
      * Function that extracts vol list
      */
     public function extraireVol(Request $reques){
-     // var_dump($reques) ; 
+     // var_dump($reques) ;
     }
 
 }
