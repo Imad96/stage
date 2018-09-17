@@ -81,19 +81,23 @@ class MainController extends Controller
     }
 
     /**
-     * 
+     *
      */
     public function searchVol(Request $request, VolRepository $volRepo){
-      /**
-       * 
-       */
-      if($request['numero_vol'] != '0' || $request['jour_vol'] != '0' || $request['depart_vol'] != '0' || $request['destination_vol'] != '0' ){
-        $data = $volRepo->searchVol($request->all()) ; 
+      // Verify wether data is set or not
+      if($request['numero_vol'] != '0' || $request['jour_vol'] != '0'
+                     || $request['depart_vol'] != '0' || $request['destination_vol'] != '0' )
+      {
+        $data = $volRepo->searchVol($request->all()) ;
 
-        return response()->json(['data'=>$data]) ; 
-      }else{
-        return response()->json(['erreur'=>'1']) ;
+        if(count($data) != 0)
+        {
+          return response()->json(['found'=>true,'data'=>$data]);
+        }
+
       }
+      return response()->json(['found'=>false,'data'=>$data]) ;
+
 
     }
 

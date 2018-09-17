@@ -27,24 +27,25 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-md-6 col-sm-6">
-                <form role="form">
+                <form method="POST" action="{{ route('search.vol.2') }}" id="form_search">
+                        {{ csrf_field() }}
                   <div class="form-group input-group ">
                     <span class="input-group-addon">#</span>
-                     <select id="numVol" class="form-control">
-                            <option disabled selected><span style="color:#a9a9a9;">
+                    <select class="form-control" id="numero_vol"  name="numero_vol">
+                            <option disabled selected value="0"><span style="color:#a9a9a9;">
                                Le numéro du vol</span></option>
-                            <option value="null"></option>
+                            <option value="0"></option>
                             @foreach ($volNums as $data)
                             <option vlaue="{{$data->numero}}"> {{$data->numero}}</option>
                             @endforeach
-                     </select>
+                    </select>
                   </div>
                   <div class="form-group input-group">
                        <span class="input-group-addon"><i class="fa fa-level-up "></i></span>
-                       <select id="depart" class="form-control">
-                              <option disabled selected><span style="color:#a9a9a9;">
+                       <select class="form-control" id="depart_vol"  name="depart_vol">
+                              <option disabled selected value="0"><span style="color:#a9a9a9;">
                                  Départ du vol</span></option>
-                                 <option value="null"></option>
+                                 <option value="0"></option>
                               @foreach ($destinations as $data)
                               <option value="{{$data->depart}}"> {{$data->depart}}</option>
                               @endforeach
@@ -52,10 +53,10 @@
                   </div>
                   <div class="form-group input-group">
                        <span class="input-group-addon"><i class="fa fa-level-down "></i></span>
-                       <select class="form-control">
-                              <option disabled selected><span style="color:#a9a9a9;">
+                       <select class="form-control" id="destination_vol"  name="destination_vol">
+                              <option disabled selected value="0"><span style="color:#a9a9a9;">
                                  Déstination du vol</span></option>
-                              <option value="null"></option>
+                              <option value="0"></option>
                               @foreach ($destinations as $data)
                               <option value="{{$data->depart}}"> {{$data->depart}}</option>
                               @endforeach
@@ -65,22 +66,22 @@
                       <label>Le jour</label>
                       <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" id="jour3" value="3">Mardi
+                            <input type="radio" name="jour" id="jour3" value="3">Mardi
                           </label>
                       </div>
                       <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" id="jour4" value="4">Mercredi
+                            <input type="radio" name="jour" id="jour4" value="4">Mercredi
                           </label>
                       </div>
                       <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" id="jour5" value="5">Jeudi
+                            <input type="radio" name="jour" id="jour5" value="5">Jeudi
                           </label>
                       </div>
                       <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" id="tous" value="tout" checked>Tous les jours
+                            <input type="radio" name="jour" id="tous" value="0" checked>Tous les jours
                           </label>
                       </div>
                   </div>
@@ -299,6 +300,42 @@
              document.getElementById(id).style.display = 'block';
         }
 			}
+</script>
+// Ajax pour retourner le tableau du resultats de recherche
+<script>
+        $(document).on("submit", "#form_search", function (event) {
+            //arreter l'envoi du formulaire
+            event.preventDefault();
+
+        var numero = $('#numero_vol option:selected').val() ;
+        var jour = $('#form_search input[type=radio]:checked' ).val();
+        var depart = $('#depart_vol option:selected').val() ;
+        var destination = $('#destination_vol option:selected').val() ;
+        var dataSend = numero + ','+jour+','+depart+','+destination;
+
+            if(dataSend == '0,0,0,0'){
+                $('#missing_field').show();
+            }
+          /**
+            * Envoie de la requette ajax
+           */else{
+           $.ajax({
+            method: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            dataType: "json",
+             success: function(data){
+
+                    alert("succeeded request ");
+                    if(data.found){
+                      console.log(data);
+                    }
+                    else {
+                      $('#!exists').show();                    }
+             },
+         })
+        }
+        });
 </script>
 
 
