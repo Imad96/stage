@@ -158,7 +158,6 @@
               /**
                 * Envoie de la requette ajax
                */else{
-                  // alert($(this).serialize());
                $.ajax({
                 method: $(this).attr('method'),
                 url: $(this).attr('action'),
@@ -166,13 +165,20 @@
                 dataType: "json",
                  success: function(data){
                         if(data != null){
-                            /*$('#vols_table > tbody').html("") ; 
-                            $('#vols_table tr:last').after('<tr><td>'+''+'</td><td>'+''+'</td>'+''+'<td></td>'+''+'<td></td>'+''+'<td>'+''+'</td></tr>');*/
+                            var vol;
                             console.log(data) ; 
+                                //$('#vols_table').tabs().remove() ; 
+                            // $('#vols_table').tabs( "refresh" ) ;
+                            for(vol in data.data){ 
+                                btn_extraire = "<form action=\"{{route('vol.extract')}}\" method=\"POST\" id=\"extract_form \" > <input type=\"hidden\" name=\"_token\" value=\"{{csrf_token()}}\" > <input type=\"hidden\" name=\"vol_id\" id=\"vol_id\" value=\" "+data.data[vol].vol_nvol+"|"+data.data[vol].vol_depart+"|"+data.data[vol].vol_destin+"|"+data.data[vol].vol_jour+"\" > <button type=\"submit\" class=\"btn btn-info\" >Extraire </button> </form> "                                                                      
+                                $('#vols_table tr:last').after('<tr><td class="text-center">'+data.data[vol].vol_nvol+'</td><td class="text-center">'
+                                    +data.data[vol].vol_depart+'</td><td class="text-center">'+data.data[vol].vol_destin+'</td><td class="text-center">'
+                                        +data.data[vol].vol_jour+'</td><td class="text-center">'+btn_extraire+'   </td></tr>');
+                               console.log(vol) ; 
+                            }
+                            
                         }else{
-                           /* $('#alert_dngr').show();
-                            alert('failed') ;*/
-                            console.log(data) ; 
+                            $('#alert_dngr').show();
                         } 
                  },
              })

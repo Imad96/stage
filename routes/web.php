@@ -33,8 +33,8 @@ Route::get('/historique/vol','MainController@getHistoryVol')->name('his.vol');
 Route::post('/home','MainController@getVolInformation')->name('vol.information') ; 
 // Une fonction qui retourne des informations sur les vols ayant le numéro selectionnée dans la page agent/extraction
 Route::post('/extraction','MainController@searchVol')->name('search.vol') ; 
-
-
+// Une fonction qui extrait les liste des employes d'un vol donnée
+Route::post('/extraction/extraire','MainController@extraireVol')->name('vol.extract') ; 
 
 
 // Une route vers la page d'accueil de l'admin
