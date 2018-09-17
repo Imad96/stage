@@ -20,7 +20,7 @@
 
 @endsection
 
-@section('body_tag') <body onload="hide_div('result1');hide_div('result2')"> @endsection
+@section('body_tag') <body> @endsection
 
 @section('contenu')
 
@@ -31,7 +31,7 @@
               <div class="col-md-6 col-sm-6">
                 <form method="POST" action="{{ route('search.vol.2') }}" id="form_search">
                         {{ csrf_field() }}
-                  <label>Le numéro du vol</label>      
+                  <label>Le numéro du vol</label>
                   <div class="form-group input-group ">
                     <span class="input-group-addon">#</span>
                     <select class="form-control" id="numero_vol"  name="numero_vol">
@@ -84,22 +84,22 @@
                           </label>
                       </div>
                   </div>
-                  <button type="submit" class="btn btn-primary pull-right" onclick="show_div('result1');" > Rechercher
+                  <button type="submit" class="btn btn-primary pull-right" > Rechercher
                       <i class=" fa fa-search "></i>
                   </button>
                </form>
             </div>
             <div class="col-md-6 col-sm-6">
                <!-- REsult of searching goes here -->
-               <div class=" alert alert-danger alert-dismissible" hidden id="missing_field">
-                       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                       <strong>Erreur ! Veuillez introduire au moins un champ.
+               <div class=" alert alert-danger " hidden id="missing_field">
+                       <button class="close alert-close" aria-label="close">&times;</button>
+                       <strong>Erreur !</strong> Veuillez introduire au moins un champ.
                </div>
-               <div class=" alert alert-danger alert-dismissible" hidden id="not_exists">
-                       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                       <strong>Erreur ! Ce vol n'existe pas.
+               <div class=" alert alert-danger " hidden id="not_exists">
+                       <button class="close alert-close2" aria-label="close">&times;</button>
+                       <strong>Erreur !</strong> Ce vol n'existe pas.
                </div>
-               <div class="table-responsive" id="result1">
+               <div class="table-responsive" id="result1" hidden>
                               <table class="table table-hover table-striped">
                                   <thead>
                                       <tr>
@@ -116,52 +116,11 @@
                                           <td class="text-center">HMD</td>
                                           <td class="text-center">BJA</td>
                                           <td class="text-center">Mardi</td>
-                                          <td><button class="btn btn-info center-block" onclick="show_div('result2')"
+                                          <td><button class="btn btn-info center-block"
                                               > Modifier
                                               </button>
                                           </td>
                                       </tr>
-                                      <tr>
-                                          <td class="text-center">1289</td>
-                                          <td class="text-center">HMD</td>
-                                          <td class="text-center">BJA</td>
-                                          <td class="text-center">Mardi</td>
-                                          <td><button class="btn btn-info center-block" onclick="show_div('result2')"
-                                              > Modifier
-                                              </button>
-                                          </td>
-                                      </tr>
-                                      <tr>
-                                          <td class="text-center">1289</td>
-                                          <td class="text-center">HMD</td>
-                                          <td class="text-center">BJA</td>
-                                          <td class="text-center">Mardi</td>
-                                          <td><button class="btn btn-info center-block" onclick="show_div('result2')"
-                                              > Modifier
-                                              </button>
-                                          </td>
-                                      </tr>
-                                      <tr>
-                                          <td class="text-center">1289</td>
-                                          <td class="text-center">HMD</td>
-                                          <td class="text-center">BJA</td>
-                                          <td class="text-center">Mardi</td>
-                                          <td><button class="btn btn-info center-block" onclick="show_div('result2')"
-                                              > Modifier
-                                              </button>
-                                          </td>
-                                      </tr>
-                                      <tr>
-                                          <td class="text-center">1289</td>
-                                          <td class="text-center">HMD</td>
-                                          <td class="text-center">BJA</td>
-                                          <td class="text-center">Mardi</td>
-                                          <td><button class="btn btn-info center-block" onclick="show_div('result2')"
-                                              > Modifier
-                                              </button>
-                                          </td>
-                                      </tr>
-
                                   </tbody>
                               </table>
                           </div>
@@ -171,7 +130,7 @@
         </div>
 </div>
 
-<div id="result2" class="panel panel-default">
+<div id="result2" class="panel panel-default" hidden>
       <div class="panel-heading"> Mettre à jour les informations du vol </div>
           <div class="panel-body">
             <div class="row">
@@ -296,15 +255,14 @@
             data: $(this).serialize(),
             dataType: "json",
              success: function(data){
-
-                    alert("succeeded request ");
                     if(data.found){
-                      alert("data is found !");
-                      console.log(data);
+                      console.log(data.data);
+                        $('#result1').show();
+
                     }
                     else {
-                      console.log(data);
-                      $('#not_exists').show();                    }
+                      $('#not_exists').show();
+                    }
              },
          })
         }
@@ -316,27 +274,18 @@
     $('#timepicker1').timepicker();
     $('#timepicker2').timepicker();
 </script>
-<!-- Scripts for showing and hiding DIVs -->
+// To hide the alert
 <script>
-
-			function hide_div(id)
-			{
-        if (document.getElementById(id).style.display == 'none')
-        {
-             document.getElementById(id).style.display = 'block';
-        }
-        else
-        {
-             document.getElementById(id).style.display = 'none';
-        }
-			}
-      function show_div(id)
-			{
-        if (document.getElementById(id).style.display == 'none')
-        {
-             document.getElementById(id).style.display = 'block';
-        }
-			}
+$(function() {
+   $(document).on('click', '.alert-close', function() {
+       $(this).parent().hide();
+   })
+});
+$(function() {
+   $(document).on('click', '.alert-close2', function() {
+       $(this).parent().hide();
+   })
+});
 </script>
 
 
