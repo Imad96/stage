@@ -16,4 +16,8 @@ class Agent extends Model
     public function plannings(){
         return $this->hasMany('App\Planning') ; 
     }
+
+    public function releveAgents(){
+        return $this->hasMany('App\ReleveAgt') ; 
+    }
 }

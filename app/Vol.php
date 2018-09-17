@@ -11,6 +11,8 @@ class Vol extends Model
 
   public $timestamps = false;
 
-  
+  public function volReleves(){
+    return $this->hasMany('App\VolReleve') ; 
+  }
 
 }

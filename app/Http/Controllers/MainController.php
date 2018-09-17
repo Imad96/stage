@@ -11,7 +11,7 @@ class MainController extends Controller
 {
     public function __construct(){
       //This function is called in 'tableau_de_bord' with ajax
-        $this->middleware('ajax',['only'=>['getVolInformation','searchVol']]);
+        $this->middleware('ajax',['only'=>['getVolInformation','searchVol','extraireVol']]);
 
     }
 
@@ -105,8 +105,10 @@ class MainController extends Controller
     /**
      * Function that extracts vol list
      */
-    public function extraireVol(Request $reques){
-     // var_dump($reques) ;
+    public function extraireVol(Request $request,VolRepository $volRepo){
+     
+      $list = $volRepo->volList($request->all()) ;
+     return response()->json(['data'=>12]) ; 
     }
 
 }

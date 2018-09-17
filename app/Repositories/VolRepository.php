@@ -94,4 +94,11 @@ class VolRepository
 
   }
 
+  /***
+   * Function that returns a list of people concerned by the flight given 
+   */
+  public function volList(Array $request){
+    return $request ; 
+  }
+
 }
