@@ -85,6 +85,7 @@ class VolRepository
    */
   public function searchVol(Array $request){
     return Vol::select('VOL_NVOL','VOL_DEPART','VOL_DESTIN','VOL_JOUR')
+<<<<<<< HEAD
   //  ->where('VOL_NVOL','=',$request['numero_vol'] != '0' ? $request['numero_vol']:'VOL_NVOL')
   //  ->where('VOL_DESTIN','=',$request['destination_vol'] != '0' ? $request['destination_vol']:'VOL_DESTIN')
   //  ->where('VOL_DEPART','=',$request['depart_vol'] != '0' ? $request['depart_vol']:'VOL_DEPART')
@@ -94,6 +95,14 @@ class VolRepository
     /*return Vol::select('VOL_NVOL','VOL_DEPART','VOL_DESTIN','VOL_JOUR')
     ->where('VOL_NVOL','=',$request['numero_vol'] != '0' ? $request['numero_vol']:'VOL_NVOL')
     ->get() ; */
+=======
+    ->where('VOL_NVOL',$request['numero_vol'] != "0" ?'=':'<>',$request['numero_vol'] != "0" ? $request['numero_vol']:"0")
+    ->where('VOL_DESTIN',$request['destination_vol'] != "0" ?'=':'<>',$request['destination_vol'] != "0" ? $request['destination_vol']:'0')
+    ->where('VOL_DEPART',$request['depart_vol'] != "0" ?'=':'<>',$request['depart_vol'] != "0" ? $request['depart_vol']:'0')
+    ->where('VOL_JOUR',$request['jour_vol'] != "0" ?'=':'<>',$request['jour_vol'] != "0" ? $request['jour_vol']:'0')
+    ->get()  ;
+
+>>>>>>> 7bdef0cd47a19f6f7927591d45c5324c2b70ef02
   }
 
 }
