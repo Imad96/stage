@@ -84,6 +84,7 @@ class VolRepository
    *
    */
   public function searchVol(Array $request){
+
     return Vol::select('VOL_NVOL','VOL_DEPART','VOL_DESTIN','VOL_JOUR')
     ->where('VOL_NVOL',$request['numero_vol'] != "0" ?'=':'<>',$request['numero_vol'] != "0" ? $request['numero_vol']:"0")
     ->where('VOL_DESTIN',$request['destination_vol'] != "0" ?'=':'<>',$request['destination_vol'] != "0" ? $request['destination_vol']:'0')

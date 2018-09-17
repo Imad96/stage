@@ -98,7 +98,6 @@ class MainController extends Controller
       }
       return response()->json(['found'=>false,'data'=>$data]) ;
 
-
     }
 
 }
