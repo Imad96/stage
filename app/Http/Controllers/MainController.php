@@ -93,11 +93,21 @@ class MainController extends Controller
         if(count($data) != 0)
         {
           return response()->json(['found'=>true,'data'=>$data]);
+        }else{
+          return response()->json(['found'=>false,'data'=>$data]) ;
         }
 
       }
-      return response()->json(['found'=>false,'data'=>$data]) ;
+      //dans le cas d'eereur de saisi de l'utilisateur
+      return response()->json(['found'=>false,'data'=>null]) ;
 
+    }
+
+    /**
+     * Function that extracts vol list
+     */
+    public function extraireVol(Request $reques){
+     // var_dump($reques) ; 
     }
 
 }
