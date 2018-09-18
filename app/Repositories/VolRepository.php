@@ -100,6 +100,33 @@ class VolRepository
   public function volList(Array $request){
     //return Vol::with(['volReleves','circAdmin','releveAgts','agent','plannings'])->first() ;  
     //return Vol::find(1)->volReleves() ; 
+    return Vol
+      ::join('H_VOLRELEVE',function($join){
+          $join->on('H_VOLRELEVE.VRV_JOUR','=','H_VOLS.VOL_JOUR') ; 
+          $join->on('H_VOLRELEVE.VRV_NVOL','=','H_VOLS.VOL_NVOL') ; 
+          $join->on('H_VOLRELEVE.VRV_DEPART','=','H_VOLS.VOL_DEPART') ; 
+          $join->on('H_VOLRELEVE.VRV_DESTIN','=','H_VOLS.VOL_DESTIN') ; })
+      ->join('H_CIRCADMIN',function($join){
+          $join->on('H_CIRCADMIN.CAD_PAYS','=','H_VOLRELEVE.VRV_PAYS'); 
+          $join->on('H_CIRCADMIN.CAD_CLIEU','=','H_VOLRELEVE.VRV_CLIEU') ; })
+      ->join('HV01_LRELEVAGT',function($join){
+        $join->on('HV01_LRELEVAGT.RVA_CPAYS','=','H_CIRCADMIN.CAD_PAYS'); 
+        $join->on('HV01_LRELEVAGT.RVA_CLIEU','=','H_CIRCADMIN.CAD_CLIEU'); })
+      ->join('H_AGENT',function($join){
+        $join->on('H_AGENT.AGT_MATRICULE','=','HV01_LRELEVAGT.RVA_MATRICULE') ; })
+      ->join('H_PLNGAGENT',function($join){
+        $join->on('H_PLNGAGENT.PLA_MATRICULE','=','H_AGENT.AGT_MATRICULE') ; })
+      ->join('H_FONCTIONS',function($join){
+        $join->on('H_FONCTIONS.FCT_CFONCTION','=','H_AGENT.AGT_CFONCTION') ;})
+      ->select('H_AGENT.AGT_MATRICULE as matricule','HV01_LRELEVAGT.CAD_DESIGN')
+      ->where('H_VOLS.VOL_DEPART','=',$request['depart_vol'])
+      ->where('H_VOLS.VOL_DESTIN','=',$request['destination_vol'])
+      ->where('H_VOLS.VOL_JOUR','=',$request['jour_vol'])
+      ->where('H_VOLS.VOL_NVOL','=',$request['numero_vol'])
+      ->get() ; 
+   
+   
+   
     return $request ; 
 
   }
