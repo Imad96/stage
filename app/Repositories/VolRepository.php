@@ -98,8 +98,10 @@ class VolRepository
    * Function that returns a list of people concerned by the flight given 
    */
   public function volList(Array $request){
-    //return Vol::with(['volReleves','circAdmin','releveAgts','agent','plannings'])->first() ;  
-    //return Vol::find(1)->volReleves() ; 
+    
+    
+    $day = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat') ; 
+    $dateVol = $day[$request['jour_vol']-1] ; 
     return Vol
       ::join('H_VOLRELEVE',function($join){
           $join->on('H_VOLRELEVE.VRV_JOUR','=','H_VOLS.VOL_JOUR') ; 
@@ -118,16 +120,17 @@ class VolRepository
         $join->on('H_PLNGAGENT.PLA_MATRICULE','=','H_AGENT.AGT_MATRICULE') ; })
       ->join('H_FONCTIONS',function($join){
         $join->on('H_FONCTIONS.FCT_CFONCTION','=','H_AGENT.AGT_CFONCTION') ;})
-      ->select('H_AGENT.AGT_MATRICULE as matricule','HV01_LRELEVAGT.CAD_DESIGN')
+      ->select('H_AGENT.AGT_MATRICULE as matricule','H_AGENT.AGT_SEXE as sexe','H_AGENT.AGT_NOM as nom','H_AGENT.AGT_PRENOM as prenom',
+               'H_AGENT.AGT_CMPTANAL as compteAnal','H_AGENT.AGT_EMAIL as email','H_FONCTIONS.FCT_DESIGNATION as fonction', 'H_VOLS.VOL_NVOL as numeroVol',
+               'H_PLNGAGENT.PLA_DDEBUT as dateVol','H_VOLS.VOL_DESTIN as destination')
       ->where('H_VOLS.VOL_DEPART','=',$request['depart_vol'])
       ->where('H_VOLS.VOL_DESTIN','=',$request['destination_vol'])
       ->where('H_VOLS.VOL_JOUR','=',$request['jour_vol'])
       ->where('H_VOLS.VOL_NVOL','=',$request['numero_vol'])
+      ->where('H_PLNGAGENT.PLA_CPOINTAG','=',$request['destination_vol']=='HME'?'T':'R')
+      ->where('H_PLNGAGENT.PLA_DDEBUT','=',date('Y-m-d',strtotime('this '.$dateVol)))
       ->get() ; 
-   
-   
-   
-    return $request ; 
+      
 
   }
 
