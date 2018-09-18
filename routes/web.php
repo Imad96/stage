@@ -19,10 +19,15 @@ Route::get('/testOracle',"TestController@test");
 // La route par default lors de la connexion, affiche le tableau de bord
 Route::get('/home', ['uses' => 'MainController@index', 'as' => 'main']);
 
-// Une route GET vers la page de modification
-Route::get('/modification','MainController@getVol')->name('modif.get');
-// Une route POST vers la page de modification
-Route::post('/modification','MainController@postVol')->name('modif.post');
+// Une route GET vers la page de modification qui retourne le formulaire de choix du vol
+Route::get('/modification','MainController@getVolForm')->name('modif.get');
+// Une route POST vers la page de modification qui retourne le formulaire de MAJ d'un vol donné
+Route::post('/modification','MainController@modifVol')->name('modif.vol') ;
+// Une route POST vers la page de modification pour le maj d'un vol
+Route::post('/modification/update','MainController@updateVol')->name('modif.update');
+
+Route::post('/modification/search','MainController@searchVol')->name('search.vol.2') ;
+
 // Une route vers la page d'extraction de la liste des employés
 Route::get('/extraction','MainController@getList')->name('list');
 // Une route vers la page d'hitorique par employe
@@ -33,10 +38,10 @@ Route::get('/historique/vol','MainController@getHistoryVol')->name('his.vol');
 Route::post('/home','MainController@getVolInformation')->name('vol.information') ;
 // Une fonction qui retourne des informations sur les vols ayant le numéro selectionnée dans la page agent/extraction
 Route::post('/extraction','MainController@searchVol')->name('search.vol') ;
-// Une fonction qui retourne des informations sur les vols ayant le numéro selectionnée dans la page agent/modification
-Route::post('/modification','MainController@searchVol')->name('search.vol.2') ;
+
 // Une fonction qui extrait les liste des employes d'un vol donnée
-Route::post('/extraction/extraire','MainController@extraireVol')->name('vol.extract') ; 
+Route::post('/extraction/extraire','MainController@extraireVol')->name('vol.extract') ;
+
 
 
 // Une route vers la page d'accueil de l'admin

@@ -11,7 +11,7 @@ class MainController extends Controller
 {
     public function __construct(){
       //This function is called in 'tableau_de_bord' with ajax
-        $this->middleware('ajax',['only'=>['getVolInformation','searchVol']]);
+        $this->middleware('ajax',['only'=>['getVolInformation','searchVol','modifVol']]);
 
     }
 
@@ -33,14 +33,14 @@ class MainController extends Controller
 
     }
 
-    public function getVol(VolRepository $volRepo)
+    public function getVolForm(VolRepository $volRepo)
     {
       $volNums= $volRepo->getVolNums();
       $destinations = $volRepo->getVolDestinations();
       return view('agent.modification',compact('volNums', 'destinations'));
     }
 
-    public function postVol()
+    public function updateVol()
     {
       // code...
       //
@@ -105,8 +105,19 @@ class MainController extends Controller
     /**
      * Function that extracts vol list
      */
-    public function extraireVol(Request $reques){
+  //  public function extraireVol(Request $request){
      // var_dump($reques) ;
+    //}
+
+    public function modifVol(Request $volRequest, VolRepository $volRepo)
+    {
+      $request = array();
+      $request['nvol']= $volRequest['numero_vol2'];
+      $request['depart']= $volRequest['depart_vol2'];
+      $request['dest']= $volRequest['destination_vol2'];
+      $request['jour'] = $volRequest['jour_vol2'];
+      $volInfo=$volRepo->getInfo($request);
+      return response()->json($volInfo) ;
     }
 
 }
