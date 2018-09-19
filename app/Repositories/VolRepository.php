@@ -120,18 +120,23 @@ class VolRepository
         $join->on('H_PLNGAGENT.PLA_MATRICULE','=','H_AGENT.AGT_MATRICULE') ; })
       ->join('H_FONCTIONS',function($join){
         $join->on('H_FONCTIONS.FCT_CFONCTION','=','H_AGENT.AGT_CFONCTION') ;})
-      ->select('H_AGENT.AGT_MATRICULE as matricule','H_AGENT.AGT_SEXE as sexe','H_AGENT.AGT_NOM as nom','H_AGENT.AGT_PRENOM as prenom',
-               'H_AGENT.AGT_CMPTANAL as compteAnal','H_AGENT.AGT_EMAIL as email','H_FONCTIONS.FCT_DESIGNATION as fonction', 'H_VOLS.VOL_NVOL as numeroVol',
-               'H_PLNGAGENT.PLA_DDEBUT as dateVol','H_VOLS.VOL_DESTIN as destination')
+      ->join('H_POINTAGE',function($join){
+        $join->on('H_POINTAGE.PTG_CPOINTAG','=','H_PLNGAGENT.PLA_CPOINTAG') ; 
+      })
+      ->select('H_AGENT.AGT_MATRICULE as matricule',\DB::raw("decode(h_agent.agt_sexe,'M','MR','MRS') as sexe "),'H_AGENT.AGT_NOM as nom','H_AGENT.AGT_PRENOM as prenom',
+               'H_AGENT.AGT_CMPTANAL as compteAnal',\DB::raw(trim('H_AGENT.AGT_EMAIL as email')),'H_FONCTIONS.FCT_DESIGNATION as fonction', 'H_VOLS.VOL_NVOL as numeroVol',
+               'H_PLNGAGENT.PLA_DDEBUT as dateVol','H_VOLS.VOL_DESTIN as destination','H_AGENT.AGT_CPC as cpc','H_AGENT.AGT_TYPEPOSTE as typePoste','H_AGENT.AGT_MATRICULE as classe')
       ->where('H_VOLS.VOL_DEPART','=',$request['depart_vol'])
       ->where('H_VOLS.VOL_DESTIN','=',$request['destination_vol'])
       ->where('H_VOLS.VOL_JOUR','=',$request['jour_vol'])
       ->where('H_VOLS.VOL_NVOL','=',$request['numero_vol'])
       ->where('H_PLNGAGENT.PLA_CPOINTAG','=',$request['destination_vol']=='HME'?'T':'R')
       ->where('H_PLNGAGENT.PLA_DDEBUT','=',date('Y-m-d',strtotime('this '.$dateVol)))
+      ->where('HV01_LRELEVAGT.RVA_MOYRELEV','=','A')
+      ->where($request['depart_vol'] == 'HME'?'H_POINTAGE.PTG_EMBDEPART':'H_POINTAGE.PTG_EMBRETOUR','=','1')
       ->get() ; 
       
-
+      
   }
 
 }
