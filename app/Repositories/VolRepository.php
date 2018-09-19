@@ -94,6 +94,24 @@ class VolRepository
 
   }
 
+
+  public function storeVol(Array $request)
+  {
+
+    $affectedRows = Vol::where('vol_jour', '=', $request['jour_vol4'])
+                        ->where('vol_nvol', '=', $request['numero_vol4'])
+                        ->where('vol_depart', '=', $request['depart_vol4'])
+                        ->where('vol_destin', '=', $request['destination_vol4'])
+                        ->update(['vol_np_y_eco' => $request['vol_y_number'],
+                                  'vol_np_c_first' => $request['vol_c_number'],
+                                  'vol_type' => $request['type_vol'],
+                                  'vol_heurdpr' => $request['heure_depart_vol'],
+                                  'vol_heutarv' => $request['heure_arrive_vol'],
+                        ]);
+
+    return $affectedRows;
+
+  }
   /***
    * Function that returns a list of people concerned by the flight given 
    */
@@ -136,7 +154,7 @@ class VolRepository
       ->where($request['depart_vol'] == 'HME'?'H_POINTAGE.PTG_EMBDEPART':'H_POINTAGE.PTG_EMBRETOUR','=','1')
       ->get() ; 
       
-      
+
   }
 
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\VolRequest;
+use App\Http\Requests\VolUpdateRequest;
 use App\Repositories\VolRepository;
 use App\Repositories\AgentRepository;
 
@@ -11,7 +12,8 @@ class MainController extends Controller
 {
     public function __construct(){
       //This function is called in 'tableau_de_bord' with ajax
-        $this->middleware('ajax',['only'=>['getVolInformation','searchVol','extraireVol']]);
+
+        $this->middleware('ajax',['only'=>['getVolInformation','searchVol','extraireVol','modifVol']]);
 
     }
 
@@ -33,18 +35,20 @@ class MainController extends Controller
 
     }
 
-    public function getVol(VolRepository $volRepo)
+    public function getVolForm(VolRepository $volRepo)
     {
       $volNums= $volRepo->getVolNums();
       $destinations = $volRepo->getVolDestinations();
       return view('agent.modification',compact('volNums', 'destinations'));
     }
 
-    public function postVol()
+    public function updateVol(VolUpdateRequest $request, VolRepository $volRepo)
     {
-      // code...
-      //
-      //
+
+    //    $primaryKey = ['jour'=>$request['jour_vol4'], 'nvol'=>$request['numero_vol4'],
+      //                    'depart'=>$request['depart_vol4'], 'dest'=>$request['destination_vol4'] ];
+        $vol=$volRepo->storeVol($request->all());
+        return redirect()->route('modif.get')->withOk("Le vol numéro ".$request['numero_vol4']." a été mis à jour avec succès." ) ;
 
     }
 
@@ -104,6 +108,21 @@ class MainController extends Controller
     /**
      * Function that extracts vol list
      */
+
+
+
+    public function modifVol(Request $volRequest, VolRepository $volRepo)
+    {
+      $request = array();
+      $request['nvol']= $volRequest['numero_vol2'];
+      $request['depart']= $volRequest['depart_vol2'];
+      $request['dest']= $volRequest['destination_vol2'];
+      $request['jour'] = $volRequest['jour_vol2'];
+      $volInfo=$volRepo->getInfo($request);
+      return response()->json($volInfo) ;
+      
+    }  
+
     public function extraireVol(Request $request,VolRepository $volRepo){
       
       $day = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat') ; 
@@ -155,7 +174,6 @@ class MainController extends Controller
         "
 " ; 
       }
-      //return response()->json(['data'=>$list]);
       
       return response()->json(['data'=>$corpsFichier,'file_name'=>'SF'.$request['numero_vol'].'-'.$request['depart_vol'].'-'.$request['destination_vol'].'-'.$date.'.txt']) ;
     }
