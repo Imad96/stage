@@ -94,6 +94,7 @@ class VolRepository
 
   }
 
+
   public function storeVol(Array $request)
   {
 
@@ -109,6 +110,50 @@ class VolRepository
                         ]);
 
     return $affectedRows;
+
+  }
+  /***
+   * Function that returns a list of people concerned by the flight given 
+   */
+  public function volList(Array $request){
+    
+    
+    $day = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat') ; 
+    $dateVol = $day[$request['jour_vol']-1] ; 
+    return Vol
+      ::join('H_VOLRELEVE',function($join){
+          $join->on('H_VOLRELEVE.VRV_JOUR','=','H_VOLS.VOL_JOUR') ; 
+          $join->on('H_VOLRELEVE.VRV_NVOL','=','H_VOLS.VOL_NVOL') ; 
+          $join->on('H_VOLRELEVE.VRV_DEPART','=','H_VOLS.VOL_DEPART') ; 
+          $join->on('H_VOLRELEVE.VRV_DESTIN','=','H_VOLS.VOL_DESTIN') ; })
+      ->join('H_CIRCADMIN',function($join){
+          $join->on('H_CIRCADMIN.CAD_PAYS','=','H_VOLRELEVE.VRV_PAYS'); 
+          $join->on('H_CIRCADMIN.CAD_CLIEU','=','H_VOLRELEVE.VRV_CLIEU') ; })
+      ->join('HV01_LRELEVAGT',function($join){
+        $join->on('HV01_LRELEVAGT.RVA_CPAYS','=','H_CIRCADMIN.CAD_PAYS'); 
+        $join->on('HV01_LRELEVAGT.RVA_CLIEU','=','H_CIRCADMIN.CAD_CLIEU'); })
+      ->join('H_AGENT',function($join){
+        $join->on('H_AGENT.AGT_MATRICULE','=','HV01_LRELEVAGT.RVA_MATRICULE') ; })
+      ->join('H_PLNGAGENT',function($join){
+        $join->on('H_PLNGAGENT.PLA_MATRICULE','=','H_AGENT.AGT_MATRICULE') ; })
+      ->join('H_FONCTIONS',function($join){
+        $join->on('H_FONCTIONS.FCT_CFONCTION','=','H_AGENT.AGT_CFONCTION') ;})
+      ->join('H_POINTAGE',function($join){
+        $join->on('H_POINTAGE.PTG_CPOINTAG','=','H_PLNGAGENT.PLA_CPOINTAG') ; 
+      })
+      ->select('H_AGENT.AGT_MATRICULE as matricule',\DB::raw("decode(h_agent.agt_sexe,'M','MR','MRS') as sexe "),'H_AGENT.AGT_NOM as nom','H_AGENT.AGT_PRENOM as prenom',
+               'H_AGENT.AGT_CMPTANAL as compteAnal',\DB::raw(trim('H_AGENT.AGT_EMAIL as email')),'H_FONCTIONS.FCT_DESIGNATION as fonction', 'H_VOLS.VOL_NVOL as numeroVol',
+               'H_PLNGAGENT.PLA_DDEBUT as dateVol','H_VOLS.VOL_DESTIN as destination','H_AGENT.AGT_CPC as cpc','H_AGENT.AGT_TYPEPOSTE as typePoste','H_AGENT.AGT_MATRICULE as classe')
+      ->where('H_VOLS.VOL_DEPART','=',$request['depart_vol'])
+      ->where('H_VOLS.VOL_DESTIN','=',$request['destination_vol'])
+      ->where('H_VOLS.VOL_JOUR','=',$request['jour_vol'])
+      ->where('H_VOLS.VOL_NVOL','=',$request['numero_vol'])
+      ->where('H_PLNGAGENT.PLA_CPOINTAG','=',$request['destination_vol']=='HME'?'T':'R')
+      ->where('H_PLNGAGENT.PLA_DDEBUT','=',date('Y-m-d',strtotime('this '.$dateVol)))
+      ->where('HV01_LRELEVAGT.RVA_MOYRELEV','=','A')
+      ->where($request['depart_vol'] == 'HME'?'H_POINTAGE.PTG_EMBDEPART':'H_POINTAGE.PTG_EMBRETOUR','=','1')
+      ->get() ; 
+      
 
   }
 

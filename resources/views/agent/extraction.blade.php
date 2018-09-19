@@ -95,7 +95,6 @@
             <div class="row">
                     <div class="col-md-4 col-md-offset-3">
                             <div class=" alert alert-danger alert-dismissible" hidden id="alert_dngr">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     <strong>Erreur ! Veuillez introduire au moins un champ. </strong>
                             </div>
                     </div>
@@ -120,24 +119,19 @@
                                    </tr>
                      </thead>
                      <tbody>
-
+                        <tr></tr>
                      </tbody>
                   </table>
             </div>
           </div>
 </div>
-<div id="no_vols" class="panel panel-default" hidden>
-            <div class="panel-body">
                     <div class="row">
                             <div class="col-md-4 col-md-offset-3">
-                                    <div class=" alert alert-warnning alert-dismissible" id="alert_dngr">
-                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <div class=" alert alert-danger alert-dismissible" id="no_vols" hidden>
                                             <strong>Aucun vol trouvé.</strong>
                                     </div>
                             </div>
                     </div>
-            </div>
-  </div>
 
 
 @endsection
@@ -164,6 +158,8 @@
             var dataSend = numero + ','+jour+','+depart+','+destination;  
                 
                 if(dataSend == '0,0,0,0'){
+                    $("#result").hide(); 
+                    $('#no_vols').hide();  
                     $('#alert_dngr').show();
                 }
               /**
@@ -175,32 +171,81 @@
                 data: $(this).serialize(),
                 dataType: "json",
                  success: function(data){
-                     console.log(data) ; 
                         if(data != null){ //les données envoyées sont valides 
-                            if(data.found != false){ //il a trouvé au moins un vol ayant les informations envoyées    
+                            if(data.found == true){ //il a trouvé au moins un vol ayant les informations envoyées    
+                                $(".my_clmn").remove();
                                 var vol;
                                 //$('#vols_table').tabs().remove() ; 
                                 // $('#vols_table').tabs( "refresh" ) ;
                                 for(vol in data.data){ 
-                                    btn_extraire = "<form action=\"{{route('vol.extract')}}\" method=\"POST\" id=\"extract_form \" > <input type=\"hidden\" name=\"_token\" value=\"{{csrf_token()}}\" > <input type=\"hidden\" name=\"vol_id\" id=\"vol_id\" value=\" "+data.data[vol].vol_nvol+"|"+data.data[vol].vol_depart+"|"+data.data[vol].vol_destin+"|"+data.data[vol].vol_jour+"\" > <button type=\"submit\" class=\"btn btn-info\" >Extraire </button> </form> "                                                                      
-                                    $('#vols_table tr:last').after('<tr><td class="text-center">'+data.data[vol].vol_nvol+'</td><td class="text-center">'
+                                    btn_extraire = "<form action=\"{{route('vol.extract')}}\" method=\"POST\" class=\"extract_form\" > <input type=\"hidden\" name=\"_token\" value=\"{{csrf_token()}}\" > <input type=\"hidden\" name=\"numero_vol\" id=\"numero_vol\" value=\""+data.data[vol].vol_nvol+"\" > <input type=\"hidden\" name=\"jour_vol\" id=\"jour_vol\" value=\""+data.data[vol].vol_jour+"\" > <input type=\"hidden\" name=\"depart_vol\" id=\"depart_vol\" value=\""+data.data[vol].vol_depart+"\" > <input type=\"hidden\" name=\"destination_vol\" id=\"destination_vol\" value=\""+data.data[vol].vol_destin+"\" > <button type=\"submit\" class=\"btn btn-info\" id=\"download\" >Extraire </button> </form> "                                                                      
+                                    $('#vols_table tr:last').after('<tr class=\"my_clmn\" ><td class="text-center">'+data.data[vol].vol_nvol+'</td><td class="text-center">'
                                         +data.data[vol].vol_depart+'</td><td class="text-center">'+data.data[vol].vol_destin+'</td><td class="text-center">'
                                             +data.data[vol].vol_jour+'</td><td class="text-center">'+btn_extraire+'   </td></tr>');
                                 }
-                                console.log(data.found) ; 
-                                $('#no_vols').hide();                                
+                                $('#no_vols').hide();  
+                                $('#alert_dngr').hide();
                                 $("#result").show(); 
                             }else{
                                 $("#result").hide(); 
+                                $('#alert_dngr').hide();
                                 $('#no_vols').show();
                             }
                             
                         }else{
+                            $("#result").hide(); 
+                            $('#no_vols').hide();                                
                             $('#alert_dngr').show();
                         } 
                  },
              })
             }
             });
+
+            $(document).on("submit",".extract_form",function(e){
+                e.preventDefault() ;
+                $.ajax({
+                    method: $(this).attr("method"), 
+                    url: $(this).attr("action"),
+                    data: $(this).serialize(),
+                    dataType: "json",
+                    success: function (data){
+                        //alert("Voulez vos extraire "+data+ "ici") ; 
+                        /*var  a = "Alllle" ; 
+                        var blob = new Blob([a],{type:"text/csv;charset=utf8"}) ;
+                        //window.navigator.msSaveBlob(blob, "extract.txt");
+                        /*var anchor = document.createElement('aakd'); 
+                        anchor.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(a);
+                        anchor.download = 'export.txt';    
+                        window.navigator.msSaveBlob(blob) ; */
+                        /*var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+                        saveAs(blob, "filename.txt");*/
+                       /* var download = document.getElementById('download');
+                        download.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent('salaam'));
+                        download.setAttribute('download', 'filename.csv');*/
+                        function download(filename, text) {
+                            var element = document.createElement('a');
+                            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+                            element.setAttribute('download', filename);
+                          
+                            element.style.display = 'none';
+                            document.body.appendChild(element);
+                          
+                            element.click();
+                          
+                            document.body.removeChild(element);
+                          }
+                          
+                          // Start file download.
+                          download(data.file_name,data.data);
+
+                        console.log(data) ;
+
+                    },
+
+                }) 
+            });
+
+
     </script>
 @endsection
