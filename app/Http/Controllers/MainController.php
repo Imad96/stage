@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\VolRequest;
+use App\Http\Requests\VolUpdateRequest;
 use App\Repositories\VolRepository;
 use App\Repositories\AgentRepository;
 
@@ -40,11 +41,13 @@ class MainController extends Controller
       return view('agent.modification',compact('volNums', 'destinations'));
     }
 
-    public function updateVol()
+    public function updateVol(VolUpdateRequest $request, VolRepository $volRepo)
     {
-      // code...
-      //
-      //
+
+    //    $primaryKey = ['jour'=>$request['jour_vol4'], 'nvol'=>$request['numero_vol4'],
+      //                    'depart'=>$request['depart_vol4'], 'dest'=>$request['destination_vol4'] ];
+        $vol=$volRepo->storeVol($request->all());
+        return redirect()->route('modif.get')->withOk("Le vol numéro ".$request['numero_vol4']." a été mis à jour avec succès." ) ;
 
     }
 

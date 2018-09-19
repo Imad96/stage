@@ -16,13 +16,55 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 <!-- TABLE STYLES-->
 <link href={{url('js/dataTables/dataTables.bootstrap.css')}} rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css">
 
 @endsection
 
 @section('body_tag') <body> @endsection
 
 @section('contenu')
+<!-- Succes message for updating VOL -->
+<div class="row">
+           @if(session()->has('ok'))
+               <div class="col-md-8 col-md-offset-2 alert alert-success alert-dismissible text-center">
+                   {!! session('ok') !!}
+                   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+               </div>
+           @endif
+</div>
+ <!-- Error messages -->
+<div class="row">
+  @if( $errors->has('type_vol'))
+  <div class="col-md-8 col-md-offset-2 alert alert-danger alert-dismissible text-center">
+    <strong>Erreur !</strong>{!! $errors->first('type_vol',':message ') !!}
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  </div>
+  @endif
+  @if( $errors->has('type_vol'))
+  <div class="col-md-8 col-md-offset-2 alert alert-danger alert-dismissible text-center">
+    <strong>Erreur !</strong>{!! $errors->first('heure_depart_vol',':message ') !!}
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  </div>
+  @endif
+  @if( $errors->has('heure_arrive_vol'))
+  <div class="col-md-8 col-md-offset-2 alert alert-danger alert-dismissible text-center">
+    <strong>Erreur !</strong>{!! $errors->first('heure_arrive_vol',' :message ') !!}
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  </div>
+  @endif
+  @if( $errors->has('vol_c_number'))
+  <div class="col-md-8 col-md-offset-2 alert alert-danger alert-dismissible text-center">
+    <strong>Erreur !</strong>{!! $errors->first('vol_c_number',' :message ') !!}
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  </div>
+  @endif
+  @if( $errors->has('vol_y_number'))
+  <div class="col-md-8 col-md-offset-2 alert alert-danger alert-dismissible text-center">
+    <strong>Erreur !</strong>{!! $errors->first('vol_y_number',' :message ') !!}
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  </div>
+  @endif
+
+</div>
 
 <div class="panel panel-default">
       <div class="panel-heading"> Veuillez rechercher le vol à Modifier ! </div>
@@ -63,6 +105,11 @@
                   </div>
                   <div class="form-group">
                       <label>Le jour</label>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="jour_vol" id="jour2" value="2">Lundi
+                        </label>
+                      </div>
                       <div class="radio">
                           <label>
                             <input type="radio" name="jour_vol" id="jour3" value="3">Mardi
@@ -142,6 +189,7 @@
                <div class="form-group">
                     <label>Le jour</label>
                           <select class="form-control" name="jour_vol3" id="jour_vol3" required disabled>
+                                  <option value="2">Lundi</option>
                                   <option value="3">Mardi</option>
                                   <option value="4">Mercredi</option>
                                   <option value="5">Jeudi</option>
@@ -163,33 +211,31 @@
                </div>
                <div class="row">
                   <div class="col-md-6">
-                    <div class="input-group bootstrap-timepicker timepicker">
+                    <div class="input-group">
                          <label for="heure_depart_vol">Heure départ</label>
                          <div class="form-group input-group">
-                           <input name="heure_depart_vol" id="heure_depart_vol" type="text" class="form-control input-small" required>
+                           <input name="heure_depart_vol" id="heure_depart_vol" type="time" class="form-control input-small" required>
                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                          </div>
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="input-group bootstrap-timepicker timepicker">
-                         <label for="heure_arrive_vol">Heure d'arrivé</label>
-                         <div class="form-group input-group">
-                           <input name="heure_arrive_vol" id="heure_arrive_vol" type="text" class="form-control input-small" required>
-                           <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                         </div>
+                          <div class="input-group">
+                               <label for="heure_arrive_vol">Heure d'arrivé</label>
+                               <div class="form-group input-group">
+                                 <input name="heure_arrive_vol" id="heure_arrive_vol" type="time" class="form-control input-small" required>
+                                 <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                               </div>
+                          </div>
                     </div>
-                  </div>
-
-               </div>
-
+              </div>
               <div class="row">
                <div class="col-md-6">
                 <div class="form-group input-group">
                     <label>Nombre du places de type 'C'</label>
                     <div class="form-group input-group">
                     <span class="input-group-addon">#</span>
-                    <input name="vol_c_number" id="vol_c_number" class="form-control" type="number" value="42" required>
+                    <input name="vol_c_number" id="vol_c_number" class="form-control" type="number"  required>
                   </div>
                 </div>
                </div>
@@ -198,7 +244,7 @@
                     <label>Nombre du places de type 'Y'</label>
                     <div class="form-group input-group">
                     <span class="input-group-addon">#</span>
-                    <input name="vol_y_number" id="vol_y_number" class="form-control" type="number" value="122" required>
+                    <input name="vol_y_number" id="vol_y_number" class="form-control" type="number" required>
                   </div>
                 </div>
                </div>
@@ -211,10 +257,10 @@
 
            </form>
             </div>
-
-
           </div>
 </div>
+
+
 
 
 @endsection
@@ -270,7 +316,7 @@
                                                                             "<input type=\"hidden\" name=\"depart_vol2\" id=\"depart_vol2\" value=\""+data.data[vol].vol_depart +"\" >"+
                                                                             "<input type=\"hidden\" name=\"destination_vol2\" id=\"destination_vol2\" value=\""+data.data[vol].vol_destin +"\" >"+
                                                                             "<input type=\"hidden\" name=\"jour_vol2\" id=\"jour_vol2\" value=\""+data.data[vol].vol_jour +"\" >"+
-                                                                            "<button type=\"submit\" class=\"btn btn-info center-block\" >Modifier </button> </form> "+
+                                                                            "<button type=\"submit\" class=\"btn btn-info center-block\">Modifier </button> </form> "+
 
                                                              '</td></tr>');
 
@@ -320,17 +366,13 @@
               $('#vol_y_number').val(data[0].vol_np_y_eco);
 
               $('#result2').show();
-
+              var etop = $('#result2').offset().top;
+              	$(window).scrollTop(etop);
              },
          })
         });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
-<!-- Time picker script  -->
-<script type="text/javascript">
-    $('#heure_depart_vol').timepicker();
-    $('#heure_arrive_vol').timepicker();
-</script>
+
 // To hide the alert
 <script>
 $(function() {
@@ -343,6 +385,7 @@ $(function() {
        $(this).parent().hide();
    })
 });
+
 </script>
 
 
