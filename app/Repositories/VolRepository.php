@@ -149,12 +149,51 @@ class VolRepository
       ->where('H_VOLS.VOL_JOUR','=',$request['jour_vol'])
       ->where('H_VOLS.VOL_NVOL','=',$request['numero_vol'])
       ->where('H_PLNGAGENT.PLA_CPOINTAG','=',$request['destination_vol']=='HME'?'T':'R')
-      ->where('H_PLNGAGENT.PLA_DDEBUT','=',date('Y-m-d',strtotime('this '.$dateVol)))
+      ->whereDate('H_PLNGAGENT.PLA_DDEBUT','<=',date('Y-m-d',strtotime('this '.$dateVol)))
+      ->whereDate('H_PLNGAGENT.PLA_DDEBUT','>',date('Y-m-d',strtotime('last '.$dateVol)))
       ->where('HV01_LRELEVAGT.RVA_MOYRELEV','=','A')
       ->where($request['depart_vol'] == 'HME'?'H_POINTAGE.PTG_EMBDEPART':'H_POINTAGE.PTG_EMBRETOUR','=','1')
       ->get() ; 
-      
+  }
 
+
+  /**
+   * Function that returns all dates of a flight berween two dates
+   */
+  public function listeParDate(Array $request){
+    return Vol
+      ::join('H_VOLRELEVE',function($join){
+          $join->on('H_VOLRELEVE.VRV_JOUR','=','H_VOLS.VOL_JOUR') ; 
+          $join->on('H_VOLRELEVE.VRV_NVOL','=','H_VOLS.VOL_NVOL') ; 
+          $join->on('H_VOLRELEVE.VRV_DEPART','=','H_VOLS.VOL_DEPART') ; 
+          $join->on('H_VOLRELEVE.VRV_DESTIN','=','H_VOLS.VOL_DESTIN') ; })
+      ->join('H_CIRCADMIN',function($join){
+          $join->on('H_CIRCADMIN.CAD_PAYS','=','H_VOLRELEVE.VRV_PAYS'); 
+          $join->on('H_CIRCADMIN.CAD_CLIEU','=','H_VOLRELEVE.VRV_CLIEU') ; })
+      /*->join('HV01_LRELEVAGT',function($join){
+        $join->on('HV01_LRELEVAGT.RVA_CPAYS','=','H_CIRCADMIN.CAD_PAYS'); 
+        $join->on('HV01_LRELEVAGT.RVA_CLIEU','=','H_CIRCADMIN.CAD_CLIEU'); })*/
+      ->join('H_LRELEVAGT',function($join){
+        $join->on('H_LRELEVAGT.RVA_CPAYS','=','H_CIRCADMIN.CAD_PAYS') ; 
+        $join->on('H_LRELEVAGT.RVA_CLIEU','=','H_CIRCADMIN.CAD_CLIEU') ;
+      })
+      ->join('H_AGENT',function($join){
+        $join->on('H_AGENT.AGT_MATRICULE','=','H_LRELEVAGT.RVA_MATRICULE') ; })
+      ->join('H_PLNGAGENT',function($join){
+        $join->on('H_PLNGAGENT.PLA_MATRICULE','=','H_AGENT.AGT_MATRICULE') ; })
+      
+      ->where('H_VOLS.VOL_DEPART','=',$request['depart_vol'])
+      ->where('H_VOLS.VOL_DESTIN','=',$request['destination_vol'])
+      ->where('H_VOLS.VOL_JOUR','=',$request['jour_vol'])
+      ->where('H_VOLS.VOL_NVOL','=',$request['numero_vol'])
+      ->where('H_PLNGAGENT.PLA_CPOINTAG','=',$request['destination_vol']=='HME'?'T':'R')
+      ->whereDate('H_PLNGAGENT.PLA_DDEBUT','>',date('Y-m-d',strtotime($request['date_vol']." -1 week")))
+      ->whereDate('H_PLNGAGENT.PLA_DDEBUT','<=',$request['date_vol'])
+      ->where('H_LRELEVAGT.RVA_MOYRELEV','=','A')
+      ->select('H_AGENT.AGT_MATRICULE as matricule','H_AGENT.AGT_NOM as nom','H_AGENT.AGT_PRENOM as prenom')
+      ->orderby('matricule')
+      ->get() ; 
+      return $request; 
   }
 
 }

@@ -13,7 +13,7 @@ class MainController extends Controller
     public function __construct(){
       //This function is called in 'tableau_de_bord' with ajax
 
-        $this->middleware('ajax',['only'=>['getVolInformation','searchVol','extraireVol','modifVol']]);
+        $this->middleware('ajax',['only'=>['getVolInformation','searchVol','extraireVol','modifVol','dateVol','listeParDate']]);
 
     }
 
@@ -71,12 +71,14 @@ class MainController extends Controller
       return view('agent.historique_employe');
     }
 
-    public function getHistoryVol()
+    public function getHistoryVol(VolRepository $volRepo)
     {
-      // code...
-      //
-      //
-      return view('agent.historique_vol');
+      //les numéros des vols
+      $vols = $volRepo->getVolNums() ;
+      //les destinations == départs des vols 
+      $destinations = $volRepo->getVolDestinations();
+      
+      return view('agent.historique_vol',compact('vols','destinations'));
     }
 
     public function getVolInformation(Request $request, VolRepository $volRepo){
@@ -170,12 +172,44 @@ class MainController extends Controller
       /**Préparation de la forme du fichier */
       $corpsFichier = "" ; 
       for($i=0;$i<$listLenght;$i++){
-        $corpsFichier .= $list[$i]->matricule."|".$list[$i]->sexe."|".$list[$i]->nom."|".$list[$i]->prenom. "|"."DP-HMD"."|".$list[$i]->compteanal."|".str_replace(" ","",$list[$i]->email)."|".$list[$i]->fonction."|".$list[$i]->classe."|".$list[$i]->numerovol."|".date('d/m/Y',strtotime($list[$i]->datevol))."|".$list[$i]->destination."|".
+        $corpsFichier .= $list[$i]->matricule."|".$list[$i]->sexe."|".$list[$i]->nom."|".$list[$i]->prenom. "|"."DP-HMD"."|".$list[$i]->compteanal."|".str_replace(" ","",$list[$i]->email)."|".$list[$i]->fonction."|".$list[$i]->classe."|".$list[$i]->numerovol."|".$date."|".$list[$i]->destination."|".
         "
 " ; 
       }
       
       return response()->json(['data'=>$corpsFichier,'file_name'=>'SF'.$request['numero_vol'].'-'.$request['depart_vol'].'-'.$request['destination_vol'].'-'.$date.'.txt']) ;
+    }
+
+
+    public function dateVol(Request $request,VolRepository $volRepo){
+      if($request['date_debut'] == "" || $request['date_fin'] == "" || $request['depart_vol'] == "0" || $request['destination_vol'] == "0" 
+      || $request['jour_vol'] =="0" || $request['numero_vol'] == "0" || $request['depart_vol'] == "" || $request['destination_vol'] == "" 
+      || $request['jour_vol'] =="" || $request['numero_vol'] == ""  ) {
+        return response()->json(['data'=>null]);
+      }
+      $date = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat') ; 
+      $day = $date[$request['jour_vol']-1] ; 
+      $days = array() ; 
+      $startDay = date('Y-m-d',strtotime($request['date_debut'])) ; 
+      $endDay = date('Y-m-d',strtotime($request['date_fin'])) ; 
+      $i =0 ; 
+       while($startDay <= $endDay ){
+        if(date('D',strtotime($startDay)) == $day){
+          $days[] = $startDay; 
+        }
+       // $i++;
+        $startDay = date('Y-m-d',strtotime($startDay." +1 day")) ; 
+      }
+      
+      return response()->json(['data'=>$days,'found'=>true,'infoVol'=>$request->all()]);      
+    }
+
+    public function listeParDate(Request $request,VolRepository $volRepo){
+      
+      $list = array() ; 
+      $list = $volRepo->listeParDate($request->all()) ; 
+      return response()->json(['data'=>$list,'vol_info'=>$request->all(),'nombre'=>count($list)]);
+      
     }
 
 }
