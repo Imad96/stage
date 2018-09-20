@@ -55,7 +55,6 @@ class AdminController extends Controller
             /**
              * Validation Rules
              * Je les ai fait ici au lieu de faire une classe request car il faut passer des arguments à cette validation
-             * 
              */
             $this->validate($request,[
                 'name' => 'bail|required|between:3,20|unique:users,name,'.$request['id'],

@@ -210,19 +210,7 @@
                     data: $(this).serialize(),
                     dataType: "json",
                     success: function (data){
-                        //alert("Voulez vos extraire "+data+ "ici") ; 
-                        /*var  a = "Alllle" ; 
-                        var blob = new Blob([a],{type:"text/csv;charset=utf8"}) ;
-                        //window.navigator.msSaveBlob(blob, "extract.txt");
-                        /*var anchor = document.createElement('aakd'); 
-                        anchor.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(a);
-                        anchor.download = 'export.txt';    
-                        window.navigator.msSaveBlob(blob) ; */
-                        /*var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
-                        saveAs(blob, "filename.txt");*/
-                       /* var download = document.getElementById('download');
-                        download.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent('salaam'));
-                        download.setAttribute('download', 'filename.csv');*/
+                        
                         function download(filename, text) {
                             var element = document.createElement('a');
                             element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
