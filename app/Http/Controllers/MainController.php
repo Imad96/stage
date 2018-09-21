@@ -187,21 +187,36 @@ class MainController extends Controller
       || $request['jour_vol'] =="" || $request['numero_vol'] == ""  ) {
         return response()->json(['data'=>null]);
       }
-      $date = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat') ; 
-      $day = $date[$request['jour_vol']-1] ; 
-      $days = array() ; 
-      $startDay = date('Y-m-d',strtotime($request['date_debut'])) ; 
-      $endDay = date('Y-m-d',strtotime($request['date_fin'])) ; 
-      $i =0 ; 
-       while($startDay <= $endDay ){
-        if(date('D',strtotime($startDay)) == $day){
-          $days[] = $startDay; 
-        }
-       // $i++;
-        $startDay = date('Y-m-d',strtotime($startDay." +1 day")) ; 
-      }
+
+      $volInformation = array() ; 
+      $volInformation['jour'] = $request['jour_vol'] ; 
+      $volInformation['nvol'] = $request['numero_vol'] ; 
+      $volInformation['depart'] = $request['depart_vol'] ; 
+      $volInformation['dest'] = $request['destination_vol'] ; 
+
+      $volExists = $volRepo->getInfo($volInformation) ; 
+      if(count($volExists)>0){
+          $date = array('Sun','Mon','Tue','Wed','Thu','Fri','Sat') ; 
+          $day = $date[$request['jour_vol']-1] ; 
+          $days = array() ; 
+          $startDay = date('Y-m-d',strtotime($request['date_debut'])) ; 
+          $endDay = date('Y-m-d',strtotime($request['date_fin'])) ; 
+          $i =0 ; 
+          while($startDay <= $endDay ){
+            if(date('D',strtotime($startDay)) == $day){
+              $days[] = $startDay; 
+            }
+          // $i++;
+            $startDay = date('Y-m-d',strtotime($startDay." +1 day")) ; 
+          }
+          
+          return response()->json(['data'=>$days,'found'=>true,'infoVol'=>$request->all()]);  
+      }else{
+        
+        return response()->json(['data'=>array(),'found'=>false]);
+        
+      }    
       
-      return response()->json(['data'=>$days,'found'=>true,'infoVol'=>$request->all()]);      
     }
 
     public function listeParDate(Request $request,VolRepository $volRepo){
