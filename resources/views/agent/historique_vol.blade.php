@@ -33,7 +33,7 @@
                 {{ csrf_field() }}
                 <div class="form-group input-group ">
                      <span class="input-group-addon">#</span>
-              
+
                      <select name="numero_vol" id="numero_vol" class="form-control">
                        <option value="0">Numéro du vol...</option>
                        @foreach ($vols as $vol)
@@ -55,7 +55,7 @@
                      <select name="destination_vol" id="destination_vol" class="form-control">
                        <option value="0">Destination du vol...</option>
                        @foreach ($destinations as $destination)
-                        <option value="{{$destination->depart}}">{{$destination->depart}}</option>                           
+                        <option value="{{$destination->depart}}">{{$destination->depart}}</option>
                        @endforeach
                      </select>
                 </div>
@@ -113,8 +113,8 @@
               <div class=" alert alert-danger " hidden id="date">
                   <button class="close alert-close2" aria-label="close">&times;</button>
                   <strong>Erreur !</strong> Date début de période doit être inférieure à la date de fin de période
-              </div> 
-                
+              </div>
+
 
              <!-- REsult of searching goes here -->
              <div class="table-responsive" id="result1" hidden>
@@ -146,7 +146,7 @@
                 <div class=" alert alert-info " hidden id="no_personne">
                       <button class="close alert-close2" aria-label="close">&times;</button>
                       <strong>Oups !</strong> Aucun employé trouvé dans cette date pour ce vol.
-                </div> 
+                </div>
               <div class="table-responsive">
                   <table class="table table-striped table-bordered table-hover" id="personne_table">
                       <thead>
@@ -184,35 +184,35 @@
       //arreter l'envoi du formulaire
       event.preventDefault();
 
-  var numero = $('#numero_vol option:selected').val() ; 
-  var jour = $('#form_search input[type=radio]:checked').val() ; 
-  var depart = $('#depart_vol option:selected').val() ; 
-  var destination = $('#destination_vol option:selected').val() ; 
-  var dateDebut = $('#date_debut').val() ; 
-  var dateFin = $('#date_fin').val() ; 
-  var dataSend = numero + ','+jour+','+depart+','+destination+','+dateDebut+','+dateFin;  
+  var numero = $('#numero_vol option:selected').val() ;
+  var jour = $('#form_search input[type=radio]:checked').val() ;
+  var depart = $('#depart_vol option:selected').val() ;
+  var destination = $('#destination_vol option:selected').val() ;
+  var dateDebut = $('#date_debut').val() ;
+  var dateFin = $('#date_fin').val() ;
+  var dataSend = numero + ','+jour+','+depart+','+destination+','+dateDebut+','+dateFin;
 
-     var timeBegin =  (new Date(dateDebut)).getTime() ; 
-     var timeEnd = (new Date(dateFin)).getTime() ; 
+     var timeBegin =  (new Date(dateDebut)).getTime() ;
+     var timeEnd = (new Date(dateFin)).getTime() ;
 
       dataSend = ','+dataSend+','
       if(dataSend.includes(',0,') || dataSend.includes(',,') ){
-        $("#result1").hide(); 
-        $('#not_exists').hide(); 
-        $('#date').hide(); 
-        $('#result2').hide() ; 
-        $('#no_personne').hide() ; 
-        $('#missing_field').show() ; 
+        $("#result1").hide();
+        $('#not_exists').hide();
+        $('#date').hide();
+        $('#result2').hide() ;
+        $('#no_personne').hide() ;
+        $('#missing_field').show() ;
       }
-    
+
      else{
       if(timeBegin > timeEnd){ //si le champ date_debut > date_fin donc erreur
-        $("#result1").hide(); 
-        $('#not_exists').hide(); 
-        $('#missing_field').hide() ; 
-        $('#result2').hide() ; 
-        $('#no_personne').hide() ; 
-        $('#date').show() ; 
+        $("#result1").hide();
+        $('#not_exists').hide();
+        $('#missing_field').hide() ;
+        $('#result2').hide() ;
+        $('#no_personne').hide() ;
+        $('#date').show() ;
       }else{
         /**
         * Envoie de la requette ajax
@@ -223,39 +223,39 @@
             data: $(this).serialize(),
             dataType: "json",
             success: function(data){
-                    if(data.data != null){ //les données envoyées sont valides 
-                        if(data.found == true){ //il a trouvé au moins un vol ayant les informations envoyées    
+                    if(data.data != null){ //les données envoyées sont valides
+                        if(data.found == true){ //il a trouvé au moins un vol ayant les informations envoyées
                            $(".my_clmn").remove();
                             var vol;
-                            for(vol in data.data){ 
-                                btn_extraire = "<form action=\"{{route('liste.date')}}\" method=\"POST\" class=\"extract_form\" id=\"liste_form\" > <input type=\"hidden\" name=\"_token\" value=\"{{csrf_token()}}\" > <input type=\"hidden\" name=\"numero_vol\" id=\"numero_vol\" value=\""+data.infoVol.numero_vol+"\" > <input type=\"hidden\" name=\"jour_vol\" id=\"jour_vol\" value=\""+data.infoVol.jour_vol+"\" > <input type=\"hidden\" name=\"depart_vol\" id=\"depart_vol\" value=\""+data.infoVol.depart_vol+"\" > <input type=\"hidden\" name=\"destination_vol\" id=\"destination_vol\" value=\""+data.infoVol.destination_vol+"\" > <input type=\"hidden\" name=\"date_vol\" id=\"date_vol\" value=\""+data.data[vol]+"\" >  <button type=\"submit\" class=\"btn btn-info\" id=\"download\" >Voir historique </button> </form> "                                                                      
+                            for(vol in data.data){
+                                btn_extraire = "<form action=\"{{route('liste.date')}}\" method=\"POST\" class=\"extract_form\" id=\"liste_form\" > <input type=\"hidden\" name=\"_token\" value=\"{{csrf_token()}}\" > <input type=\"hidden\" name=\"numero_vol\" id=\"numero_vol\" value=\""+data.infoVol.numero_vol+"\" > <input type=\"hidden\" name=\"jour_vol\" id=\"jour_vol\" value=\""+data.infoVol.jour_vol+"\" > <input type=\"hidden\" name=\"depart_vol\" id=\"depart_vol\" value=\""+data.infoVol.depart_vol+"\" > <input type=\"hidden\" name=\"destination_vol\" id=\"destination_vol\" value=\""+data.infoVol.destination_vol+"\" > <input type=\"hidden\" name=\"date_vol\" id=\"date_vol\" value=\""+data.data[vol]+"\" >  <button type=\"submit\" class=\"btn btn-info\" id=\"download\" >Voir historique </button> </form> "
                                 $('#date_table tr:last').after('<tr class=\"my_clmn\" ><td class="text-center">'+data.infoVol.numero_vol+'</td><td class="text-center">'
                                     +data.infoVol.depart_vol+'</td><td class="text-center">'+data.infoVol.destination_vol+'</td><td class="text-center">'
                                         +data.data[vol]+'</td><td class="text-center">'+btn_extraire+'   </td></tr>');
                             }
-                            $('#missing_field').hide();  
+                            $('#missing_field').hide();
                             $('#not_exists').hide();
-                            $('#date').hide(); 
+                            $('#date').hide();
                             $('#result2').hide() ;
-                            $('#no_personne').hide() ;  
-                            $("#result1").show(); 
+                            $('#no_personne').hide() ;
+                            $("#result1").show();
                         }else{
-                            $("#result1").hide(); 
+                            $("#result1").hide();
                             $('#missing_field').hide();
                             $('#date').hide();
-                            $('#result2').hide() ; 
-                            $('#no_personne').hide() ; 
+                            $('#result2').hide() ;
+                            $('#no_personne').hide() ;
                             $('#not_exists').show();
                         }
-                        
+
                     }else{
-                        $("#result1").hide(); 
-                        $('#not_exists').hide();  
-                        $('#date').hide(); 
-                        $('#result2').hide() ; 
-                        $('#no_personne').hide() ; 
+                        $("#result1").hide();
+                        $('#not_exists').hide();
+                        $('#date').hide();
+                        $('#result2').hide() ;
+                        $('#no_personne').hide() ;
                         $('#missing_field').show();
-                    } 
+                    }
             },
           })
         }
@@ -271,18 +271,21 @@
       data: $(this).serialize(),
       dataType: 'json',
       success: function (data){
-        $('#vol_number').html(data.vol_info.numero_vol) ; 
+        $('#vol_number').html(data.vol_info.numero_vol) ;
         $('#vol_day').html(data.vol_info.date_vol);
         $(".my_clmn2").remove();
         if(data.nombre > 0){
-          $('#no_personne').hide() ; 
+          $('#no_personne').hide() ;
           for(personne in data.data){
-            $('#personne_table tr:last').after(" <tr class=\"my_clmn2\"> <td>"+data.data[personne].matricule+"</td><td>"+data.data[personne].nom+"</td><td>"+data.data[personne].prenom+"</td> </tr> ") ; 
+            $('#personne_table tr:last').after(" <tr class=\"my_clmn2\"> <td>"+data.data[personne].matricule+"</td><td>"+data.data[personne].nom+"</td><td>"+data.data[personne].prenom+"</td> </tr> ") ;
           }
+
         }else{
-            $('#no_personne').show() ; 
+            $('#no_personne').show() ;
         }
-        $('#result2').show() ; 
+        $('#result2').show() ;
+        var etop = $('#result2').offset().top-100;
+        $(window).scrollTop(etop);
       },
     })
   });
@@ -304,6 +307,6 @@
            $(this).parent().hide();
        })
     });
-    
+
     </script>
-@endsection 
+@endsection

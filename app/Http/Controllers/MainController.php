@@ -13,11 +13,9 @@ class MainController extends Controller
     public function __construct(){
       //This function is called in 'tableau_de_bord' with ajax
 
-<<<<<<< HEAD
-        $this->middleware('ajax',['only'=>['getVolInformation','searchVol','autocomplete','extraireVol','modifVol','searchHistory']]);
-=======
-        $this->middleware('ajax',['only'=>['getVolInformation','searchVol','extraireVol','modifVol','dateVol','listeParDate']]);
->>>>>>> b578ed32f960fcb49f5464455364acf7eeb18f6e
+        $this->middleware('ajax',['only'=>['getVolInformation','searchVol',
+                             'autocomplete','extraireVol','modifVol','searchHistory','dateVol','listeParDate']]);
+
 
     }
 
@@ -193,6 +191,10 @@ class MainController extends Controller
 
    public function searchHistory(Request $request, AgentRepository $agentRepo)
    {
+
+          $this->validate($request,[
+          'matricule' => 'required',
+           ]) ;
 
          $matricule = $request['matricule'];
          $data = $agentRepo->getHistory($matricule);

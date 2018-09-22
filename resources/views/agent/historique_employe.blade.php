@@ -67,8 +67,8 @@
             </form>
           </div>
 </div>
-<div id="result" class="panel panel-default">
-      <div class="panel-heading"> Liste des vols de <span style="color:#1cc09f;">Haddad Imad</span> </div>
+<div id="result" class="panel panel-default" hidden>
+      <div class="panel-heading"> Liste des vols de <span style="color:#1cc09f;" id="nom_prenom"></span> </div>
           <div class="panel-body">
               <div class="table-responsive">
                                 <table class="table table-hover table-striped" id="vols_table">
@@ -116,8 +116,6 @@
             dataType: "json",
             success: function(data){
 
-                 console.log(data);
-
                if(data.found){
                  $(".tab_row").remove();
                  for(vol in data.data){
@@ -131,8 +129,10 @@
                  }
                }
 
-
-
+                var nom =   $("#nom").val();
+                var prenom = $("#prenom").val();
+                $("#nom_prenom").html(prenom+' '+nom)
+                $('#result').show();
                 var etop = $('#result').offset().top-100;
               	$(window).scrollTop(etop);
              },
@@ -144,6 +144,7 @@
 <script>
 
              $("#matricule").on("change", function () {
+                $('#result').hide();
                 $.ajax({
                   dataType: "json",
                   url: "{{route('auto.fill')}}",
