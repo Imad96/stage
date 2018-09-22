@@ -25,22 +25,24 @@ Route::get('/modification','MainController@getVolForm')->name('modif.get');
 Route::post('/modification','MainController@modifVol')->name('modif.vol') ;
 // Une route POST vers la page de modification pour le maj d'un vol
 Route::post('/modification/update','MainController@updateVol')->name('modif.update');
-
-Route::post('/modification/search','MainController@searchVol')->name('search.vol.2') ;
-
 // Une route vers la page d'extraction de la liste des employés
 Route::get('/extraction','MainController@getList')->name('list');
 // Une route vers la page d'hitorique par employe
 Route::get('/historique/employe','MainController@getHistoryEmploye')->name('his.employe');
+// Une route POST vers la page d'hisorique d'un employe
+Route::post('/historique/employe','MainController@searchHistory')->name('his.employe.search');
 // Une route vers la page d'hitorique par vol
 Route::get('/historique/vol','MainController@getHistoryVol')->name('his.vol');
 // Une route vers la fonction qui récupère les données d'un vol et les retourne en ajax
 Route::post('/home','MainController@getVolInformation')->name('vol.information') ;
 // Une fonction qui retourne des informations sur les vols ayant le numéro selectionnée dans la page agent/extraction
 Route::post('/extraction','MainController@searchVol')->name('search.vol') ;
-
+Route::post('/modification/search','MainController@searchVol')->name('search.vol.2') ;
 // Une fonction qui extrait les liste des employes d'un vol donnée
 Route::post('/extraction/extraire','MainController@extraireVol')->name('vol.extract') ;
+// Une route vers une fonction qui fait l'Autocomplete
+Route::get('historique/employe/autocomplete', 'MainController@autocomplete')->name('auto.fill');
+
 
 
 

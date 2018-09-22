@@ -326,6 +326,8 @@
                         $('#missing_field').hide();
                         $('#not_exists').hide();
                         $('#result1').show();
+                        var etop = $('#result1').offset().top-100;
+                        	$(window).scrollTop(etop);
                     }
                     else {
                       $('#result1').hide();
@@ -366,7 +368,7 @@
               $('#vol_y_number').val(data[0].vol_np_y_eco);
 
               $('#result2').show();
-              var etop = $('#result2').offset().top;
+              var etop = $('#result2').offset().top-100;
               	$(window).scrollTop(etop);
              },
          })
