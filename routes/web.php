@@ -40,6 +40,10 @@ Route::post('/extraction','MainController@searchVol')->name('search.vol') ;
 Route::post('/modification/search','MainController@searchVol')->name('search.vol.2') ;
 // Une fonction qui extrait les liste des employes d'un vol donnée
 Route::post('/extraction/extraire','MainController@extraireVol')->name('vol.extract') ;
+// Une route qui retourne toutes les dates d'un vol donnée
+Route::post('/historique/vol','MainController@dateVol')->name('vol.date') ;
+// Une route qui retourne la liste des employées ayant pris un vol à une date donnée
+Route::post('/historique/vol/date','MainController@listeParDate')->name('liste.date') ;
 // Une route vers une fonction qui fait l'Autocomplete
 Route::get('historique/employe/autocomplete', 'MainController@autocomplete')->name('auto.fill');
 
