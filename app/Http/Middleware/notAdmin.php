@@ -19,6 +19,8 @@ class notAdmin
         if(Auth::user()->type != 3){
             return $next($request);
         }
-        return redirect()->route('accueil.admin') ; 
+        return redirect()->route('login.page') ; 
+      //  return $next($request);
+
     }
 }

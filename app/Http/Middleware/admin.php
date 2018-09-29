@@ -20,6 +20,5 @@ class admin
             return $next($request);
         }
         return redirect()->route('main') ; 
-        //return $next($request) ; 
     }
 }
