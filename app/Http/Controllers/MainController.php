@@ -13,7 +13,7 @@ class MainController extends Controller
     public function __construct(){
       //This function is called in 'tableau_de_bord' with ajax
         $this->middleware('auth');
-        $this->middleware('notAdmin');
+       // $this->middleware('notAdmin');
         $this->middleware('ajax',['only'=>['getVolInformation','searchVol',
                              'autocomplete','extraireVol','modifVol','searchHistory','dateVol','listeParDate']]);
 

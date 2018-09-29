@@ -16,11 +16,11 @@ class notAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->type != 3){
+        /*if(Auth::user()->type != 3){
             return $next($request);
         }
-        return redirect()->route('login.page') ; 
-      //  return $next($request);
+        return redirect()->route('login.page') ; */
+        return $next($request);
 
     }
 }
