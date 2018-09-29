@@ -9,6 +9,12 @@ use App\Repositories\AccountRepository;
 
 class AdminController extends Controller
 {
+
+   public function __construct(){
+
+     $this->middleware('auth');
+   }
+
     /**
      * Function that redirects to the admin main page "admin.accueil"
      */
@@ -59,11 +65,11 @@ class AdminController extends Controller
             $this->validate($request,[
                 'name' => 'bail|required|between:3,20|unique:users,name,'.$request['id'],
                 'email' => 'bail|required|email|unique:users,email,'.$request['id']
-            ]) ; 
-        
-        $userUpdated = $accountRepo->updateAccount($request->all()); 
+            ]) ;
 
-        return redirect()->route('accueil.admin')->with('update','Le compte de '.$userUpdated->name.' a été modifié avec succes') ; 
+        $userUpdated = $accountRepo->updateAccount($request->all());
+
+        return redirect()->route('accueil.admin')->with('update','Le compte de '.$userUpdated->name.' a été modifié avec succes') ;
     }
 
 
@@ -74,9 +80,9 @@ class AdminController extends Controller
         UpdatePasswordRequest $request,
         AccountRepository $accountRepo)
     {
-        $userUpdated = $accountRepo->updatePassword($request->all()) ; 
+        $userUpdated = $accountRepo->updatePassword($request->all()) ;
 
-        return redirect()->route('accueil.admin')->with('update','Le mot de passe de '.$userUpdated->name.' a été modifié avec succès') ; 
+        return redirect()->route('accueil.admin')->with('update','Le mot de passe de '.$userUpdated->name.' a été modifié avec succès') ;
     }
 
     /***
@@ -86,9 +92,9 @@ class AdminController extends Controller
         $id,
         AccountRepository $accountRepo
     ){
-        $nameUserDeleted = $accountRepo->deleteAccount($id) ; 
+        $nameUserDeleted = $accountRepo->deleteAccount($id) ;
 
-        return redirect()->route('accueil.admin')->with('update','Le compte de '.$nameUserDeleted.' a été supprimé avec succès') ; 
+        return redirect()->route('accueil.admin')->with('update','Le compte de '.$nameUserDeleted.' a été supprimé avec succès') ;
     }
 
 
