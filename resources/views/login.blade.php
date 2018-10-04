@@ -33,7 +33,8 @@
 				<form class="login100-form validate-form p-b-33 p-t-5" method="post" id="login" action="{{route('logIn')}}">
                 {{csrf_field()}}
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="email" name="email" placeholder="Email" required>
+						<input class="input100" type="email" name="email" value="{{ Session::has('email')? Session::get('email'):''}}"
+						placeholder="{{ Session::has('email')? Session::get('email'):'Email'}}" required>
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 					</div>
 					<small style="color:red; margin-left:20px; opacity:0.7;">{{ $errors->first('email') }}</small>
@@ -50,10 +51,16 @@
 							Login
 						</button>
 					</div>
+					@if (Session::has('passwdError'))
+					   <br>
+							<div class="alert alert-danger text-center" id="mpIncorrect">
+								        <button class="close alert-close" aria-label="close">&times;</button>
+												<strong>Erreur !</strong> Le mot de passe est incorrect.
+						  </div>
+					@endif
 
 				</form>
 			</div>
-
 		</div>
 	</div>
 
@@ -61,6 +68,14 @@
 	<script src='js/jquery-3.2.1.min.js'></script>
 <!--===============================================================================================-->
 	<script src='js/main.js'></script>
+
+	<script>
+	$(function() {
+	   $(document).on('click', '.alert-close', function() {
+	       $(this).parent().hide();
+	   })
+	});
+	</script>
 
 </body>
 </html>

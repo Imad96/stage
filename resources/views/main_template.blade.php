@@ -81,11 +81,14 @@
                     <i class="fa fa-dashboard"></i> Tableau de bord
                   </a>
               </li>
+              @if (Auth::user()->type == 2)
               <li class="hoveredLink">
                   <a class="@yield('modification_class')" href="{{route('modif.get')}}">
                     <i class="fa fa-edit "></i> Modification / Mise à jour
                   </a>
               </li>
+              @endif
+
               <li class="hoveredLink">
                   <a class="@yield('extraction_class')" href="{{route('list')}}">
                     <i class="fa fa-fw fa-file "></i> Extraction des listes

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\InsertAccountRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Repositories\AccountRepository;
+use Auth; 
 
 class AdminController extends Controller
 {
@@ -94,9 +95,13 @@ class AdminController extends Controller
         $id,
         AccountRepository $accountRepo
     ){
-        $nameUserDeleted = $accountRepo->deleteAccount($id) ;
-
-        return redirect()->route('accueil.admin')->with('update','Le compte de '.$nameUserDeleted.' a été supprimé avec succès') ;
+        if(Auth::user()->id != $id){
+            $nameUserDeleted = $accountRepo->deleteAccount($id) ;
+ 
+            return redirect()->route('accueil.admin')->with('update','Le compte de '.$nameUserDeleted.' a été supprimé avec succès') ;
+        }else{
+            return redirect()->route('accueil.admin')->with('error','Ce compte est le votre. Vous ne pouvez pas le supprimer') ; 
+        }
     }
 
 
