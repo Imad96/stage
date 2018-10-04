@@ -55,6 +55,7 @@ class Kernel extends HttpKernel
         'ajax' => \App\Http\Middleware\Ajax::class,
         'admin' => \App\Http\Middleware\Admin::class,
         'notAdmin' => \App\Http\Middleware\notAdmin::class,
+        'ModificationMiddleware' => \App\Http\Middleware\ModificationMiddleware::class,
 
 
     ];
