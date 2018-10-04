@@ -45,10 +45,10 @@ class LoginController extends Controller
             } else {
 
                 // validation not successful, send back to form
-                return redirect()->route('login');
+                return redirect()->route('login.page');
 
             }
-
+ 
     }
 
      public function doLogout()
