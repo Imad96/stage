@@ -53,7 +53,7 @@
   Route::get('/historique/employe/autocomplete', 'MainController@autocomplete')->name('auto.fill');
 
 
-
+ 
   // Une route vers la page d'accueil de l'admin
   Route::get('/admin','AdminController@index')->name('accueil.admin') ;
   // Une route vers la page d'ajout d'un compte de l'admin  "page de saisie"
