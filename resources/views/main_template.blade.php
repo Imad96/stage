@@ -20,7 +20,7 @@
 
 </head>
 
-@yield('body_tag') 
+@yield('body_tag')
 
   <nav class="navbar-default top-navbar" role="navigation">
       <div class="navbar-header">
@@ -51,12 +51,12 @@
                   <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
               </a>
               <ul class="dropdown-menu dropdown-user">
-                  <li><a href="#"><i class="fa fa-user fa-fw"></i> Profile</a>
+                  <li><a href="{{route('main')}}"><i class="fa fa-user fa-fw"></i> Profile</a>
                   </li>
-                  <li><a href="#"><i class="fa fa-gear fa-fw"></i> Paramètre</a>
+                  <li><a href="{{route('main')}}"><i class="fa fa-gear fa-fw"></i> Paramètre</a>
                   </li>
                   <li class="divider"></li>
-                  <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Déconnexion</a>
+                  <li><a href="{{route('logout')}}" ><i class="fa fa-sign-out fa-fw"></i> Déconnexion</a>
                   </li>
               </ul>
               <!-- /.dropdown-user -->
@@ -105,7 +105,7 @@
 
 
               <li class="hoveredLink">
-                  <a href=""><i class="fa fa fa-sign-out"></i> Déconnexion</a>
+                  <a href="{{route('logout')}}"><i class="fa fa fa-sign-out"></i> Déconnexion</a>
               </li>
           </ul>
 

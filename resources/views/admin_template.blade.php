@@ -61,12 +61,12 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Profile</a>
+                        <li><a href="{{route('accueil.admin')}}"><i class="fa fa-user fa-fw"></i> Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Paramètre</a>
+                        <li><a href="{{route('accueil.admin')}}"><i class="fa fa-gear fa-fw"></i> Paramètre</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Déconnexion</a>
+                        <li><a href="{{route('logout')}}"><i class="fa fa-sign-out fa-fw"></i> Déconnexion</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -93,7 +93,7 @@
                         <a class="@yield('ajouter_compte_classe')" href={{route('add.account')}}><i class="fa fa-plus "></i> Ajouter un compte</a>
                     </li>
                     <li class="hoveredLink">
-                        <a href=""><i class="fa fa fa-sign-out"></i> Déconnexion</a>
+                        <a href="{{route('logout')}}"><i class="fa fa fa-sign-out"></i> Déconnexion</a>
                     </li>
                 </ul>
 
@@ -121,7 +121,7 @@
 
                             @yield('content')
 
-                                        
+
 				        </div>
 
 				  </div>
