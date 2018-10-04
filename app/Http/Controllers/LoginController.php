@@ -49,7 +49,7 @@ class LoginController extends Controller
                 return redirect()->route('login.page')->with( [ 'passwdError' => true, 'email' => $request->all()['email'] ] );
 
             }
-
+ 
     }
 
      public function doLogout()

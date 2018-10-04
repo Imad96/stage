@@ -53,6 +53,12 @@
         </div>
                         <br>
         @endif
+        @if (session('error'))
+        <div class="col-md-4 col-md-offset-4 alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Erreur ! La suppression a échouée </strong> {{session('error')}} <br>
+        </div>
+        @endif
     </div>
     
     <div class="row">
@@ -102,7 +108,7 @@
                                     <input type="submit" value=" Supprimer" class="btn btn-danger btn-block" >
                                 {!! Form::close() !!}
                                 &nbsp; &nbsp; &nbsp; 
-                            </td>
+                            </td> 
                             
                         </tr>  
                     @endforeach
